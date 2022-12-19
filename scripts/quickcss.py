@@ -94,7 +94,7 @@ class MyTab():
 
             self.apply_favicon_bttn.click(
                 fn = lambda x: self.apply_favicon(x),
-                inputs = self.logos_dropdown
+                inputs = self.favicon_dropdown
             )
 
 
