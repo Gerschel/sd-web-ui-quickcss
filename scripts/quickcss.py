@@ -13,7 +13,6 @@ class MyTab():
     def __init__(self, basedir):
         self.extensiondir = basedir
         self.webui_dir = Path(self.extensiondir).parents[1]
-        print(self.webui_dir)
 
 
         self.style_folder = path.join(basedir, "style_choices") 
@@ -80,8 +79,6 @@ class MyTab():
 
             # Handlers
 
-            # Dropdown change
-
             self.logos_dropdown.change(
                 fn = lambda x: self.get_image(x, folder = "logos"), 
                 inputs = self.logos_dropdown,
@@ -93,7 +90,6 @@ class MyTab():
                 inputs = self.favicon_dropdown,
                 outputs = self.favicon_image
             )
-
 
             self.apply_style_bttn.click(
                 fn = lambda x: self.apply_style(x),
