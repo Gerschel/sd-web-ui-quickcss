@@ -39,6 +39,10 @@ class MyTab():
         self.logo_image = gr.Image(render=False)
         self.favicon_image = gr.Image(render=False)
 
+        self.import_style_file = gr.File(render=False, label="Import CSS file")
+        self.import_logo_file = gr.File(render=False, label="Import Logo's")
+        self.import_favicon_file = gr.File(render=False, label="Import favicons")
+
 
         self.restart_bttn = gr.Button(value="Soft Restart to see affects", render=False, variant="primary")
 
@@ -56,7 +60,16 @@ class MyTab():
                 with gr.Column():
                     self.favicon_dropdown.render()
                     self.apply_favicon_bttn.render()
-
+            
+            with gr.Accordion(label="Import Files", open=False):
+                with gr.Row():
+                    with gr.Column():
+                        self.import_style_file.render()
+                    with gr.Column():
+                        self.import_logo_file.render()
+                    with gr.Column():
+                        self.import_favicon_file.render()
+            
             with gr.Row():
                 self.restart_bttn.render()
                 self.remove_style.render()
@@ -104,17 +117,51 @@ class MyTab():
 
             self.restart_bttn.click(fn=self.local_request_restart, _js='restart_reload', inputs=[], outputs=[])
 
+            self.import_style_file.change(
+                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="style_choices", func = self.get_styles, comp = self.styles_dropdown),
+                inputs=self.import_style_file,
+                outputs=self.styles_dropdown
+            )
+
+            self.import_logo_file.change(
+                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="logos", func = self.get_logos, comp = self.logos_dropdown),
+                inputs=self.import_logo_file,
+                outputs=self.logos_dropdown
+            )
+
+
+            self.import_favicon_file.change(
+                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="favicons", func = self.get_favicons, comp = self.favicon_dropdown),
+                inputs=self.import_favicon_file,
+                outputs=self.favicon_dropdown
+            )
+
+
 
         return [(ui, "CSS App", "css app")]
+    
+    def import_file_from_path(self, tmp_file_obj, target_folder, func, comp):
+        if tmp_file_obj:
+            shutil.copy(tmp_file_obj.name, path.join(self.extensiondir, target_folder, tmp_file_obj.orig_name))
+            # Update appropriate list 
+            # Make backend the same as front-end so it matches when selected
+            comp.choices = func()
+            tmp_file_obj.flush()
+            # return sends update to front-end
+        return gr.update(choices=comp.choices)
 
     def get_styles(self):
         self.styles_list = [file_name for file_name in listdir(self.style_folder) if path.isfile(path.join(self.style_folder, file_name))] 
+        # return is only used during file import
+        return self.styles_list
 
     def get_logos(self):
         self.logos_list = [file_name for file_name in listdir(self.logos_folder) if path.isfile(path.join(self.logos_folder,file_name))] 
+        return self.logos_list
 
     def get_favicons(self):
         self.favicon_list = [file_name for file_name in listdir(self.favicon_folder) if path.isfile(path.join(self.favicon_folder,file_name))] 
+        return self.favicon_list
 
 
     def apply_style(self, selection):
