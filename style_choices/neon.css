@@ -1,191 +1,428 @@
-/* user.css
-Custom Dark theme for Stable Diffusion WebUI alpha-v1.01
+/*user.css
+Custom Dark theme for Stable Diffusion WebUI 
 Original Style.css Edit
+
+* @Version: alpha-v1.2
+* @Author: Nacurutu
+* @Last Modified: 2022-12-28
+
+
+/*----------------------------------------------------------------*/
+/*----------------------------------------------------------------*/
+/*----------------------------------------------------------------*/
+
+/*THEME VARIABLES*/
+:root, * {
+
+    --primarycolor: #ff205f !important;
+    --secondarycolor: #a3133c  !important;
+    --inputtextcolor: #65f6ae !important; 
+    --inputtextcolorfocus: #FFFFFF !important;  
+    --backgrouncolor: #000 !important;
+    --borderappcolor: #a7abb1 !important; 
+    --Logo: url('file=logo.png') !important;
+}
+    
+
+/*----------------------------------------------------------------*/
+/*----------------------------------------------------------------*/
+/*----------------------------------------------------------------*/
+
 
 /*================================================ */
 /* Changes */
 /*================================================ */
 
-/*css hide Gradio animations*/
 
-.dark .wrap .m-12 svg, .dark .wrap .z-20 svg, .dark .meta-text-center, .dark .meta-text { 
-    display:none !important; 
-}
-.dark .wrap .m-12::before, .dark .wrap .z-20::before { 
-    content:"Loading..." !important; 
-}
- 
-/*Gradio Progrees bar color change*/
-
-.dark .progress-bar { 
-    background-color: #ff205f !important;
-} 
 
 /* Import font */
-
+/*----------------------------------------------------------------*/
 @font-face {
     font-family: 'Source Code Pro', monospace !important;
     src: url('SourceCodePro-Regular.otf') !important;
 }
 
-.dark fieldset span.text-gray-500, .dark .gr-block.gr-box span.text-gray-500, .dark label.block span{
-   border: 1px solid #ff205f75!important;
+/*Css hide Gradio animations*/
+/*----------------------------------------------------------------*/
+.dark .wrap .m-12 svg, 
+.dark .wrap .z-20 svg, 
+.dark .wrap .m-12 svg, 
+.dark .wrap .z-20 svg, 
+.dark .meta-text-center, 
+.dark .meta-text { 
+    display:none !important;
 }
 
-.dark .dark\:bg-gray-900, .dark, .dark .gr-button-primary, .dark .dark\:text-gray-200, .dark .text-gray-700, .dark .text-gray-800, .dark .text-gray-900, .dark .\!text-gray-700, .dark .\!text-gray-800 {
-    color: #a7abb1 !important;
+.dark .wrap .m-12::before, 
+.dark .wrap .z-20::before { 
+    content:"Loading..." !important;
+    color: var(--inputtextcolorfocus) !important;
+}
+ 
+/*Gradio Progrees bar color change*/
+/*----------------------------------------------------------------*/
+.dark .progress-bar { 
+    background: var(--primarycolor) !important;
+    border-width: 1px !important;
+    border-color: var(--inputtextcolorfocus) !important;
+    color: var(--inputtextcolorfocus) !important;
+} 
+
+/* Tabs font size */
+/*----------------------------------------------------------------*/
+#tabs > div:first-of-type button {
+    font-size: 90% !important;
+}
+
+/* UI border radius*/
+/*----------------------------------------------------------------*/
+* {
+    border-radius: 0px !important;
+}
+
+/* UI Changes */
+/*----------------------------------------------------------------*/
+
+.dark,
+.dark\:bg-gray-900, 
+.dark .gr-button-primary, 
+.dark .dark\:text-gray-200, 
+.dark .text-gray-700, 
+.dark .text-gray-800, 
+.dark .text-gray-900, 
+.dark .\!text-gray-700, 
+.dark .\!text-gray-800 {
+    color: var(--borderappcolor) !important;
 }
 
 .dark .gr-input {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro' !important;
-    color: #65f6ae !important;
+    color: var(--inputtextcolor) !important;
 }
 
-.dark .gr-input::selection, .dark .gr-input:focus, .dark .gr-input:hover  {
-    color: white !important;
-    background-color: #ff205f75 !important;
+.dark .gr-input:focus, 
+.dark .gr-input:hover  {
+    color: var(--inputtextcolorfocus)!important;
+    background-color: var(--secondarycolor)!important;
+    border-color: var(--inputtextcolorfocus)!important;
+    transition: all 0.3s ease-out;
 }
 
-.dark, .dark .gr-button, .dark .bg-white, .dark .gr-panel, .gr-button-lg, .gr-box, .dark .dark\:bg-gray-700, .dark .dark\:bg-gray-950,
- .dark fieldset span.text-gray-500, .dark .gr-block.gr-box span.text-gray-500,
- .dark label.block span {
-    background-color: #000000 !important;
+.dark .gr-input::selection {
+    color: var(--inputtextcolorfocus)!important;
+    background-color: var(--backgrouncolor)!important;
 }
 
-.dark .gr-radio, gr-check-radio gr-checkbox, .dark .gr-button-lg, .dark .gr-box, .dark .rounded-lg, .dark div.svelte-10ogue4 > :last-child, .dark div.svelte-10ogue4 > :first-child, rounded-t-lg {
-    border-radius: 0px !important;
+.dark, 
+.dark .gr-button, 
+.dark .bg-white, 
+.dark .gr-panel, 
+.dark .gr-button-lg, 
+.dark .gr-box, 
+.dark .dark\:bg-gray-700, 
+.dark .dark\:bg-gray-950,
+.dark fieldset span.text-gray-500, 
+.dark .gr-block.gr-box span.text-gray-500,
+.dark label.block span {
+    background-color: var(--backgrouncolor) !important;
 }
 
-.dark .gr-input-label, .dark .gr-button {
+.dark .gr-input-label, 
+.dark .gr-button {
     background-image:  none !important;
 }
 
-.dark .gr-check-radio:checked, .dark gr-check-radio gr-checkbox {
-    background-color: #ff205f !important;
+.dark .gr-check-radio:checked, 
+.dark gr-check-radio gr-checkbox {
+    background-color: var(--primarycolor) !important;
 }
 
-#txt2img_gallery, #img2img_gallery {
-    border-width: 1px !important;
-    border-radius: 0 !important;
-    background-image: url('file=logo.png') !important;
+#txt2img_gallery, 
+#img2img_gallery {
+    border-radius: 0px !important;
+    background-image: var(--Logo) !important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
 }   
 
-#modelmerger_merge, #deforum_generate, #depthmap_generate, #vxa_gen_btn {
-    border-color: #ff205f !important;
+#modelmerger_merge, 
+#deforum_generate, 
+#depthmap_generate, 
+#vxa_gen_btn {
+    border-color: var(--primarycolor) !important;
 }
 
-#txt2img_generate:after, #img2img_generate:after, #extras_generate:after {
-    background-image: text !important;
-}
-
-#txt2img_interrupt, #img2img_interrupt, #txt2img_skip, #img2img_skip {
-    background:  #333 !important;
-}
-
-#txt2img_gallery svg, #img2img_gallery svg {
+#txt2img_gallery svg, 
+#img2img_gallery svg {
     display: none !important;
 }
 
-/* Generation progress bar Color */
+.dark .gr-input-label:hover {
+    border-color: var(--secondarycolor)!important;
+    color: var(--inputtextcolorfocus)!important;
+    transition: all 0.3s ease-out;
+
+    animation: pulse3 0.5s;
+      -webkit-animation: pulse3 0.5s;
+      -moz-animation: pulse3 0.5s;
+      -o-animation: pulse3 0.5s;
+      box-shadow: 0 0 0 0.5em transparent;
+    }
+      @keyframes pulse3 {
+        0% { box-shadow: 0 0 0 0 var(--secondarycolor); }
+  }
+
+/* Generation progress bar color */
+/*----------------------------------------------------------------*/
 
 .dark .progressDiv .progress {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro'!important;
-    width: 0% !important;
-    height: 20px !important;
-    background: #ff205f !important;
-    color: white !important;
+    background: var(--primarycolor) !important;
+    color: var(--inputtextcolorfocus)!important;
     font-weight: bold !important;
     line-height: 20px !important;
-    padding: 0 8px 0 0 !important;
     text-align: right !important;
-    border-radius: 7px !important;
+}
+
+/* Buttons */
+/*----------------------------------------------------------------*/
+
+#txt2img_interrupt, 
+#img2img_interrupt, 
+#txt2img_skip, 
+#img2img_skip {
+    background: var(--backgrouncolor) !important;
+}
+  
+#txt2img_interrupt:hover, 
+#img2img_interrupt:hover, 
+#txt2img_skip:hover, 
+#img2img_skip:hover {
+    background: var(--secondarycolor) !important;
+    color: var(--inputtextcolorfocus) !important;
+    transition: all 0.5s ease-out !important;
+    
 }
 
 .dark .gr-button-primary  {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro' !important;
-    border-color: #ff205f !important;
+    text-transform: uppercase;
+    border-color: var(--primarycolor) !important;
     border-width: 3px !important;
-    background-image: url('file=logo.png') !important;
+    background-image: var(--Logo) !important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
+    color: var(--borderappcolor) !important;
 }
 
-.dark .gr-button-primary:hover  {
-    border-color: #ff205f !important;
+.dark .gr-button-primary:hover {
+    border-color: var(--inputtextcolorfocus)!important;
     border-width: 3px !important;
-    background-color: #ff205f75 !important;
+    background-color: var(--primarycolor) !important;
+    color: var(--inputtextcolorfocus) !important;
+    transition: all 0.5s ease-out !important;
+        
 }
 
 .dark .gr-button-secondary {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro' !important;
-    border-color: #ff205f75 !important;
+    border-color: var(--secondarycolor) !important;
     border-width: 1px !important;
+    color: var(--borderappcolor) !important;
 }
 
 .dark .gr-button-secondary:hover {
-    border-color: #ff205f75 !important;
+    border-color: var(--inputtextcolorfocus)!important;
     border-width: 1px !important;
-    background-color: #ff205f75 !important;
+    background-color: var(--secondarycolor)!important;
+    color: var(--inputtextcolorfocus) !important;
+    transition: all 0.5s ease-out !important;
+    
+    animation: pulse2 0.5s;
+    -webkit-animation: pulse2 0.5s;
+    -moz-animation: pulse2 0.5s;
+    -o-animation: pulse2 0.5s;
+    box-shadow: 0 0 0 0.5em transparent;
+    }
+    
+    @keyframes pulse2 {
+      0% { box-shadow: 0 0 0 0 var(--inputtextcolorfocus); }
+}
+
+/* Generation buttons pulse effect */
+/*----------------------------------------------------------------*/
+#txt2img_generate, #img2img_generate {
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+    font-weight: bold
+}
+    
+#txt2img_generate:hover, #img2img_generate:hover {
+    animation: pulse 0.5s;
+    -webkit-animation: pulse 0.5s;
+    -moz-animation: pulse 0.5s;
+    -o-animation: pulse 0.5s;
+    box-shadow: 0 0 0 2em transparent;
+}
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 var(--primarycolor) }
 }
 
 /* gradio 3.4.1 stuff for editable scrollbar values */
+/*----------------------------------------------------------------*/
 .dark .gr-box > div > div > input.gr-text-input{
     position: absolute !important;
     right: 0.5em !important;
     top: -0.6em !important;
     z-index: 200 !important;
     width: 8em !important;
-    border-color: #ff205f75 !important;
-    border-width: 1px !important;
+    border-color: var(--secondarycolor) !important;
 }
 
+.dark .gr-box > div > div > input.gr-text-input:hover, 
+.dark .gr-box > div > div > input.gr-text-input:focus{
+    border-color: var(--inputtextcolorfocus) !important;
+}
+
+/* Gallery */
+/*----------------------------------------------------------------*/
 #gallery_item {
     border-width: 1px !important;
-    border-radius: 0 !important;
-    background-image: url('file=logo.png') !important;
+    background-image: var(--Logo)!important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
 }
 
 .dark .gallery-item.svelte-1g9btlg.svelte-1g9btlg {
-    --tw-ring-color: #ff205f !important;
+    --tw-ring-color: var(--primarycolor)!important;
 }
 
 .dark .dark\:bg-gray-900 {
-    background-image: url('file=logo.png') !important;
+    background-image: var(--Logo)!important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
     --tw-bg-opacity: 1 !important;
-    background-color: rgb(10, 10, 10) !important;
+    background-color: var(--backgrouncolor) !important;
 }
 
+/* Context menu */
+/*----------------------------------------------------------------*/
 #context-menu {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro'!important;
-    border: 2px solid #ff205f75 !important;
-    border-radius: 1px !important;
-    box-shadow: 1px 1px 2px #ff205f75 !important;
+    border-color: var(--primarycolor)!important;
+    box-shadow: 1px 1px 2px var(--primarycolor) !important;
 }
 
 .context-menu-items a:hover {
-    background: #ff205f75 !important;
+    background: var(--secondarycolor) !important;
+    color: var(--inputtextcolorfocus) !important;
+    box-shadow: 1px 1px 2px var(--secondarycolor) !important;
+    transition: all 0.3s ease-out;
 }
 
-#txt2img_interrupt, #img2img_interrupt, #txt2img_skip, #img2img_skip {
-    background: rgb(10, 10, 10) !important;
+
+/*-------------------------------------*/
+/*---------------Sliders-------------- */
+/*-------------------------------------*/
+
+.gradio-container input[type=range] {
+    -webkit-appearance: none !important;
+    background: transparent !important;
 }
-  
-#txt2img_interrupt:hover, #img2img_interrupt:hover, #txt2img_skip:hover, #img2img_skip:hover {
-    background: #ff205f !important;
+
+.gradio-container input[type=range]:focus {
+    outline: none !important;
 }
-  
+
+.gradio-container input[type=range]::-webkit-slider-runnable-track {
+    cursor: pointer !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+    background:  var(--borderappcolor) !important;
+}
+
+.gradio-container input[type=range]:hover::-webkit-slider-runnable-track {
+    background-image: linear-gradient(90deg, var(--borderappcolor), var(--primarycolor))!important;
+    background-repeat: no-repeat!important;
+}
+
+.gradio-container input[type=range]::-moz-range-track {
+    cursor: pointer !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+    background:  var(--primarycolor) !important;
+}
+
+.gradio-container input[type=range]:hover::-moz-range-track {
+    background: var(--secondarycolor) !important;
+}
+
+.gradio-container input[type=range]::-ms-fill-upper,
+.gradio-container input[type=range]::-ms-fill-lower {
+    cursor: pointer !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+    background:   var(--primarycolor) !important;
+}
+
+.gradio-container input[type=range]:hover::-ms-fill-upper,
+.gradio-container input[type=range]:hover::-ms-fill-lower {
+    background:   var(--secondarycolor) !important;
+}
+
+.gradio-container input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0 0 3px var(--borderappcolor) !important;
+    border: 2px solid var(--borderappcolor) !important;
+    height: 16px !important;
+    width: 16px !important;
+    border-radius: 16px !important;
+    background:   var(--primarycolor) !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important;
+    margin-top: -5px !important;
+}
+
+.gradio-container input[type=range]:active::-webkit-slider-thumb {
+    background:   var(--secondarycolor) !important;
+}
+
+.gradio-container input[type=range]::-moz-range-thumb {
+    box-shadow: 0 0 3px var(--borderappcolor) !important;
+    border: 2px solid  var(--borderappcolor) !important;
+    height: 16px !important;
+    width: 16px !important;
+    border-radius: 16px !important;
+    background:   var(--primarycolor) !important;
+    cursor: pointer !important;
+    margin-top: -5px !important;
+}
+
+.gradio-container input[type=range]:active::-moz-range-thumb {
+    background:   var(--secondarycolor) !important;
+}
+
+.gradio-container input[type=range]::-ms-thumb {
+    box-shadow: 0 0 3px var(--borderappcolor) !important;
+    border: 2px solid  var(--borderappcolor) !important;
+    height: 16px !important;
+    width: 16px !important;
+    border-radius: 16px !important;
+    background:   var(--primarycolor) !important;
+    cursor: pointer !important;
+    margin-top: -5px !important;
+}
+
+.gradio-container input[type=range]:active::-ms-thumb {
+    background:   var(--secondarycolor) !important;
+}
+
