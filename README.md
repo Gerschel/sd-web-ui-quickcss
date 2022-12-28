@@ -1,4 +1,7 @@
 # sd-web-ui-quickcss
+
+UPDATE 2022/12/19: Now has local imports.
+
 I just setup a quick css apply using the style here https://github.com/AUTOMATIC1111/stable-diffusion-webui/discussions/5813
 
 Theme and images included are from that discussion. They are not my work. I just made the tool for them to play with their work.
