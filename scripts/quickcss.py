@@ -62,11 +62,13 @@ class MyTab():
         #--Logo: url('file=logo.png');
         self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.color_pickers))]
         self.length_of_colors = gr.Text(value=len(self.color_pickers), visible=False, render=False)
+        self.dummy_picker = gr.Text(visible=False, render=False)
 
     def ui(self, *args, **kwargs):
         with gr.Blocks(analytics_enabled=False) as ui:
             #Necessary for values being accessible
             self.length_of_colors.render()
+            self.dummy_picker.render()
             for h in self.hidden_vals:
                 h.render()
             with gr.Row():
@@ -116,11 +118,12 @@ class MyTab():
             #)
             for comp,val in zip(self.color_pickers, self.hidden_vals):
                 comp.change(
-                    fn = None,
+                    fn = lambda x: str(x),
                     _js = "quickcssFormatRule",
-                    inputs = [comp, val, self.length_of_colors]
+                    inputs = [comp, val, self.length_of_colors],
+                    outputs = self.dummy_picker
                 )
-                print(self.hidden_vals[self.color_pickers.index(comp)].value)
+
             self.logos_dropdown.change(
                 fn = lambda x: self.get_image(x, folder = "logos"), 
                 inputs = self.logos_dropdown,
