@@ -118,10 +118,10 @@ class MyTab():
             #)
             for comp,val in zip(self.color_pickers, self.hidden_vals):
                 comp.change(
-                    fn = lambda x: str(x),
+                    fn = lambda: print(),
                     _js = "quickcssFormatRule",
                     inputs = [comp, val, self.length_of_colors],
-                    outputs = self.dummy_picker
+                    outputs = []
                 )
 
             self.logos_dropdown.change(
