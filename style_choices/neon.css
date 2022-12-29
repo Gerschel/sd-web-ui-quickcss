@@ -12,15 +12,15 @@ Original Style.css Edit
 /*----------------------------------------------------------------*/
 
 /*THEME VARIABLES*/
-:root, * {
+:root, * , quickcss_target{
 
-    --primarycolor: #ff205f !important;
-    --secondarycolor: #a3133c  !important;
-    --inputtextcolor: #65f6ae !important; 
-    --inputtextcolorfocus: #FFFFFF !important;  
-    --backgrouncolor: #000 !important;
-    --borderappcolor: #a7abb1 !important; 
-    --Logo: url('file=logo.png') !important;
+    --primarycolor: #ff205f ;
+    --secondarycolor: #a3133c ;
+    --inputtextcolor: #65f6ae ; 
+    --inputtextcolorfocus: #FFFFFF;  
+    --backgrouncolor: #000 ;
+    --borderappcolor: #a7abb1 ; 
+    --Logo: url('file=logo.png');
 }
     
 

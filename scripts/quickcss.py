@@ -47,8 +47,38 @@ class MyTab():
 
         self.remove_style = gr.Button(value="Remove Style", render=False)
 
+        self.primary_color = gr.ColorPicker(label="Primary Color", render=False)
+        self.secondary_color = gr.ColorPicker(label="Secondary Color", render=False)
+        self.input_text_color = gr.ColorPicker(label="Input Text Color", render=False)
+        self.input_text_color_focus = gr.ColorPicker(label="Input Text Focus Color", render=False)
+        self.background_color= gr.ColorPicker(label="Background Color", render=False)
+        self.border_app_color = gr.ColorPicker(label="Border App Color", render=False)
+        self.color_pickers = [self.primary_color, self.secondary_color, self.input_text_color, self.input_text_color_focus, self.background_color, self.border_app_color]
+        #--secondarycolor: #------ ;
+        #--inputtextcolor: #------ ; 
+        #--inputtextcolorfocus: #------;  
+        #--backgrouncolor: #------ ;
+        #--borderappcolor: #------ ; 
+        #--Logo: url('file=logo.png');
+        self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.color_pickers))]
+        self.length_of_colors = gr.Text(value=len(self.color_pickers), visible=False, render=False)
+
     def ui(self, *args, **kwargs):
         with gr.Blocks(analytics_enabled=False) as ui:
+            #Necessary for values being accessible
+            self.length_of_colors.render()
+            for h in self.hidden_vals:
+                h.render()
+            with gr.Row():
+                for c in self.color_pickers:
+                    with gr.Column(scale=1):
+                        c.render()
+            #self.primary_color.render()
+            #self.secondary_color.render()
+            #self.input_text_color.render()
+            #self.input_text_color_focus.render()
+            #self.background_color.render()
+            #self.border_app_color.render()
             with gr.Row():
                 with gr.Column():
                     self.styles_dropdown.render()
@@ -79,6 +109,18 @@ class MyTab():
 
             # Handlers
 
+            #self.primary_color.change(
+            #    fn = None,
+            #    _js = "quickcssFormatRule",
+            #    inputs = self.primary_color
+            #)
+            for comp,val in zip(self.color_pickers, self.hidden_vals):
+                comp.change(
+                    fn = None,
+                    _js = "quickcssFormatRule",
+                    inputs = [comp, val, self.length_of_colors]
+                )
+                print(self.hidden_vals[self.color_pickers.index(comp)].value)
             self.logos_dropdown.change(
                 fn = lambda x: self.get_image(x, folder = "logos"), 
                 inputs = self.logos_dropdown,
