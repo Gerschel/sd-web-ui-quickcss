@@ -45,7 +45,7 @@ class MyTab():
         self.import_favicon_file = gr.File(render=False, label="Import favicons")
 
 
-        self.restart_bttn = gr.Button(value="Soft Restart to see affects", render=False, variant="primary")
+        self.restart_bttn = gr.Button(value="Soft Restart to see effects", render=False, variant="primary")
 
         self.remove_style = gr.Button(value="Remove Style", render=False)
 
@@ -72,7 +72,7 @@ class MyTab():
 
 
             self.color_pickers = [gr.ColorPicker(label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_colorpicker", value=x[1].replace(";", "").strip())
-                                                for x in lines]
+                                                for x in lines]# + [gr.Slider(minimum=0,maximum=100,step=1)]
             #else:
             ##TODO: this is remainder from before file reader, but is in place so 
             #self.primary_color = gr.ColorPicker(label="Primary Color", render=False)
@@ -97,7 +97,7 @@ class MyTab():
         with gr.Blocks(analytics_enabled=False) as ui:
             with gr.Accordion(label="Some instruction", open=False):
                 gr.Markdown(value="""<center>This is a mix from old style to new style. It is not in it's finished state</center>
-<center>To see affects, you must use dropdown, select neon, click apply, click restart. More options will be available on restart</center>
+<center>To see effects, you must use dropdown, select neon, click apply, click restart. More options will be available on restart</center>
 <center>I know it lives as a tab, but this was meant to be a demo at first, now it's growing to something more</center>
 
 <center>To see favicon take affect, you will need to add `favicon_path="favicon.svg"` to webui.py</center>
