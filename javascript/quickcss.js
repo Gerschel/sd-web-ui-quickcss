@@ -19,7 +19,6 @@ function quickcssRuleSwap(cssRule, cssTargetIndex){
 */
 function quickcssFormatRule(val, ele, colorsSize){
     //async  is not needed, just trying to debug some error from colorpicker
-    console.log(ele)
     ele = parseInt(ele)
     //get sheet
     var quickcssSheet =  document.documentElement.querySelector("gradio-app").shadowRoot.querySelector("style").sheet
@@ -34,7 +33,6 @@ function quickcssFormatRule(val, ele, colorsSize){
     var quickcssRuleAsString =  quickcssRuleAsString.slice(quickcssRuleAsString.indexOf("{"))
     var asSplit =  quickcssRuleAsString.split(";")
     var endStr =  asSplit.slice(parseInt(colorsSize)).join(";")
-    console.log(`endstr ${endStr}`)
     while (asSplit.length > parseInt(colorsSize))
     {
         asSplit.pop()
@@ -44,9 +42,6 @@ function quickcssFormatRule(val, ele, colorsSize){
     let stringarray = new Array
      asArray.forEach( (e, i) => {stringarray.push( i==ele ? `${e[0]}:${val}`: `${e[0]}:${e[1]}`)})
     stringarray = stringarray.join(";") + `;${endStr}`
-    console.log(ele)
-    console.log(asArray)
-    console.log(stringarray)
     let cssRule = ":root, *, quickcss_target" + stringarray
     //let cssRule = ":root, *, quickcss_target{--primarycolor:" + val + "}"
     //Delete rule at
@@ -54,5 +49,4 @@ function quickcssFormatRule(val, ele, colorsSize){
     //insert (as in add)
     quickcssSheet.insertRule(cssRule, quickcssTargetIndex)
     //quickcssRuleSwap(r, window.quickcssTargetIndex)
-    return "0"
 }

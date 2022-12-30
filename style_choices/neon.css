@@ -13,13 +13,14 @@ Original Style.css Edit
 
 /*THEME VARIABLES*/
 :root, * , quickcss_target{
-
-    --primarycolor: #ff205f ;
-    --secondarycolor: #a3133c ;
-    --inputtextcolor: #65f6ae ; 
-    --inputtextcolorfocus: #FFFFFF;  
-    --backgrouncolor: #000 ;
-    --borderappcolor: #a7abb1 ; 
+    --primary_color: #ff205f ;
+    --secondary_color: #a3133c ;
+    --input_text_color: #65f6ae ; 
+    --input_text_color_focus: #FFFFFF;  
+    --background_color: #000 ;
+    --border_app_color: #a7abb1 ; 
+    --checked_text: #DE73FF;
+    /*BREAKFILEREADER*/
     --Logo: url('file=logo.png');
 }
     
@@ -56,16 +57,16 @@ Original Style.css Edit
 .dark .wrap .m-12::before, 
 .dark .wrap .z-20::before { 
     content:"Loading..." !important;
-    color: var(--inputtextcolorfocus) !important;
+    color: var(--input_text_color_focus) !important;
 }
  
 /*Gradio Progrees bar color change*/
 /*----------------------------------------------------------------*/
 .dark .progress-bar { 
-    background: var(--primarycolor) !important;
+    background: var(--primary_color) !important;
     border-width: 1px !important;
-    border-color: var(--inputtextcolorfocus) !important;
-    color: var(--inputtextcolorfocus) !important;
+    border-color: var(--input_text_color_focus) !important;
+    color: var(--input_text_color_focus) !important;
 } 
 
 /* Tabs font size */
@@ -92,26 +93,26 @@ Original Style.css Edit
 .dark .text-gray-900, 
 .dark .\!text-gray-700, 
 .dark .\!text-gray-800 {
-    color: var(--borderappcolor) !important;
+    color: var(--border_app_color) !important;
 }
 
 .dark .gr-input {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro' !important;
-    color: var(--inputtextcolor) !important;
+    color: var(--input_text_color) !important;
 }
 
 .dark .gr-input:focus, 
 .dark .gr-input:hover  {
-    color: var(--inputtextcolorfocus)!important;
-    background-color: var(--secondarycolor)!important;
-    border-color: var(--inputtextcolorfocus)!important;
+    color: var(--input_text_color_focus)!important;
+    background-color: var(--secondary_color)!important;
+    border-color: var(--input_text_color_focus)!important;
     transition: all 0.3s ease-out;
 }
 
 .dark .gr-input::selection {
-    color: var(--inputtextcolorfocus)!important;
-    background-color: var(--backgrouncolor)!important;
+    color: var(--input_text_color_focus)!important;
+    background-color: var(--background_color)!important;
 }
 
 .dark, 
@@ -125,7 +126,7 @@ Original Style.css Edit
 .dark fieldset span.text-gray-500, 
 .dark .gr-block.gr-box span.text-gray-500,
 .dark label.block span {
-    background-color: var(--backgrouncolor) !important;
+    background-color: var(--background_color) !important;
 }
 
 .dark .gr-input-label, 
@@ -135,7 +136,7 @@ Original Style.css Edit
 
 .dark .gr-check-radio:checked, 
 .dark gr-check-radio gr-checkbox {
-    background-color: var(--primarycolor) !important;
+    background-color: var(--primary_color) !important;
 }
 
 #txt2img_gallery, 
@@ -151,7 +152,7 @@ Original Style.css Edit
 #deforum_generate, 
 #depthmap_generate, 
 #vxa_gen_btn {
-    border-color: var(--primarycolor) !important;
+    border-color: var(--primary_color) !important;
 }
 
 #txt2img_gallery svg, 
@@ -160,8 +161,8 @@ Original Style.css Edit
 }
 
 .dark .gr-input-label:hover {
-    border-color: var(--secondarycolor)!important;
-    color: var(--inputtextcolorfocus)!important;
+    border-color: var(--secondary_color)!important;
+    color: var(--input_text_color_focus)!important;
     transition: all 0.3s ease-out;
 
     animation: pulse3 0.5s;
@@ -171,7 +172,7 @@ Original Style.css Edit
       box-shadow: 0 0 0 0.5em transparent;
     }
       @keyframes pulse3 {
-        0% { box-shadow: 0 0 0 0 var(--secondarycolor); }
+        0% { box-shadow: 0 0 0 0 var(--secondary_color); }
   }
 
 /* Generation progress bar color */
@@ -180,8 +181,8 @@ Original Style.css Edit
 .dark .progressDiv .progress {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro'!important;
-    background: var(--primarycolor) !important;
-    color: var(--inputtextcolorfocus)!important;
+    background: var(--primary_color) !important;
+    color: var(--input_text_color_focus)!important;
     font-weight: bold !important;
     line-height: 20px !important;
     text-align: right !important;
@@ -194,15 +195,15 @@ Original Style.css Edit
 #img2img_interrupt, 
 #txt2img_skip, 
 #img2img_skip {
-    background: var(--backgrouncolor) !important;
+    background: var(--background_color) !important;
 }
   
 #txt2img_interrupt:hover, 
 #img2img_interrupt:hover, 
 #txt2img_skip:hover, 
 #img2img_skip:hover {
-    background: var(--secondarycolor) !important;
-    color: var(--inputtextcolorfocus) !important;
+    background: var(--secondary_color) !important;
+    color: var(--input_text_color_focus) !important;
     transition: all 0.5s ease-out !important;
     
 }
@@ -211,20 +212,20 @@ Original Style.css Edit
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro' !important;
     text-transform: uppercase;
-    border-color: var(--primarycolor) !important;
+    border-color: var(--primary_color) !important;
     border-width: 3px !important;
     background-image: var(--Logo) !important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
-    color: var(--borderappcolor) !important;
+    color: var(--border_app_color) !important;
 }
 
 .dark .gr-button-primary:hover {
-    border-color: var(--inputtextcolorfocus)!important;
+    border-color: var(--input_text_color_focus)!important;
     border-width: 3px !important;
-    background-color: var(--primarycolor) !important;
-    color: var(--inputtextcolorfocus) !important;
+    background-color: var(--primary_color) !important;
+    color: var(--input_text_color_focus) !important;
     transition: all 0.5s ease-out !important;
         
 }
@@ -232,16 +233,16 @@ Original Style.css Edit
 .dark .gr-button-secondary {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro' !important;
-    border-color: var(--secondarycolor) !important;
+    border-color: var(--secondary_color) !important;
     border-width: 1px !important;
-    color: var(--borderappcolor) !important;
+    color: var(--border_app_color) !important;
 }
 
 .dark .gr-button-secondary:hover {
-    border-color: var(--inputtextcolorfocus)!important;
+    border-color: var(--input_text_color_focus)!important;
     border-width: 1px !important;
-    background-color: var(--secondarycolor)!important;
-    color: var(--inputtextcolorfocus) !important;
+    background-color: var(--secondary_color)!important;
+    color: var(--input_text_color_focus) !important;
     transition: all 0.5s ease-out !important;
     
     animation: pulse2 0.5s;
@@ -252,7 +253,7 @@ Original Style.css Edit
     }
     
     @keyframes pulse2 {
-      0% { box-shadow: 0 0 0 0 var(--inputtextcolorfocus); }
+      0% { box-shadow: 0 0 0 0 var(--input_text_color_focus); }
 }
 
 /* Generation buttons pulse effect */
@@ -272,7 +273,7 @@ Original Style.css Edit
 }
     
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 var(--primarycolor) }
+      0% { box-shadow: 0 0 0 0 var(--primary_color) }
 }
 
 /* gradio 3.4.1 stuff for editable scrollbar values */
@@ -283,12 +284,12 @@ Original Style.css Edit
     top: -0.6em !important;
     z-index: 200 !important;
     width: 8em !important;
-    border-color: var(--secondarycolor) !important;
+    border-color: var(--secondary_color) !important;
 }
 
 .dark .gr-box > div > div > input.gr-text-input:hover, 
 .dark .gr-box > div > div > input.gr-text-input:focus{
-    border-color: var(--inputtextcolorfocus) !important;
+    border-color: var(--input_text_color_focus) !important;
 }
 
 /* Gallery */
@@ -302,7 +303,7 @@ Original Style.css Edit
 }
 
 .dark .gallery-item.svelte-1g9btlg.svelte-1g9btlg {
-    --tw-ring-color: var(--primarycolor)!important;
+    --tw-ring-color: var(--primary_color)!important;
 }
 
 .dark .dark\:bg-gray-900 {
@@ -311,7 +312,7 @@ Original Style.css Edit
     background-position: center center !important;
     background-repeat: no-repeat !important;
     --tw-bg-opacity: 1 !important;
-    background-color: var(--backgrouncolor) !important;
+    background-color: var(--background_color) !important;
 }
 
 /* Context menu */
@@ -319,14 +320,14 @@ Original Style.css Edit
 #context-menu {
     font-family: 'Source Code Pro', monospace !important;
     font: 'Source Code Pro'!important;
-    border-color: var(--primarycolor)!important;
-    box-shadow: 1px 1px 2px var(--primarycolor) !important;
+    border-color: var(--primary_color)!important;
+    box-shadow: 1px 1px 2px var(--primary_color) !important;
 }
 
 .context-menu-items a:hover {
-    background: var(--secondarycolor) !important;
-    color: var(--inputtextcolorfocus) !important;
-    box-shadow: 1px 1px 2px var(--secondarycolor) !important;
+    background: var(--secondary_color) !important;
+    color: var(--input_text_color_focus) !important;
+    box-shadow: 1px 1px 2px var(--secondary_color) !important;
     transition: all 0.3s ease-out;
 }
 
@@ -348,11 +349,11 @@ Original Style.css Edit
     cursor: pointer !important;
     height: 6px !important;
     border-radius: 3px !important;
-    background:  var(--borderappcolor) !important;
+    background:  var(--border_app_color) !important;
 }
 
 .gradio-container input[type=range]:hover::-webkit-slider-runnable-track {
-    background-image: linear-gradient(90deg, var(--borderappcolor), var(--primarycolor))!important;
+    background-image: linear-gradient(90deg, var(--border_app_color), var(--primary_color))!important;
     background-repeat: no-repeat!important;
 }
 
@@ -360,11 +361,11 @@ Original Style.css Edit
     cursor: pointer !important;
     height: 6px !important;
     border-radius: 3px !important;
-    background:  var(--primarycolor) !important;
+    background:  var(--primary_color) !important;
 }
 
 .gradio-container input[type=range]:hover::-moz-range-track {
-    background: var(--secondarycolor) !important;
+    background: var(--secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-ms-fill-upper,
@@ -372,57 +373,71 @@ Original Style.css Edit
     cursor: pointer !important;
     height: 6px !important;
     border-radius: 3px !important;
-    background:   var(--primarycolor) !important;
+    background:   var(--primary_color) !important;
 }
 
 .gradio-container input[type=range]:hover::-ms-fill-upper,
 .gradio-container input[type=range]:hover::-ms-fill-lower {
-    background:   var(--secondarycolor) !important;
+    background:   var(--secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-webkit-slider-thumb {
-    box-shadow: 0 0 3px var(--borderappcolor) !important;
-    border: 2px solid var(--borderappcolor) !important;
+    box-shadow: 0 0 3px var(--border_app_color) !important;
+    border: 2px solid var(--border_app_color) !important;
     height: 16px !important;
     width: 16px !important;
     border-radius: 16px !important;
-    background:   var(--primarycolor) !important;
+    background:   var(--primary_color) !important;
     cursor: pointer !important;
     -webkit-appearance: none !important;
     margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-webkit-slider-thumb {
-    background:   var(--secondarycolor) !important;
+    background:   var(--secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-moz-range-thumb {
-    box-shadow: 0 0 3px var(--borderappcolor) !important;
-    border: 2px solid  var(--borderappcolor) !important;
+    box-shadow: 0 0 3px var(--border_app_color) !important;
+    border: 2px solid  var(--border_app_color) !important;
     height: 16px !important;
     width: 16px !important;
     border-radius: 16px !important;
-    background:   var(--primarycolor) !important;
+    background:   var(--primary_color) !important;
     cursor: pointer !important;
     margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-moz-range-thumb {
-    background:   var(--secondarycolor) !important;
+    background:   var(--secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-ms-thumb {
-    box-shadow: 0 0 3px var(--borderappcolor) !important;
-    border: 2px solid  var(--borderappcolor) !important;
+    box-shadow: 0 0 3px var(--border_app_color) !important;
+    border: 2px solid  var(--border_app_color) !important;
     height: 16px !important;
     width: 16px !important;
     border-radius: 16px !important;
-    background:   var(--primarycolor) !important;
+    background:   var(--primary_color) !important;
     cursor: pointer !important;
     margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-ms-thumb {
-    background:   var(--secondarycolor) !important;
+    background:   var(--secondary_color) !important;
 }
 
+#hidden{
+    visibility: hidden;
+}
+input[type=checkbox]:checked + span, input[type=radio]:checked + span {
+    color: var(--checked_text);
+}
+
+#quickcss_colorpicker {
+    max-width: 10vw;
+}
+
+input[type=color] {
+    width: 100%;
+}

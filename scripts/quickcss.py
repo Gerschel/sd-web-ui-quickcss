@@ -11,7 +11,9 @@ basedir = scripts.basedir()
 class MyTab():
     
     def __init__(self, basedir):
+        #This extensions directory
         self.extensiondir = basedir
+        #Up two directories, webui root
         self.webui_dir = Path(self.extensiondir).parents[1]
 
 
@@ -47,40 +49,75 @@ class MyTab():
 
         self.remove_style = gr.Button(value="Remove Style", render=False)
 
-        self.primary_color = gr.ColorPicker(label="Primary Color", render=False)
-        self.secondary_color = gr.ColorPicker(label="Secondary Color", render=False)
-        self.input_text_color = gr.ColorPicker(label="Input Text Color", render=False)
-        self.input_text_color_focus = gr.ColorPicker(label="Input Text Focus Color", render=False)
-        self.background_color= gr.ColorPicker(label="Background Color", render=False)
-        self.border_app_color = gr.ColorPicker(label="Border App Color", render=False)
-        self.color_pickers = [self.primary_color, self.secondary_color, self.input_text_color, self.input_text_color_focus, self.background_color, self.border_app_color]
-        #--secondarycolor: #------ ;
-        #--inputtextcolor: #------ ; 
-        #--inputtextcolorfocus: #------;  
-        #--backgrouncolor: #------ ;
-        #--borderappcolor: #------ ; 
-        #--Logo: url('file=logo.png');
-        self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.color_pickers))]
-        self.length_of_colors = gr.Text(value=len(self.color_pickers), visible=False, render=False)
-        self.dummy_picker = gr.Text(visible=False, render=False)
+        # BEGIN CSS COLORPICK COMPONENTS
+        #Test for file being set
+        self.file_exists = False
+        style_path = path.join(self.extensiondir, "style.css")
+        if path.exists(style_path):
+            self.file_exists = True #Conditional for creating inputs
+            lines = []
+            line = ""
+            read = False
+            with open(style_path, 'r') as cssfile:
+                for line in cssfile:
+                    line = line.strip()
+                    if "/*BREAKFILEREADER*/" in line:
+                        break
+                    if "quickcss_target" in line:
+                        read = True
+                        continue
+                    if read:
+                        if len(line) > 0:
+                            lines.append(line.split(":"))
+
+
+            self.color_pickers = [gr.ColorPicker(label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_colorpicker", value=x[1].replace(";", "").strip())
+                                                for x in lines]
+            #else:
+            ##TODO: this is remainder from before file reader, but is in place so 
+            #self.primary_color = gr.ColorPicker(label="Primary Color", render=False)
+            #self.secondary_color = gr.ColorPicker(label="Secondary Color", render=False)
+            #self.input_text_color = gr.ColorPicker(label="Input Text Color", render=False)
+            #self.input_text_color_focus = gr.ColorPicker(label="Input Text Focus Color", render=False)
+            #self.background_color= gr.ColorPicker(label="Background Color", render=False)
+            #self.border_app_color = gr.ColorPicker(label="Border App Color", render=False)
+            #self.checked_text_color = gr.ColorPicker(label="Checked Text Color", render=False)
+            #self.color_pickers = [self.primary_color, self.secondary_color, self.input_text_color, self.input_text_color_focus, self.background_color, self.border_app_color, self.checked_text_color]
+            ##--secondarycolor: #------ ;
+            ##--inputtextcolor: #------ ; 
+            ##--inputtextcolorfocus: #------;  
+            ##--backgrouncolor: #------ ;
+            ##--borderappcolor: #------ ; 
+            ##--Logo: url('file=logo.png');
+            self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.color_pickers))]
+            self.length_of_colors = gr.Text(value=len(self.color_pickers), visible=False, render=False)
+            self.dummy_picker = gr.Text(visible=False, render=False, elem_id="hidden")
 
     def ui(self, *args, **kwargs):
         with gr.Blocks(analytics_enabled=False) as ui:
-            #Necessary for values being accessible
-            self.length_of_colors.render()
-            self.dummy_picker.render()
-            for h in self.hidden_vals:
-                h.render()
-            with gr.Row():
-                for c in self.color_pickers:
-                    with gr.Column(scale=1):
-                        c.render()
-            #self.primary_color.render()
-            #self.secondary_color.render()
-            #self.input_text_color.render()
-            #self.input_text_color_focus.render()
-            #self.background_color.render()
-            #self.border_app_color.render()
+            with gr.Accordion(label="Some instruction", open=False):
+                gr.Markdown(value="""<center>This is a mix from old style to new style. It is not in it's finished state</center>
+<center>To see affects, you must use dropdown, select neon, click apply, click restart. More options will be available on restart</center>
+<center>I know it lives as a tab, but this was meant to be a demo at first, now it's growing to something more</center>
+
+<center>To see favicon take affect, you will need to add `favicon_path="favicon.svg"` to webui.py</center>
+<center>To do this, open file, search for `prevent_thread_lock` add comma, paste in text, save.</center>
+
+<center>You may need to undo this for an update, if you have git issues and don't know how to deal with them</center>
+<center>This won't break your system, if you find you can't update, try `git fetch --all` `git reset --hard origin/master`</center>
+
+<center>Once again, this `dynamic` demo has not removed/re-implemented all features present</center>
+""")
+            if self.file_exists:
+                #Necessary for values being accessible
+                self.length_of_colors.render()
+                self.dummy_picker.render()
+                for h in self.hidden_vals:
+                    h.render()
+                with gr.Row():
+                    for c in self.color_pickers:
+                        with gr.Column(elem_id="quickcss_colorpicker"):
+                            c.render()
             with gr.Row():
                 with gr.Column():
                     self.styles_dropdown.render()
@@ -110,19 +147,15 @@ class MyTab():
                 self.favicon_image.render()
 
             # Handlers
-
-            #self.primary_color.change(
-            #    fn = None,
-            #    _js = "quickcssFormatRule",
-            #    inputs = self.primary_color
-            #)
-            for comp,val in zip(self.color_pickers, self.hidden_vals):
-                comp.change(
-                    fn = lambda: print(),
-                    _js = "quickcssFormatRule",
-                    inputs = [comp, val, self.length_of_colors],
-                    outputs = []
-                )
+            if self.file_exists:
+                for comp,val in zip(self.color_pickers, self.hidden_vals):
+                    comp.change(
+                        #996
+                        fn = None,
+                        _js = "quickcssFormatRule",
+                        inputs = [comp, val, self.length_of_colors],
+                        outputs = self.dummy_picker
+                    )
 
             self.logos_dropdown.change(
                 fn = lambda x: self.get_image(x, folder = "logos"), 
