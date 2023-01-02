@@ -30,7 +30,7 @@
 
 /* global */
 * {
-    border-radius: calc(1px *var(--radius)) ;
+    border-radius: calc(1px *var(--all_border_radius)) !important;
 }
 
 .gradio-container {
@@ -56,18 +56,18 @@
 #setting_sd_hypernetwork_strength input {
     font-size: .5rem;
     border: 0;
-    background: none;
+    background: none!important;
 }
 
 /* tabs */
 #tabs > div:first-of-type button {
-    font-size: 75% 
+    font-size: 75% !important
 }
 
 /* value input boxes */
 input.gr-box.gr-input.gr-text-input.text-center.h-6 {
     color: var(--ml-color-highlight);
-    background-color: var(--ml-color-dark) ;
+    background-color: var(--ml-color-dark) !important;
 }
 
 /* input */
@@ -81,7 +81,7 @@ input.gr-box.gr-input.gr-text-input.text-center.h-6 {
 .dark .gr-input:focus
 {
     color: var(--ml-color-highlight);
-    background-color: var(--ml-color-dark) ;
+    background-color: var(--ml-color-dark) !important;
 }
 
 /* form fields */
@@ -90,8 +90,8 @@ input.gr-box.gr-input.gr-text-input.text-center.h-6 {
 .gr-form .gr-box,
 .gr-form .dark .bg-gray-5
 {
-    background: none ;
-    /*border: 1px solid rgb(25, 25, 25) ;*/
+    background: none !important;
+    /*border: 1px solid rgb(25, 25, 25) !important;*/
 }
 
 #negative_prompt label {
@@ -99,7 +99,7 @@ input.gr-box.gr-input.gr-text-input.text-center.h-6 {
 }
 
 textarea {
-/*  border: 1px solid rgb(64, 68, 77) ;*/
+/*  border: 1px solid rgb(64, 68, 77) !important;*/
 }
 
 .dark fieldset span.text-gray-500, .dark .gr-block.gr-box span.text-gray-500, .dark label.block span  /* container names */ {
@@ -116,16 +116,16 @@ textarea {
 label,
 .gr-form div /* number */
 {
-    background-image: transparent ;
+    background-image: transparent !important;
     background: 0;
     color: var(--ml-color-lightgrey);
 }
 
 button.gr-button.gr-button-lg.gr-button-primary {
-    border: 1px solid var(--ml-color-pink) ;
+    border: 1px solid var(--ml-color-pink) !important;
 }
 button.gr-button.gr-button-lg.gr-button-primary:hover {
-    border: 1px solid white ;
+    border: 1px solid white !important;
 }
 
 label.gr-input-label,
@@ -140,8 +140,8 @@ label span
 }
 
 #txt2img_generate:hover {
-    color: black ;
-    background: var(--ml-color-highlight) ;
+    color: black !important;
+    background: var(--ml-color-highlight) !important;
 }
 
 .gr-button:hover,
@@ -150,9 +150,9 @@ label span
 }
 
 label {
-    background-color: transparent ;
-    background-image: transparent ;
-    background: 0 ;
+    background-color: transparent !important;
+    background-image: transparent !important;
+    background: 0 !important;
     color: var(--ml-color-lightgrey);
 }
 
@@ -169,11 +169,11 @@ label {
 
 /* image preview bg */
 #txt2img_gallery {
-    border: 1px solid var(--ml-color-grey) ;
+    border: 1px solid var(--ml-color-grey) !important;
 }
 
 /*#txt2img_gallery {
-    border:  1px solid rgb(64, 68, 77);
+    border:  1px solid rgb(64, 68, 77)!important;
 }
 */
 
@@ -279,14 +279,14 @@ label {
     visibility: hidden;
 }
 input[type=checkbox]:checked + span, input[type=radio]:checked + span {
-    color: var(--checked_text);
+    color: var(--checked_text)!important;
 }
 
 #quickcss_colorpicker {
     max-width: 10vw;
-    border-radius: calc(1px * var(--radius));
+    border-radius: calc(1px * var(--all_border_radius))!important;
 }
 
 input[type=color] {
-    width: 100%;
+    width: 100%!important;
 }
