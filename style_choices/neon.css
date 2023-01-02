@@ -13,14 +13,15 @@ Original Style.css Edit
 
 /*THEME VARIABLES*/
 :root, * , quickcss_target{
-    --primary_color: #ff205f ;
-    --secondary_color: #a3133c ;
-    --input_text_color: #65f6ae ; 
+    --primary_color: #ff205f;
+    --secondary_color: #a3133c;
+    --input_text_color: #65f6ae; 
     --input_text_color_focus: #FFFFFF;  
-    --background_color: #000 ;
-    --border_app_color: #a7abb1 ; 
+    --background_color: #000;
+    --border_app_color: #a7abb1; 
     --checked_text: #DE73FF;
     /*BREAKFILEREADER*/
+    --radius : 4;
     --Logo: url('file=logo.png');
 }
     
@@ -78,7 +79,7 @@ Original Style.css Edit
 /* UI border radius*/
 /*----------------------------------------------------------------*/
 * {
-    border-radius: 0px !important;
+    border-radius: calc(1px *var(--radius)) !important;
 }
 
 /* UI Changes */
@@ -93,7 +94,7 @@ Original Style.css Edit
 .dark .text-gray-900, 
 .dark .\!text-gray-700, 
 .dark .\!text-gray-800 {
-    color: var(--border_app_color) !important;
+    color: calc(0px * var(--border_app_color)) !important;
 }
 
 .dark .gr-input {
@@ -338,6 +339,7 @@ Original Style.css Edit
 
 .gradio-container input[type=range] {
     -webkit-appearance: none !important;
+    appearance: none;
     background: transparent !important;
 }
 
@@ -436,6 +438,7 @@ input[type=checkbox]:checked + span, input[type=radio]:checked + span {
 
 #quickcss_colorpicker {
     max-width: 10vw;
+    border-radius: calc(1px * var(--radius));
 }
 
 input[type=color] {

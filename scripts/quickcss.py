@@ -1,7 +1,7 @@
 import gradio as gr
 import modules.scripts as scripts
 from modules import script_callbacks, shared
-from os import listdir, path, remove
+import os
 import shutil
 from pathlib import Path
 
@@ -17,9 +17,9 @@ class MyTab():
         self.webui_dir = Path(self.extensiondir).parents[1]
 
 
-        self.style_folder = path.join(basedir, "style_choices") 
-        self.logos_folder = path.join(self.extensiondir, "logos")
-        self.favicon_folder = path.join(self.extensiondir, "favicons")
+        self.style_folder = os.path.join(basedir, "style_choices") 
+        self.logos_folder = os.path.join(self.extensiondir, "logos")
+        self.favicon_folder = os.path.join(self.extensiondir, "favicons")
 
         self.styles_list = []
         self.logos_list = []
@@ -49,53 +49,50 @@ class MyTab():
 
         self.remove_style = gr.Button(value="Remove Style", render=False)
 
+
         # BEGIN CSS COLORPICK COMPONENTS
+        self.save_as_filename = gr.Text(label="Save Name", visible=False, render=False)
+        self.save_button = gr.Button(value="Save", visible=False, render=False)
+
         #Test for file being set
         self.file_exists = False
-        style_path = path.join(self.extensiondir, "style.css")
-        if path.exists(style_path):
+        self.style_path = os.path.join(self.extensiondir, "style.css")
+        self.start_position_for_save = 0
+        self.insert_break_rule_for_save = 0
+        if os.path.exists(self.style_path):
             self.file_exists = True #Conditional for creating inputs
-            lines = []
+            self.lines = []
             line = ""
             read = False
-            with open(style_path, 'r') as cssfile:
-                for line in cssfile:
+            with open(self.style_path, 'r') as cssfile:
+                for i, line in enumerate(cssfile):
                     line = line.strip()
                     if "/*BREAKFILEREADER*/" in line:
+                        self.insert_break_rule_for_save = i - self.start_position_for_save
                         break
                     if "quickcss_target" in line:
                         read = True
+                        self.start_position_for_save = i+1
                         continue
                     if read:
                         if len(line) > 0:
-                            lines.append(line.split(":"))
+                            self.lines.append(line.split(":"))
 
 
             self.color_pickers = [gr.ColorPicker(label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_colorpicker", value=x[1].replace(";", "").strip())
-                                                for x in lines]# + [gr.Slider(minimum=0,maximum=100,step=1)]
-            #else:
-            ##TODO: this is remainder from before file reader, but is in place so 
-            #self.primary_color = gr.ColorPicker(label="Primary Color", render=False)
-            #self.secondary_color = gr.ColorPicker(label="Secondary Color", render=False)
-            #self.input_text_color = gr.ColorPicker(label="Input Text Color", render=False)
-            #self.input_text_color_focus = gr.ColorPicker(label="Input Text Focus Color", render=False)
-            #self.background_color= gr.ColorPicker(label="Background Color", render=False)
-            #self.border_app_color = gr.ColorPicker(label="Border App Color", render=False)
-            #self.checked_text_color = gr.ColorPicker(label="Checked Text Color", render=False)
-            #self.color_pickers = [self.primary_color, self.secondary_color, self.input_text_color, self.input_text_color_focus, self.background_color, self.border_app_color, self.checked_text_color]
-            ##--secondarycolor: #------ ;
-            ##--inputtextcolor: #------ ; 
-            ##--inputtextcolorfocus: #------;  
-            ##--backgrouncolor: #------ ;
-            ##--borderappcolor: #------ ; 
-            ##--Logo: url('file=logo.png');
+                                                for x in self.lines] + [gr.Slider(minimum=0,maximum=100,step=1)]
+            # hidden_vals acts like an index, it's in component so gradio doesn't complain
             self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.color_pickers))]
+            # length_of_colors similar to hidden vals, but provides length so js knows the limit
             self.length_of_colors = gr.Text(value=len(self.color_pickers), visible=False, render=False)
+            # used as padding so we don't list index error or http 500 internal server, or http 422 forEach can't over undefined (promise pending)
             self.dummy_picker = gr.Text(visible=False, render=False, elem_id="hidden")
+            # Acts like catcher, actual values store in list
+            self.js_result_component = gr.Text(render=False, interactive=False)
 
     def ui(self, *args, **kwargs):
         with gr.Blocks(analytics_enabled=False) as ui:
-            with gr.Accordion(label="Some instruction", open=False):
+            with gr.Accordion(label="Some instructions", open=False):
                 gr.Markdown(value="""<center>This is a mix from old style to new style. It is not in it's finished state</center>
 <center>To see effects, you must use dropdown, select neon, click apply, click restart. More options will be available on restart</center>
 <center>I know it lives as a tab, but this was meant to be a demo at first, now it's growing to something more</center>
@@ -109,12 +106,20 @@ class MyTab():
 <center>Once again, this `dynamic` demo has not removed/re-implemented all features present</center>
 """)
             if self.file_exists:
+                with gr.Row():
+                    with gr.Column(scale=5):
+                        self.save_as_filename.render()
+                    with gr.Column(scale=5):
+                        self.save_button.render()
                 #Necessary for values being accessible
                 self.length_of_colors.render()
                 self.dummy_picker.render()
+                self.js_result_component.render()
+                #Render hidden vals that serve as indices to map
                 for h in self.hidden_vals:
                     h.render()
                 with gr.Row():
+                    #Render adjusters
                     for c in self.color_pickers:
                         with gr.Column(elem_id="quickcss_colorpicker"):
                             c.render()
@@ -150,12 +155,21 @@ class MyTab():
             if self.file_exists:
                 for comp,val in zip(self.color_pickers, self.hidden_vals):
                     comp.change(
-                        #996
-                        fn = None,
+                        fn = lambda *x: self.process_for_save(*x),
                         _js = "quickcssFormatRule",
                         inputs = [comp, val, self.length_of_colors],
-                        outputs = self.dummy_picker
+                        outputs = [self.js_result_component] + [self.save_as_filename, self.dummy_picker]
                     )
+                self.save_as_filename.change(
+                    fn = lambda x: gr.update(visible=bool(x)),
+                    inputs = self.save_as_filename,
+                    outputs = self.save_button
+                )
+                self.save_button.click(
+                    fn = self.save,
+                    inputs = [self.js_result_component, self.save_as_filename],
+                    outputs = [self.js_result_component, self.styles_dropdown]
+                )
 
             self.logos_dropdown.change(
                 fn = lambda x: self.get_image(x, folder = "logos"), 
@@ -216,7 +230,7 @@ class MyTab():
     
     def import_file_from_path(self, tmp_file_obj, target_folder, func, comp):
         if tmp_file_obj:
-            shutil.copy(tmp_file_obj.name, path.join(self.extensiondir, target_folder, tmp_file_obj.orig_name))
+            shutil.copy(tmp_file_obj.name, os.path.join(self.extensiondir, target_folder, tmp_file_obj.orig_name))
             # Update appropriate list 
             # Make backend the same as front-end so it matches when selected
             comp.choices = func()
@@ -225,35 +239,35 @@ class MyTab():
         return gr.update(choices=comp.choices)
 
     def get_styles(self):
-        self.styles_list = [file_name for file_name in listdir(self.style_folder) if path.isfile(path.join(self.style_folder, file_name))] 
+        self.styles_list = [file_name for file_name in os.listdir(self.style_folder) if os.path.isfile(os.path.join(self.style_folder, file_name))] 
         # return is only used during file import
         return self.styles_list
 
     def get_logos(self):
-        self.logos_list = [file_name for file_name in listdir(self.logos_folder) if path.isfile(path.join(self.logos_folder,file_name))] 
+        self.logos_list = [file_name for file_name in os.listdir(self.logos_folder) if os.path.isfile(os.path.join(self.logos_folder,file_name))] 
         return self.logos_list
 
     def get_favicons(self):
-        self.favicon_list = [file_name for file_name in listdir(self.favicon_folder) if path.isfile(path.join(self.favicon_folder,file_name))] 
+        self.favicon_list = [file_name for file_name in os.listdir(self.favicon_folder) if os.path.isfile(os.path.join(self.favicon_folder,file_name))] 
         return self.favicon_list
 
 
     def apply_style(self, selection):
-        shutil.copy(path.join(self.style_folder, selection), path.join(self.extensiondir, "style.css"))
+        shutil.copy(os.path.join(self.style_folder, selection), os.path.join(self.extensiondir, "style.css"))
 
     def apply_logo(self, selection):
-        shutil.copy(path.join(self.logos_folder, selection), path.join(self.webui_dir, "logo.png"))
+        shutil.copy(os.path.join(self.logos_folder, selection), os.path.join(self.webui_dir, "logo.png"))
  
     def apply_favicon(self, selection):
-        shutil.copy(path.join(self.favicon_folder, selection), path.join(self.webui_dir, "favicon.svg"))
+        shutil.copy(os.path.join(self.favicon_folder, selection), os.path.join(self.webui_dir, "favicon.svg"))
 
     def get_image(self, name, folder):
-        return path.join(self.extensiondir, folder, name)
+        return os.path.join(self.extensiondir, folder, name)
 
     
     def delete_style(self):
         try:
-            remove(path.join(self.extensiondir, "style.css"))
+            os.remove(os.path.join(self.extensiondir, "style.css"))
         except FileNotFoundError:
             pass
 
@@ -261,6 +275,25 @@ class MyTab():
         "Restart button"
         shared.state.interrupt()
         shared.state.need_restart = True
+    
+    def process_for_save(self, x, *y):
+        return [x] + [gr.update(visible=True), None]
+    
+    def save(self, js_cmp_val, filename):
+        rules = [f"   {e};\n" for e in js_cmp_val[1:-1].split(";")][:-1]
+        #issue, save button needs to stay hidden until some color change
+        rules.insert(self.insert_break_rule_for_save, "    /*BREAKFILEREADER*/\n")
+        with open(self.style_path, 'r+') as file:
+            lines = file.readlines()
+            start_pos = self.start_position_for_save
+            for i, rule in enumerate(rules):
+                lines[start_pos + i] = rule
+            file.seek(0)
+            file.writelines(lines)
+        self.styles_dropdown.choices.insert(0, f"{filename}.css")
+        shutil.copy(self.style_path, os.path.join(self.style_folder, f"{filename}.css"))
+        return ["Saved", gr.update(choices=self.styles_dropdown.choices, value=self.styles_dropdown.choices[0])]
+
 
 
 tab = MyTab(basedir)        

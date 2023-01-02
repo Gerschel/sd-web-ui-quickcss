@@ -40,7 +40,7 @@ function quickcssFormatRule(val, ele, colorsSize){
     var asArray = new Array
      asSplit.forEach( e => {asArray.push(e.split(":"))})
     let stringarray = new Array
-     asArray.forEach( (e, i) => {stringarray.push( i==ele ? `${e[0]}:${val}`: `${e[0]}:${e[1]}`)})
+     asArray.forEach( (e, i) => {stringarray.push( i==ele ? `${e[0]}: ${val}`: `${e[0]}: ${e[1]}`)})
     stringarray = stringarray.join(";") + `;${endStr}`
     let cssRule = ":root, *, quickcss_target" + stringarray
     //let cssRule = ":root, *, quickcss_target{--primarycolor:" + val + "}"
@@ -49,4 +49,5 @@ function quickcssFormatRule(val, ele, colorsSize){
     //insert (as in add)
     quickcssSheet.insertRule(cssRule, quickcssTargetIndex)
     //quickcssRuleSwap(r, window.quickcssTargetIndex)
+    return [stringarray, "", ""]
 }
