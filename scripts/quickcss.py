@@ -58,6 +58,7 @@ class MyTab():
         self.file_exists = False
         self.style_path = os.path.join(self.extensiondir, "style.css")
         self.start_position_for_save = 0
+        self.insert_colorpicker_break_rule_for_save = 0
         self.insert_break_rule_for_save = 0
         if os.path.exists(self.style_path):
             self.file_exists = True #Conditional for creating inputs
@@ -70,17 +71,24 @@ class MyTab():
                     if "/*BREAKFILEREADER*/" in line:
                         self.insert_break_rule_for_save = i - self.start_position_for_save
                         break
+                    elif "/*ENDCOLORPICKERS*/" in line:
+                        self.insert_colorpicker_break_rule_for_save = i - self.start_position_for_save
+                        continue
                     if "quickcss_target" in line:
                         read = True
                         self.start_position_for_save = i+1
                         continue
                     if read:
+                        print(line)
                         if len(line) > 0:
                             self.lines.append(line.split(":"))
 
 
-            self.color_pickers = [gr.ColorPicker(label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_colorpicker", value=x[1].replace(";", "").strip())
-                                                for x in self.lines] + [gr.Slider(minimum=0,maximum=100,step=1)]
+            print(self.lines)
+            self.color_pickers = [gr.ColorPicker(label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_colorpicker", value=x[1].replace(";", "").strip()) 
+                                                        if i < self.insert_colorpicker_break_rule_for_save else 
+                                                        gr.Slider(minimum=0, maximum=100, step=1, label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_slider", value=x[1].replace(";", "").strip())
+                                                        for i,x in enumerate(self.lines)] 
             # hidden_vals acts like an index, it's in component so gradio doesn't complain
             self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.color_pickers))]
             # length_of_colors similar to hidden vals, but provides length so js knows the limit
@@ -110,7 +118,8 @@ class MyTab():
                     with gr.Column(scale=5):
                         self.save_as_filename.render()
                     with gr.Column(scale=5):
-                        self.save_button.render()
+                        with gr.Box():
+                            self.save_button.render()
                 #Necessary for values being accessible
                 self.length_of_colors.render()
                 self.dummy_picker.render()
@@ -282,6 +291,7 @@ class MyTab():
     def save(self, js_cmp_val, filename):
         rules = [f"   {e};\n" for e in js_cmp_val[1:-1].split(";")][:-1]
         #issue, save button needs to stay hidden until some color change
+        rules.insert(self.insert_colorpicker_break_rule_for_save, "    /*ENDCOLORPICKERS*/\n")
         rules.insert(self.insert_break_rule_for_save, "    /*BREAKFILEREADER*/\n")
         with open(self.style_path, 'r+') as file:
             lines = file.readlines()

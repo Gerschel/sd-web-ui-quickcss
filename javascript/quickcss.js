@@ -1,53 +1,41 @@
-/*function quickcssPrep(){
-    //get sheet
-    var quickcssSheet = document.documentElement.querySelector("gradio-app").shadowRoot.querySelector("style").sheet
-    //get as rules
-    var quickcssCssr = quickcssSheet.cssRules
-    //convert to array to for finding index
-    var quickcssCssrArray = Array.from(quickcssCssr)
-    //use custom target
-    var quickcssTarget = quickcssCssrArray.find( item => item.cssText.includes("quickcss_target"))
-    var quickcssTargetIndex = quickcssCssrArray.indexOf(quickcssTarget)
-}
-
-function quickcssRuleSwap(cssRule, cssTargetIndex){
-    //Delete rule at
-    window.quickcssSheet.deleteRule(cssTargetIndex)
-    //insert (as in add)
-    window.quickcssSheet.insertRule(cssRule, cssTargetIndex)
-}
-*/
 function quickcssFormatRule(val, ele, colorsSize){
     //async  is not needed, just trying to debug some error from colorpicker
     ele = parseInt(ele)
-    //get sheet
-    var quickcssSheet =  document.documentElement.querySelector("gradio-app").shadowRoot.querySelector("style").sheet
-    //get as rules
-    var quickcssCssr = quickcssSheet.cssRules
-    //convert to array to for finding index
-    var quickcssCssrArray = Array.from(quickcssCssr)
-    //use custom target
-    var quickcssTarget =  quickcssCssrArray.find( item => item.cssText.includes("quickcss_target"))
-    var quickcssTargetIndex =  quickcssCssrArray.indexOf(quickcssTarget)
-    var quickcssRuleAsString =  quickcssCssr[quickcssTargetIndex].cssText.toString()
-    var quickcssRuleAsString =  quickcssRuleAsString.slice(quickcssRuleAsString.indexOf("{"))
-    var asSplit =  quickcssRuleAsString.split(";")
-    var endStr =  asSplit.slice(parseInt(colorsSize)).join(";")
+    //get sheet from style tag
+    let quickcssSheet =  document.documentElement.querySelector("gradio-app").shadowRoot.querySelector("style").sheet
+    //get it's rules
+    let quickcssCssr = quickcssSheet.cssRules
+    //convert to array for finding index
+    let quickcssCssrArray = Array.from(quickcssCssr)
+    //use custom target to find index
+    let quickcssTarget =  quickcssCssrArray.find( item => item.cssText.includes("quickcss_target"))
+    let quickcssTargetIndex =  quickcssCssrArray.indexOf(quickcssTarget)
+    //Pull rule out
+    let quickcssRuleAsString =  quickcssCssr[quickcssTargetIndex].cssText.toString()
+    //splitter for rule targets and body
+    let ruleSplitIndex = quickcssRuleAsString.indexOf("{")
+    //Target of rule
+    let ruleTargets = quickcssRuleAsString.slice(0, ruleSplitIndex)
+    //Body of rule
+    let quickcssRuleBody =  quickcssRuleAsString.slice(ruleSplitIndex)
+    //Rule body edit
+    let asSplit =  quickcssRuleBody.split(";")
+    let endStr =  asSplit.slice(parseInt(colorsSize)).join(";")
+    //Edit to element position, index and length given as string via hiddenvals components
     while (asSplit.length > parseInt(colorsSize))
     {
         asSplit.pop()
     }
-    var asArray = new Array
+    let asArray = new Array
      asSplit.forEach( e => {asArray.push(e.split(":"))})
     let stringarray = new Array
      asArray.forEach( (e, i) => {stringarray.push( i==ele ? `${e[0]}: ${val}`: `${e[0]}: ${e[1]}`)})
     stringarray = stringarray.join(";") + `;${endStr}`
-    let cssRule = ":root, *, quickcss_target" + stringarray
-    //let cssRule = ":root, *, quickcss_target{--primarycolor:" + val + "}"
-    //Delete rule at
+    let cssRule = ruleTargets + stringarray
+    //Delete old rule at
     quickcssSheet.deleteRule(quickcssTargetIndex)
-    //insert (as in add)
+    //insert (as in add at same location)
     quickcssSheet.insertRule(cssRule, quickcssTargetIndex)
-    //quickcssRuleSwap(r, window.quickcssTargetIndex)
+    //returns must equal inputs size, so outputs must matchsize, python fn hijacks for finishing save data
     return [stringarray, "", ""]
 }
