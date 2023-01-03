@@ -80,7 +80,6 @@ class MyTab():
                             self.start_position_for_save = i+1
                             continue
                         if self.dynamic_compatible:
-                            print(line)
                             if len(line) > 0:
                                 self.lines.append(line.split(":"))
                 except UnicodeDecodeError as error:
