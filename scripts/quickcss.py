@@ -52,7 +52,7 @@ class MyTab():
 
         # BEGIN CSS COLORPICK COMPONENTS
         self.save_as_filename = gr.Text(label="Save Name", visible=False, render=False)
-        self.save_button = gr.Button(value="Save", visible=False, render=False)
+        self.save_button = gr.Button(value="Save", visible=False, render=False, variant="primary")
 
         #Test for file being set
         self.file_exists = False
@@ -64,35 +64,41 @@ class MyTab():
             self.file_exists = True #Conditional for creating inputs
             self.lines = []
             line = ""
-            read = False
-            with open(self.style_path, 'r') as cssfile:
-                for i, line in enumerate(cssfile):
-                    line = line.strip()
-                    if "/*BREAKFILEREADER*/" in line:
-                        self.insert_break_rule_for_save = i - self.start_position_for_save
-                        break
-                    elif "/*ENDCOLORPICKERS*/" in line:
-                        self.insert_colorpicker_break_rule_for_save = i - self.start_position_for_save
-                        continue
-                    if "quickcss_target" in line:
-                        read = True
-                        self.start_position_for_save = i+1
-                        continue
-                    if read:
-                        print(line)
-                        if len(line) > 0:
-                            self.lines.append(line.split(":"))
+            self.dynamic_compatible = False
+            with open(self.style_path, 'r', encoding='utf-8') as cssfile:
+                try:
+                    for i, line in enumerate(cssfile):
+                        line = line.strip()
+                        if "/*BREAKFILEREADER*/" in line:
+                            self.insert_break_rule_for_save = i - self.start_position_for_save
+                            break
+                        elif "/*ENDCOLORPICKERS*/" in line:
+                            self.insert_colorpicker_break_rule_for_save = i - self.start_position_for_save
+                            continue
+                        if "quickcss_target" in line:
+                            self.dynamic_compatible = True
+                            self.start_position_for_save = i+1
+                            continue
+                        if self.dynamic_compatible:
+                            print(line)
+                            if len(line) > 0:
+                                self.lines.append(line.split(":"))
+                except UnicodeDecodeError as error:
+                    print(f"{error}\nCheck style.css in this extensions folder.")
 
 
-            print(self.lines)
-            self.color_pickers = [gr.ColorPicker(label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_colorpicker", value=x[1].replace(";", "").strip()) 
-                                                        if i < self.insert_colorpicker_break_rule_for_save else 
-                                                        gr.Slider(minimum=0, maximum=100, step=1, label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_slider", value=x[1].replace(";", "").strip())
-                                                        for i,x in enumerate(self.lines)] 
+            if self.dynamic_compatible:
+                self.dynamically_generated_components = [gr.ColorPicker(label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_colorpicker", value=x[1].replace(";", "").strip()) 
+                                                            if i < self.insert_colorpicker_break_rule_for_save else 
+                                                            gr.Slider(minimum=0, maximum=100, step=1, label=x[0].replace("-", "").replace("_", " ").title(), render=False, elem_id="quikcss_slider", value=x[1].replace(";", "").strip())
+                                                            for i,x in enumerate(self.lines)
+                                                            ] 
+            else:
+                self.dynamically_generated_components = []
             # hidden_vals acts like an index, it's in component so gradio doesn't complain
-            self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.color_pickers))]
+            self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.dynamically_generated_components))]
             # length_of_colors similar to hidden vals, but provides length so js knows the limit
-            self.length_of_colors = gr.Text(value=len(self.color_pickers), visible=False, render=False)
+            self.length_of_colors = gr.Text(value=len(self.dynamically_generated_components), visible=False, render=False)
             # used as padding so we don't list index error or http 500 internal server, or http 422 forEach can't over undefined (promise pending)
             self.dummy_picker = gr.Text(visible=False, render=False, elem_id="hidden")
             # Acts like catcher, actual values store in list
@@ -102,7 +108,7 @@ class MyTab():
         with gr.Blocks(analytics_enabled=False) as ui:
             with gr.Accordion(label="Some instructions", open=False):
                 gr.Markdown(value="""<center>This is a mix from old style to new style. It is not in it's finished state</center>
-<center>To see effects, you must use dropdown, select neon, click apply, click restart. More options will be available on restart</center>
+<center>To see effects, you must use dropdown, select as sheet, click apply, click restart. More options will be available on restart</center>
 <center>I know it lives as a tab, but this was meant to be a demo at first, now it's growing to something more</center>
 
 <center>To see favicon take affect, you will need to add `favicon_path="favicon.svg"` to webui.py</center>
@@ -113,13 +119,10 @@ class MyTab():
 
 <center>Once again, this `dynamic` demo has not removed/re-implemented all features present</center>
 """)
-            if self.file_exists:
-                with gr.Row():
-                    with gr.Column(scale=5):
+            if self.file_exists and self.dynamic_compatible:
+                with gr.Row(equal_height=True):
                         self.save_as_filename.render()
-                    with gr.Column(scale=5):
-                        with gr.Box():
-                            self.save_button.render()
+                        self.save_button.render()
                 #Necessary for values being accessible
                 self.length_of_colors.render()
                 self.dummy_picker.render()
@@ -129,7 +132,7 @@ class MyTab():
                     h.render()
                 with gr.Row():
                     #Render adjusters
-                    for c in self.color_pickers:
+                    for c in self.dynamically_generated_components:
                         with gr.Column(elem_id="quickcss_colorpicker"):
                             c.render()
             with gr.Row():
@@ -162,7 +165,7 @@ class MyTab():
 
             # Handlers
             if self.file_exists:
-                for comp,val in zip(self.color_pickers, self.hidden_vals):
+                for comp,val in zip(self.dynamically_generated_components, self.hidden_vals):
                     comp.change(
                         fn = lambda *x: self.process_for_save(*x),
                         _js = "quickcssFormatRule",
