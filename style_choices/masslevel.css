@@ -24,15 +24,21 @@
   --ml-color-range-border:#6b7280;
   --ml-color-range-shadow:#6b7280;
   --checked_text: #008080;
-  /*BREAKFILEREADER*/
+  /*ENDCOLORPICKERS*/
   --all_border_radius:0;
+  /*BREAKFILEREADER*/
 }
 
 /* global */
-* {
+.gradio-container *:not(img){
     border-radius: calc(1px *var(--all_border_radius)) !important;
 }
-
+.gradio-container div[id*=tab][class*=tabitem] {
+    border-radius: 0px !important;
+}
+.gradio-container div #tabs button[class*=bg-white] {
+    border-radius: 0px!important;
+}
 .gradio-container {
     font-family: PragmataPro, 'Source Code Pro', monospace, Arial, sans-serif;
 }
