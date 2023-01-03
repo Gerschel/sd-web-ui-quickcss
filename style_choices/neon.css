@@ -20,8 +20,9 @@ Original Style.css Edit
     --background_color: #000;
     --border_app_color: #a7abb1; 
     --checked_text: #DE73FF;
-    /*BREAKFILEREADER*/
+    /*ENDCOLORPICKERS*/
     --radius : 4;
+    /*BREAKFILEREADER*/
     --Logo: url('file=logo.png');
 }
     
@@ -437,8 +438,9 @@ input[type=checkbox]:checked + span, input[type=radio]:checked + span {
 }
 
 #quickcss_colorpicker {
+    /*Demo use of slider values*/
     max-width: 10vw;
-    border-radius: calc(1px * var(--radius));
+    border-radius: calc(1px * var(--radius))!important;
 }
 
 input[type=color] {
