@@ -19,6 +19,7 @@ Original Style.css Edit
     --Input_text_color_focus: #ffffff;
     --App_color: #a7abb1;
     --Background_color: #000;
+    --checked_text: #ff205f;
     /*ENDCOLORPICKERS*/
     --UI_radius: 0;
     /*BREAKFILEREADER*/
@@ -33,7 +34,7 @@ Original Style.css Edit
 }
 
 input[type=checkbox]:checked + span, input[type=radio]:checked + span {
-    color: var(--App_color)!important;
+    color: var(--checked_text);
 }
 
 #quickcss_colorpicker {
@@ -42,6 +43,10 @@ input[type=checkbox]:checked + span, input[type=radio]:checked + span {
 
 input[type=color] {
     width: 100%;
+}
+
+input[type=checkbox]:checked + span, input[type=radio]:checked + span {
+    color: var(--checked_text);
 }
 
 /*================================================ */
