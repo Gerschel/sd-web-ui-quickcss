@@ -1,4 +1,18 @@
 # sd-web-ui-quickcss
+## Feature List
+
+- It can import sheets  
+- It can swap sheets
+- It can import logos
+- It can import favicons
+- It can disable the style sheet
+- It can create color pickers to alter parts of the sheet
+- It can create sliders for integer parts
+- It labels the components according to the variable name
+- It can save your choices as a new sheet
+- It can apply logo if logo is used in sheet
+- It can apply favicon if favicon is specified in webui
+
 
 ## Creating sheets
 Dynamic branch merged with master branch. It can now autogenerate sliders and colorpickers, and has a save feature.  
