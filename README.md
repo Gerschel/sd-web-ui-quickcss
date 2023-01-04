@@ -65,6 +65,15 @@ Opacity is an alternative you can use, but it will affect more than just the col
 calc( 0.01 * var(--my_int))
 ``` 
 
+If you really need more fine grained control, you can use several sliders, just make sure to do the math so it's range goes from 0 to 255.
+```css
+rgba(calc(2.55 * var(--background_red_value)) calc(25.5 * var(--background_blue_value)) calc(25.5 * var(--background_green_value)) calc(25.5 * var(--background_alpha_val))
+```  
+You can store it in a variable too. Just put it outside the read zone.
+
+Going back to saving, when it saves, it will overwrite the `style.css` copy, so it's ready to load when it boots up, and it saves it with the filename in the `style_choices` directory, for later reapplying.  
+
+There's a reason the button and save as field is hidden, if a person tries to save while the javascript has not done a fetch and replace on the styles, the backend list will be empty. This would cause it to mangle the file.
 
 ## Old info, relevant enough
 UPDATE Has save feature
