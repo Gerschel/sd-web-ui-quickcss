@@ -19,7 +19,7 @@ Original Style.css Edit
     --Input_text_color_focus: #ffffff;
     --App_color: #a7abb1;
     --Background_color: #000;
-    --checked_text: #ff205f;
+    --Checked_text: #ff205f;
     /*ENDCOLORPICKERS*/
     --UI_radius: 0;
     /*BREAKFILEREADER*/
@@ -33,20 +33,12 @@ Original Style.css Edit
     visibility: hidden;
 }
 
-input[type=checkbox]:checked + span, input[type=radio]:checked + span {
-    color: var(--checked_text);
-}
-
 #quickcss_colorpicker {
     max-width: 10vw;
 }
 
 input[type=color] {
     width: 100%;
-}
-
-input[type=checkbox]:checked + span, input[type=radio]:checked + span {
-    color: var(--checked_text);
 }
 
 /*================================================ */
@@ -95,9 +87,19 @@ input[type=checkbox]:checked + span, input[type=radio]:checked + span {
 
 /* UI border radius */
 /*----------------------------------------------------------------*/
+
 .gradio-container * {
     border-radius: calc(1px *var(--UI_radius)) !important;
 }
+
+/* Selected text colors */
+/*----------------------------------------------------------------*/
+
+*::selection {
+    color: var(--Input_text_color_focus);
+        background-color: var(--Secondary_color);
+    
+    }
 
 /* App Colors */
 /*----------------------------------------------------------------*/
@@ -112,6 +114,9 @@ input[type=checkbox]:checked + span, input[type=radio]:checked + span {
 .dark .\!text-gray-800 {
     color: var(--App_color) ;
 }
+
+/* Input Colors */
+/*----------------------------------------------------------------*/
 
 .dark .gr-input {
     font-family: 'Source Code Pro', monospace ;
@@ -170,7 +175,7 @@ img2maskimg, #img2maskimg > .h-60, #img2maskimg > .h-60 > div, #img2maskimg > .h
 #img2img-grids_images_history_gallery,
 #Extras_images_history_gallery, 
 #Favorites_images_history_gallery {
-    border-radius: 0px !important;
+    border-radius: calc(1px *var(--UI_radius)) !important;
     background-image: var(--logo) !important;
     background: none;
     background-size: cover ;
@@ -244,6 +249,10 @@ img2maskimg, #img2maskimg > .h-60, #img2maskimg > .h-60 > div, #img2maskimg > .h
         0% { box-shadow: 0 0 0 0 var(--Secondary_color); }
 }
 
+input[type=checkbox]:checked + span, input[type=radio]:checked + span {
+  color: var(--Primary_color);
+}
+
 /* Generate progress bar style */
 /*----------------------------------------------------------------*/
 .dark .progressDiv .progress {
@@ -266,7 +275,7 @@ img2maskimg, #img2maskimg > .h-60, #img2maskimg > .h-60 > div, #img2maskimg > .h
     font-weight: bold;
     transition: all 0.3s ease-in-out ;   
 }
-    
+
 #txt2img_interrupt, 
 #img2img_interrupt, 
 #txt2img_skip, 
@@ -888,3 +897,15 @@ It precisely targets only the styles that need normalizing.
     display: none;
   }
   
+
+
+/*----------------------------------------------------------------*/
+/* Test code space*/
+/*----------------------------------------------------------------*/
+
+/* To get the favicon working, 
+add this to webui.py besides prevent_thread_lock=True,
+
+favicon_path="favicon.svg",
+
+*/
