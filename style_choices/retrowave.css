@@ -154,9 +154,13 @@
      border-radius: 10px;
 }
 
-.text-gray-400 {
-     color: var(--subtext0);
-     background-color: var(--area);
+.text-gray-400{
+    color: var(--subtext0);
+    background-color: var(--area);
+}
+div[data-testid*=image] [class*=inset-0]{
+color: var(--subtext0);
+background-color: transparent;
 }
 
 .dark .dark\:bg-gray-950 {
