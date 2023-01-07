@@ -20,6 +20,8 @@ class MyTab():
         self.style_folder = os.path.join(basedir, "style_choices") 
         self.logos_folder = os.path.join(self.extensiondir, "logos")
         self.favicon_folder = os.path.join(self.extensiondir, "favicons")
+        self.effects_folder = os.path.join(self.extensiondir, "effects")
+        self.javascript_folder = os.path.join(self.extensiondir, "javascript")
 
         self.styles_list = []
         self.logos_list = []
@@ -28,14 +30,18 @@ class MyTab():
         self.get_styles()
         self.get_logos()
         self.get_favicons()
+        self.get_effects()
 
         self.styles_dropdown = gr.Dropdown(label="Styles", render=False, interactive=True, choices=self.styles_list, type="value")
         self.logos_dropdown = gr.Dropdown(label="Logos", render=False, interactive=True, choices=self.logos_list, type="value")
         self.favicon_dropdown = gr.Dropdown(label="Favicon", render=False, interactive=True, choices=self.favicon_list, type="value")
+        self.effects_dropdown = gr.Dropdown(label="Effects (on until refresh)", render=False, interactive=True, choices=self.effects_list, type="value")
         
         self.apply_style_bttn = gr.Button(value="Apply Style", render=False)
         self.apply_logo_bttn = gr.Button(value="Apply Logo", render=False)
         self.apply_favicon_bttn = gr.Button(value="Apply Favicon", render=False)
+        self.effects_button = gr.Button(value="Activate Selected Script", render=False)
+        self.effects_off_button = gr.Button(value="Deactivate Selected Script", render=False)
 
         self.logo_image = gr.Image(render=False)
         self.favicon_image = gr.Image(render=False)
@@ -144,6 +150,11 @@ class MyTab():
                 with gr.Column():
                     self.favicon_dropdown.render()
                     self.apply_favicon_bttn.render()
+                with gr.Column():
+                    self.effects_dropdown.render()
+                    with gr.Row():
+                        self.effects_button.render()
+                        self.effects_off_button.render()
             
             with gr.Accordion(label="Import Files", open=False):
                 with gr.Row():
@@ -163,6 +174,7 @@ class MyTab():
                 self.favicon_image.render()
 
             # Handlers
+            #Generate colorpickers and sliders handlers
             if self.file_exists:
                 for comp,val in zip(self.dynamically_generated_components, self.hidden_vals):
                     comp.change(
@@ -182,6 +194,7 @@ class MyTab():
                     outputs = [self.js_result_component, self.styles_dropdown]
                 )
 
+            #Common interface
             self.logos_dropdown.change(
                 fn = lambda x: self.get_image(x, folder = "logos"), 
                 inputs = self.logos_dropdown,
@@ -199,9 +212,23 @@ class MyTab():
                 inputs = self.styles_dropdown
             )
 
+            self.effects_button.click(
+                fn = None,#lambda x: self.apply_effects(x),
+                _js = "launchEffect",
+                inputs = self.effects_dropdown,
+                outputs = self.dummy_picker
+            )
+
+            self.effects_off_button.click(
+                fn = None,#lambda x: self.apply_effects(x),
+                _js = "destroyEffect",
+                inputs = self.effects_dropdown,
+                outputs = self.dummy_picker
+            )
+
             self.apply_logo_bttn.click(
                 fn = lambda x: self.apply_logo(x),
-                inputs = self.logos_dropdown
+                inputs = self.logos_dropdown,
             )
 
             self.apply_favicon_bttn.click(
@@ -261,6 +288,11 @@ class MyTab():
     def get_favicons(self):
         self.favicon_list = [file_name for file_name in os.listdir(self.favicon_folder) if os.path.isfile(os.path.join(self.favicon_folder,file_name))] 
         return self.favicon_list
+    
+    def get_effects(self):
+        #! Deviation for now, folder
+        self.effects_list = [os.path.splitext(file_name)[0] for file_name in os.listdir(self.javascript_folder) if os.path.isfile(os.path.join(self.javascript_folder, file_name)) and file_name not in ["quickcss.js", "utility.js"]]
+        return self.effects_list
 
 
     def apply_style(self, selection):
@@ -271,6 +303,11 @@ class MyTab():
  
     def apply_favicon(self, selection):
         shutil.copy(os.path.join(self.favicon_folder, selection), os.path.join(self.webui_dir, "favicon.svg"))
+    
+    def apply_effects(self, selection):
+        """js function will handle launch for now"""
+        pass
+        #shutil.copy(os.path.join(self.effects_folder, selection), os.path.join(self.javascript_folder, selection))
 
     def get_image(self, name, folder):
         return os.path.join(self.extensiondir, folder, name)

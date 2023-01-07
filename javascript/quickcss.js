@@ -39,3 +39,13 @@ function quickcssFormatRule(val, ele, colorsSize){
     //returns must equal inputs size, so outputs must matchsize, python fn hijacks for finishing save data
     return [stringarray, "", ""]
 }
+
+qkcssFXMap = {};
+
+function launchEffect(filename){
+    qkcssFXMap[filename][0]()
+}
+
+function destroyEffect(filename){
+    qkcssFXMap[filename][1].destroy()
+}
