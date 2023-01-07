@@ -13,18 +13,18 @@ Original Style.css Edit
 
 /*THEME VARIABLES*/
 :root, * , quickcss_target{
-    --Primary_color: #E94822;
-    --Secondary_color: #F2910A;
-    --Input_text_color: #EFD510;
-    --Input_text_color_focus: #ffffff;
-    --App_color: #F2910A;
-    --Background_color: #2C2D34;
-    --Checked_text: #ffffff;
+    --Primary_color:  #6bb300;
+    --Secondary_color:  #115f28;
+    --Input_text_color:  #11ee5e;
+    --Input_text_color_focus:  #00bd48;
+    --App_color:  #0af019;
+    --Background_color: #020401;
+    --Checked_text:  #01e947;
     /*ENDCOLORPICKERS*/
-    --UI_radius: 0;
+    --UI_radius:  19;
     /*BREAKFILEREADER*/
-    --logo: url('file=logo.png');
-    --favicon: url('file=favicon.svg');
+    --logo: url("file=logo.png");
+    --favicon: url("file=favicon.svg");
 }
 
 /* Quickcss extension */
@@ -907,8 +907,6 @@ add this to webui.py besides prevent_thread_lock=True,
 favicon_path="favicon.svg",
 
 */
-
-
 
 input[type=checkbox]:checked + span, input[type=radio]:checked + span {
     color: var(--Checked_text);

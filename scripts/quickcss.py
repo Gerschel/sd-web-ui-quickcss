@@ -114,7 +114,7 @@ class MyTab():
 <center>To do this, open file, search for `prevent_thread_lock` add comma, paste in text, save.</center>
 
 <center>You may need to undo this for an update, if you have git issues and don't know how to deal with them</center>
-<center>This won't break your system, if you find you can't update, try `git fetch --all` `git reset --hard origin/master`</center>
+<center>This won't break your system, if you find you can't update, try `git checkout webui.py` ~~`git fetch --all` `git reset --hard origin/master`~~</center>
 
 <center>Once again, this `dynamic` demo has not removed/re-implemented all features present</center>
 """)
