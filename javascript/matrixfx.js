@@ -75,9 +75,7 @@ async function registerMatrixToHandler(){
     await delay(1000);
     while(qkcssFXMap == undefined){
         await delay(500)
-        console.log('waiting')
     }
-    console.log('found')
     qkcssFXMap["matrixfx"] = [launchMatrixEffect, matrixEffect];
 }
 
