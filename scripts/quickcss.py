@@ -108,6 +108,8 @@ class MyTab():
             self.dummy_picker = gr.Text(visible=False, render=False, elem_id="hidden")
             # Acts like catcher, actual values store in list
             self.js_result_component = gr.Text(render=False, interactive=False)
+        
+        self._dummy = gr.Text(value="", visible=False, render=False)
 
     def ui(self, *args, **kwargs):
         with gr.Blocks(analytics_enabled=False) as ui:
@@ -140,6 +142,7 @@ class MyTab():
                     for c in self.dynamically_generated_components:
                         with gr.Column(elem_id="quickcss_colorpicker"):
                             c.render()
+            
             with gr.Row():
                 with gr.Column():
                     self.styles_dropdown.render()
@@ -172,6 +175,7 @@ class MyTab():
             with gr.Row():
                 self.logo_image.render()
                 self.favicon_image.render()
+                self._dummy.render()
 
             # Handlers
             #Generate colorpickers and sliders handlers
@@ -216,14 +220,14 @@ class MyTab():
                 fn = None,#lambda x: self.apply_effects(x),
                 _js = "launchEffect",
                 inputs = self.effects_dropdown,
-                outputs = self.dummy_picker
+                outputs = self._dummy
             )
 
             self.effects_off_button.click(
                 fn = None,#lambda x: self.apply_effects(x),
                 _js = "destroyEffect",
                 inputs = self.effects_dropdown,
-                outputs = self.dummy_picker
+                outputs = self._dummy
             )
 
             self.apply_logo_bttn.click(
