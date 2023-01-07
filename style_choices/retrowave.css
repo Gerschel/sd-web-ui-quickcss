@@ -28,11 +28,9 @@
 :root, .dark, * , #context-menu, quickcss_target {
      --primary_color: #b81cab;
      --secondary_color:  #17c8c8c4;
-     --input_text_color:  #65f6ae;
      --input_text_color_focus:  #eadef8;
      --background_color:  #000000;
      --border_app_color:  #2df5ba;
-     --checked_text:  #bc15b2;
      --magenta: #e804da;
      --phosphor: #2df5ba;
      --bone: #fff; 
@@ -40,8 +38,6 @@
      --text: #e804da;
      --subtext1: #bac2de;
      --subtext0: #1ad9be;
-     --overlay2: #9399b2;
-     --overlay1: #7f849c;
      --overlay0: #6c7086;
      --surface3: #bac2de;
      --surface2: #585b70;
@@ -50,11 +46,10 @@
      --base: #1e1e2e;
      --skin: #11111b;
      --area: #11111b;
-     --shadow: #010409;
-     --accent: var(--phosphor);
      /*ENDCOLORPICKERS*/
      --radius: 2;
      /*BREAKFILEREADER*/
+     --accent: var(--phosphor);
      --Logo: url('file=logo.png');
 }
 
