@@ -18,42 +18,51 @@ class MyTab():
 
 
         self.style_folder = os.path.join(basedir, "style_choices") 
+        self.backgrounds_folder = os.path.join(self.extensiondir, "backgrounds")
         self.logos_folder = os.path.join(self.extensiondir, "logos")
         self.favicon_folder = os.path.join(self.extensiondir, "favicons")
         self.effects_folder = os.path.join(self.extensiondir, "effects")
         self.javascript_folder = os.path.join(self.extensiondir, "javascript")
+        self.static_folder = os.path.join(self.webui_dir, "static")
 
-        self.styles_list = []
-        self.logos_list = []
-        self.favicon_list = []
 
-        self.get_styles()
-        self.get_logos()
-        self.get_favicons()
-        self.get_effects()
+        self.styles_list = self.get_files(self.style_folder)
+        self.backgrounds_list = self.get_files(self.backgrounds_folder)
+        self.logos_list = self.get_files(self.logos_folder)
+        self.favicon_list = self.get_files(self.favicon_folder)
+        self.effects_list = self.get_files(self.effects_folder, file_filter=["quickcss.js", "utility.js", "background.js"], split=True)
+
 
         self.styles_dropdown = gr.Dropdown(label="Styles", render=False, interactive=True, choices=self.styles_list, type="value")
+        self.background_dropdown = gr.Dropdown(label="Background", render=False, interactive=True, choices=self.backgrounds_list, type="value")
         self.logos_dropdown = gr.Dropdown(label="Logos", render=False, interactive=True, choices=self.logos_list, type="value")
         self.favicon_dropdown = gr.Dropdown(label="Favicon", render=False, interactive=True, choices=self.favicon_list, type="value")
         self.effects_dropdown = gr.Dropdown(label="Effects (on until refresh)", render=False, interactive=True, choices=self.effects_list, type="value")
         
+
         self.apply_style_bttn = gr.Button(value="Apply Style", render=False)
+        self.apply_background_bttn = gr.Button(value="Apply Background Immediately (refresh browser)", render=False)
+        #TODO: background off button to swap image in folder to blankbackground and disable style rule
+        self.refresh_bkcgrnd_droplist_button = gr.Button(value="Refresh List", render=False)
         self.apply_logo_bttn = gr.Button(value="Apply Logo", render=False)
-        self.apply_favicon_bttn = gr.Button(value="Apply Favicon", render=False)
+        self.apply_favicon_bttn = gr.Button(value="Apply Favicon (edit webui.py to see)", render=False)
         self.effects_button = gr.Button(value="Activate Selected Script", render=False)
         self.effects_off_button = gr.Button(value="Deactivate Selected Script", render=False)
+
 
         self.logo_image = gr.Image(render=False)
         self.favicon_image = gr.Image(render=False)
 
+
         self.import_style_file = gr.File(render=False, label="Import CSS file")
-        self.import_logo_file = gr.File(render=False, label="Import Logo's")
-        self.import_favicon_file = gr.File(render=False, label="Import favicons")
+        self.import_background_file = gr.File(render=False, label="Import Background Images (png)")
+        self.import_logo_file = gr.File(render=False, label="Import Logo's (png)")
+        self.import_favicon_file = gr.File(render=False, label="Import favicons (svg)")
 
 
         self.restart_bttn = gr.Button(value="Soft Restart to see effects", render=False, variant="primary")
 
-        self.remove_style = gr.Button(value="Remove Style", render=False)
+        self.remove_style = gr.Button(value="Remove Stylesheet", render=False)
 
 
         # BEGIN CSS COLORPICK COMPONENTS
@@ -100,16 +109,21 @@ class MyTab():
                                                             ] 
             else:
                 self.dynamically_generated_components = []
-            # hidden_vals acts like an index, it's in component so gradio doesn't complain
+
+            # hidden_vals acts like an index, holds int values that are used in js
             self.hidden_vals = [gr.Text(value=str(x), render=False, visible=False) for x in range(len(self.dynamically_generated_components))]
-            # length_of_colors similar to hidden vals, but provides length so js knows the limit
+
+            # length_of_colors similar to hidden vals, but provides length so js knows the limit when parsing rules
             self.length_of_colors = gr.Text(value=len(self.dynamically_generated_components), visible=False, render=False)
+
             # used as padding so we don't list index error or http 500 internal server, or http 422 forEach can't over undefined (promise pending)
             self.dummy_picker = gr.Text(visible=False, render=False, elem_id="hidden")
+
             # Acts like catcher, actual values store in list
             self.js_result_component = gr.Text(render=False, interactive=False)
         
-        self._dummy = gr.Text(value="", visible=False, render=False)
+        #dummy component for general purpose, currently used for _js effects; holds no relevant data, just for input/output element quota
+        self._dummy = gr.Text(value="", visible=False, render=False, show_label=False, interactive=False)
 
     def ui(self, *args, **kwargs):
         with gr.Blocks(analytics_enabled=False) as ui:
@@ -148,6 +162,11 @@ class MyTab():
                     self.styles_dropdown.render()
                     self.apply_style_bttn.render()
                 with gr.Column():
+                    self.background_dropdown.render()
+                    with gr.Row():
+                        self.apply_background_bttn.render()
+                        self.refresh_bkcgrnd_droplist_button.render()
+                with gr.Column():
                     self.logos_dropdown.render()
                     self.apply_logo_bttn.render()
                 with gr.Column():
@@ -163,6 +182,8 @@ class MyTab():
                 with gr.Row():
                     with gr.Column():
                         self.import_style_file.render()
+                    with gr.Column():
+                        self.import_background_file.render()
                     with gr.Column():
                         self.import_logo_file.render()
                     with gr.Column():
@@ -198,7 +219,9 @@ class MyTab():
                     outputs = [self.js_result_component, self.styles_dropdown]
                 )
 
+            #Handler cont.
             #Common interface
+            #NOTE: These dropdowns affect image placeholders
             self.logos_dropdown.change(
                 fn = lambda x: self.get_image(x, folder = "logos"), 
                 inputs = self.logos_dropdown,
@@ -211,35 +234,47 @@ class MyTab():
                 outputs = self.favicon_image
             )
 
+            #buttons
             self.apply_style_bttn.click(
-                fn = lambda x: self.apply_style(x),
+                fn = self.apply_choice_wrapper(self.style_folder, self.extensiondir, "style.css"),
                 inputs = self.styles_dropdown
             )
 
+            self.apply_background_bttn.click(
+                fn = self.apply_choice_wrapper(self.backgrounds_folder, self.static_folder, "background.png"),#TODO: MAYBE: delete file extension
+                _js = "injectBackground.refreshImage",
+                inputs = self.background_dropdown,
+                outputs=self._dummy
+            )
+
+            self.refresh_bkcgrnd_droplist_button.click(
+                fn = lambda: self.refresh_list(self.refresh_bkcgrnd_droplist_button, self.backgrounds_folder, self.background_dropdown),
+                outputs=self.background_dropdown
+            )
+
+            self.apply_logo_bttn.click(
+                fn = self.apply_choice_wrapper(self.logos_folder, self.webui_dir, "logo.png"),#TODO Update css files and change dir to static
+                inputs = self.logos_dropdown,
+            )
+
+            self.apply_favicon_bttn.click(
+                fn = self.apply_choice_wrapper(self.favicon_folder, self.webui_dir, "favicon.png"),#TODO update css files and change dir to static
+                inputs = self.favicon_dropdown
+            )
+
             self.effects_button.click(
-                fn = None,#lambda x: self.apply_effects(x),
+                fn = None,
                 _js = "launchEffect",
                 inputs = self.effects_dropdown,
                 outputs = self._dummy
             )
 
             self.effects_off_button.click(
-                fn = None,#lambda x: self.apply_effects(x),
+                fn = None,
                 _js = "destroyEffect",
                 inputs = self.effects_dropdown,
                 outputs = self._dummy
             )
-
-            self.apply_logo_bttn.click(
-                fn = lambda x: self.apply_logo(x),
-                inputs = self.logos_dropdown,
-            )
-
-            self.apply_favicon_bttn.click(
-                fn = lambda x: self.apply_favicon(x),
-                inputs = self.favicon_dropdown
-            )
-
 
             self.remove_style.click(
                 fn = lambda: self.delete_style()
@@ -247,74 +282,67 @@ class MyTab():
 
             self.restart_bttn.click(fn=self.local_request_restart, _js='restart_reload', inputs=[], outputs=[])
 
+            #File Importers
             self.import_style_file.change(
-                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="style_choices", func = self.get_styles, comp = self.styles_dropdown),
+                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="style_choices", comp = self.styles_dropdown, func = self.get_files, folder=self.style_folder, focus_list=self.styles_list),
                 inputs=self.import_style_file,
                 outputs=self.styles_dropdown
             )
 
+            self.import_background_file.change(
+                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="backgrounds", comp = self.background_dropdown, func = self.get_files, folder=self.backgrounds_folder, focus_list=self.backgrounds_list),
+                inputs=self.import_background_file,
+                outputs=self.background_dropdown
+            )
+
             self.import_logo_file.change(
-                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="logos", func = self.get_logos, comp = self.logos_dropdown),
+                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="logos", comp = self.logos_dropdown, func = self.get_files, folder=self.logos_folder, focus_list=self.logos_list),
                 inputs=self.import_logo_file,
                 outputs=self.logos_dropdown
             )
 
 
             self.import_favicon_file.change(
-                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="favicons", func = self.get_favicons, comp = self.favicon_dropdown),
+                fn = lambda tmp_file: self.import_file_from_path(tmp_file, target_folder="favicons", comp = self.favicon_dropdown, func = self.get_files, folder=self.favicon_folder, focus_list=self.favicon_list),
                 inputs=self.import_favicon_file,
                 outputs=self.favicon_dropdown
             )
 
 
-
         return [(ui, "CSS App", "css app")]
     
-    def import_file_from_path(self, tmp_file_obj, target_folder, func, comp):
+
+    def import_file_from_path(self, tmp_file_obj, target_folder, comp, func, **kwargs):
         if tmp_file_obj:
             shutil.copy(tmp_file_obj.name, os.path.join(self.extensiondir, target_folder, tmp_file_obj.orig_name))
             # Update appropriate list 
             # Make backend the same as front-end so it matches when selected
-            comp.choices = func()
+            comp.choices = func(**kwargs)
             tmp_file_obj.flush()
             # return sends update to front-end
         return gr.update(choices=comp.choices)
 
-    def get_styles(self):
-        self.styles_list = [file_name for file_name in os.listdir(self.style_folder) if os.path.isfile(os.path.join(self.style_folder, file_name))] 
-        # return is only used during file import
-        return self.styles_list
 
-    def get_logos(self):
-        self.logos_list = [file_name for file_name in os.listdir(self.logos_folder) if os.path.isfile(os.path.join(self.logos_folder,file_name))] 
-        return self.logos_list
-
-    def get_favicons(self):
-        self.favicon_list = [file_name for file_name in os.listdir(self.favicon_folder) if os.path.isfile(os.path.join(self.favicon_folder,file_name))] 
-        return self.favicon_list
-    
-    def get_effects(self):
-        #! Deviation for now, folder
-        self.effects_list = [os.path.splitext(file_name)[0] for file_name in os.listdir(self.javascript_folder) if os.path.isfile(os.path.join(self.javascript_folder, file_name)) and file_name not in ["quickcss.js", "utility.js"]]
-        return self.effects_list
+    def get_files(self, folder, focus_list=[], file_filter=[], split=False):
+        focus_list = [file_name if not split else os.path.splitext(file_name)[0] for file_name in os.listdir(folder) if os.path.isfile(os.path.join(folder, file_name)) and file_name not in file_filter] 
+        return focus_list
 
 
-    def apply_style(self, selection):
-        shutil.copy(os.path.join(self.style_folder, selection), os.path.join(self.extensiondir, "style.css"))
+    def apply_choice_wrapper(self, src_base_path, dst_base_path, name):
+        """Encapsulation so I don't need a different function for each type"""
+        def apply_choice(selection):
+            shutil.copy(os.path.join(src_base_path, selection), os.path.join(dst_base_path, name))
+        return apply_choice
 
-    def apply_logo(self, selection):
-        shutil.copy(os.path.join(self.logos_folder, selection), os.path.join(self.webui_dir, "logo.png"))
- 
-    def apply_favicon(self, selection):
-        shutil.copy(os.path.join(self.favicon_folder, selection), os.path.join(self.webui_dir, "favicon.svg"))
-    
-    def apply_effects(self, selection):
-        """js function will handle launch for now"""
-        pass
-        #shutil.copy(os.path.join(self.effects_folder, selection), os.path.join(self.javascript_folder, selection))
 
     def get_image(self, name, folder):
         return os.path.join(self.extensiondir, folder, name)
+
+
+    def refresh_list(self, component, folder, focus_list, file_filter=[]):
+        component.choices = self.get_files(folder, focus_list, file_filter)
+        return gr.update(choices=component.choices)
+
 
     
     def delete_style(self):
@@ -323,14 +351,17 @@ class MyTab():
         except FileNotFoundError:
             pass
 
+
     def local_request_restart(self):
         "Restart button"
         shared.state.interrupt()
         shared.state.need_restart = True
     
+
     def process_for_save(self, x, *y):
         return [x] + [gr.update(visible=True), None]
     
+
     def save(self, js_cmp_val, filename):
         rules = [f"   {e};\n" for e in js_cmp_val[1:-1].split(";")][:-1]
         #issue, save button needs to stay hidden until some color change
