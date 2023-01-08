@@ -30,7 +30,7 @@ class MyTab():
         self.backgrounds_list = self.get_files(self.backgrounds_folder)
         self.logos_list = self.get_files(self.logos_folder)
         self.favicon_list = self.get_files(self.favicon_folder)
-        self.effects_list = self.get_files(self.effects_folder, file_filter=["quickcss.js", "utility.js", "background.js"], split=True)
+        self.effects_list = self.get_files(self.javascript_folder, file_filter=["quickcss.js", "utility.js", "background.js"], split=True)
 
 
         self.styles_dropdown = gr.Dropdown(label="Styles", render=False, interactive=True, choices=self.styles_list, type="value")
