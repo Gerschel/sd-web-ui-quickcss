@@ -55,7 +55,7 @@ class MyTab():
 
 
         self.import_style_file = gr.File(render=False, label="Import CSS file")
-        self.import_background_file = gr.File(render=False, label="Import Background Images (png)")
+        self.import_background_file = gr.File(render=False, label="Import Background Images")
         self.import_logo_file = gr.File(render=False, label="Import Logo's (png)")
         self.import_favicon_file = gr.File(render=False, label="Import favicons (svg)")
 
