@@ -40,6 +40,9 @@ function quickcssFormatRule(val, ele, colorsSize){
     return [stringarray, "", ""]
 }
 
+//Register js fx's
+//they must support a destroy method
+
 qkcssFXMap = {};
 
 function launchEffect(filename){
@@ -48,4 +51,22 @@ function launchEffect(filename){
 
 function destroyEffect(filename){
     qkcssFXMap[filename][1].destroy()
+}
+
+//Register js image injectors
+qkcssImagemap = {};
+
+function launchImage(name){
+    qkcssImagemap[name].register()
+}
+function removeImage(name){
+    qkcssImagemap[name].destroy()
+}
+function updateImage(name, new_name){
+    //notimplemented hidden component to send name?
+    qkcssImagemap[name].updateImage(new_name)
+}
+async function refreshImage(name){
+    await qkcssImagemap[name].refreshImage()
+    return name
 }
