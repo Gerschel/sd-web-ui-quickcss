@@ -57,6 +57,11 @@ class BasicUpdater:
     def check_folders(self, folder_path):
         if not os.path.exists(folder_path):
             os.mkdir(folder_path)
+
+        gitignore = os.path.join(folder_path, ".gitignore")
+        if not os.path.exists(gitignore):
+            with open(gitignore, "w", encoding="utf-8") as f:
+                f.write("*")
     
     def clone_file(self, defaults_object:DefaultFile):
         from_file = os.path.join(defaults_object.current_path, defaults_object.og_file)
