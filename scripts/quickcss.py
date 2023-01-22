@@ -41,7 +41,7 @@ class MyTab():
         
 
         self.apply_style_bttn = gr.Button(value="Apply Style", render=False)
-        self.apply_background_bttn = gr.Button(value="Apply Background Immediately (refresh browser)", render=False)
+        self.apply_background_bttn = gr.Button(value="Apply (Reload UI)", render=False)
         #TODO: background off button to swap image in folder to blankbackground and disable style rule
         self.refresh_bkcgrnd_droplist_button = gr.Button(value="Refresh List", render=False)
         self.apply_logo_bttn = gr.Button(value="Apply Logo", render=False)
@@ -60,7 +60,7 @@ class MyTab():
         self.import_favicon_file = gr.File(render=False, label="Import favicons (svg)")
 
 
-        self.restart_bttn = gr.Button(value="Soft Restart to see effects", render=False, variant="primary")
+        self.restart_bttn = gr.Button(value="Apply changes (Reload UI)", render=False, variant="primary")
 
         self.remove_style = gr.Button(value="Remove Stylesheet", render=False)
 
