@@ -22,7 +22,8 @@ Original Style.css Edit
     --Checked_text: #ff205f;
     /*ENDCOLORPICKERS*/
     --UI_radius: 0;
-    --left_pannel_width: 40;
+    --left_pannel_width: 42;
+    --cards_size: 50;
     /*BREAKFILEREADER*/
     --logo: url('file=logo.png');
     --favicon: url('file=favicon.svg');
@@ -63,7 +64,6 @@ input[type=color] {
 
 /*Css hide Gradio text, progress bar and animations*/
 /*----------------------------------------------------------------*/
-
 * .wrap.m-12, 
 * .wrap.z-20,
 * .meta-text-center, 
@@ -94,14 +94,12 @@ input[type=color] {
 } 
 
 /* gradio 3.8 adds opacity to progressbar which makes it blink; disable it here */
-
 .dark .transition.opacity-20 {
   opacity: 1 ;
 }
 
 /* Tab buttons */
 /*----------------------------------------------------------------*/
-
 #tabs > div:first-of-type button {
   font-family: "Segoe UI"; 
   font-variant: small-caps;
@@ -119,7 +117,6 @@ input[type=color] {
 
 /* UI border radius */
 /*----------------------------------------------------------------*/
-
 .dark .gradio-container *,
 .dark .gr-compact *,
 .dark .rounded-t-lg,
@@ -131,7 +128,6 @@ input[type=color] {
 
 /* Selected text colors */
 /*----------------------------------------------------------------*/
-
 *::selection {
   color: var(--Input_text_color_focus);
       background-color: var(--Secondary_color);
@@ -154,7 +150,6 @@ input[type=color] {
 
 /* Input Colors */
 /*----------------------------------------------------------------*/
-
 .dark .gr-input {
   font-family: 'Source Code Pro', monospace ;
   font: 'Source Code Pro' ;
@@ -199,15 +194,11 @@ input[type=color] {
 .dark .dark\:bg-gray-200, 
 .dark .bg-gray-200 {
 background-color: transparent !important;
-
 }
-
 
 /* Galleries */
 /*----------------------------------------------------------------*/
-
 [id$="_gallery"].gr-block.gr-box {
-
   border-radius: calc(0.25px *var(--UI_radius)) !important;
   background-image: var(--logo) !important;
   background: none;
@@ -221,7 +212,6 @@ background-color: transparent !important;
 .dark .group {
   max-height: 60vh;
 }
-
 
 [id$="_gallery"] svg{
   display: none ;
@@ -254,8 +244,7 @@ background-color: transparent !important;
   transition: all 0.3s ease-in-out ;
 }
 
-
-.backdrop-blur .modify-upload .hover\:shadow-xl{
+.dark .backdrop-blur .modify-upload .hover\:shadow-xl{
   border-style:solid;
   border-color: var(--Secondary_color);
   border-width:1px;
@@ -288,7 +277,6 @@ background-color: transparent !important;
 
 /* Gallery items fix */
 /*----------------------------------------------------------------*/
-
 #img2img_image, 
 #img2img_image > .h-60, 
 #img2img_image > .h-60 > div, 
@@ -307,8 +295,6 @@ background-color: transparent !important;
   max-height: 100% !important;
   min-height: 90% !important;
 }
-
-
 
 /* Checks */
 /*----------------------------------------------------------------*/
@@ -335,7 +321,6 @@ color: var(--Primary_color);
 
 /* Generate progress bar style */
 /*----------------------------------------------------------------*/
-
 .dark .progressDiv{
   width: 100%;
   height: 22px;
@@ -381,10 +366,8 @@ color: var(--Primary_color);
   max-width: var(--left-column);
 }
 
- 
 /* txt2img generation parameters left panel width */
 /*----------------------------------------------------------------*/
-
 #txt2img_settings { 
   min-width: var(--left-column); 
   max-width: var(--left-column); 
@@ -398,8 +381,10 @@ color: var(--Primary_color);
 /* TI - HN - LoRa Cards */
 /*----------------------------------------------------------------*/
 #tabs .tabitem .card{
- width:150px;
- height:224px;
+ width: calc(3px *var(--cards_size));
+ height: calc(4.48px *var(--cards_size));
+ min-width: 50px !important;
+ min-height: 74.6px !important;
  font-size: 60%;
  text-align: center;
  color: var(--Primary_color);
@@ -408,7 +393,6 @@ color: var(--Primary_color);
 #tabs .tabitem .card:hover {
 border-width: 4px ;
 border-color: var(--Primary_color);
-
 }
 
 /* Extra network cards */
@@ -418,20 +402,14 @@ border-color: var(--Primary_color);
  justify-content:center;
 }
 
-
 /* Options Row */
 /*----------------------------------------------------------------*/
-
 .dark .flex-col:nth-child(2) .flex-wrap:nth-child(2){
   justify-content:center;
  }
 
-/*----------------------------------------------------------------*/
-/* img2img tab Layout test (WORK IN PROGRESS) v2
-/*----------------------------------------------------------------*/
-
 /* New img2img buttons reposition and border*/
-
+/*----------------------------------------------------------------*/
 #tabs .flex-wrap .tabitem .gr-compact{
  margin-left:0px;
  z-index: 10;
@@ -441,93 +419,6 @@ border-color: var(--Primary_color);
 .dark .gr-compact .flex-col .tabitem .flex-col .gr-compact .gr-button-secondary{
  border-width:1px !important;
 }
-
-
-/*------------------------------*/
-
-
-
-/*Puts settings and canvas next to each other. Flex grow make entire section bigger than the gallery*/
-/*#img2img_settings { 
-  display: flex; 
-  flex-direction: row-reverse;
-  flex-grow: 2 !important;
-}
-
-/* img2img tabs panel no wrap*/
-/*.dark .tabitem .overflow-hidden .overflow-hidden .flex-wrap .overflow-hidden > .flex-col > .flex-wrap{
-  flex-wrap:nowrap;
- }
-
-
-/*Tabs and inpainting canvas, add less flex shrink to make canvas take up more space*/
-/*#mode_img2img {
-  flex-shrink: 0.4;
-}
-
-/* img2img tabs container fixed width and height */
-
-/*.dark .tabitem .overflow-hidden .overflow-hidden .flex-wrap .overflow-hidden .flex-col .tabitem{
-  max-height:800px !important;
-  min-height:800px !important;
- 
-}
-
-.dark .min-h-screen .mx-auto .overflow-hidden #tabs .tabitem .overflow-hidden .overflow-hidden .flex-wrap .overflow-hidden .flex-col .tabitem > .overflow-hidden > .overflow-hidden{
-  max-height: 780px !important;
-  min-height: 780px !important;
-}
-
-.dark .min-h-screen .mx-auto .overflow-hidden #tabs .tabitem .overflow-hidden .overflow-hidden .flex-wrap .overflow-hidden .flex-col .tabitem .overflow-hidden .overflow-hidden .h-60 .cursor-pointer{
-  max-height: 760px !important;
-  min-height: 760px !important;
-}
-
-.dark .overflow-hidden > .overflow-hidden > .flex-wrap > .overflow-hidden > .flex-col {
-  max-width: 1200px !important;
-  min-width: 610px !important;
-}
-
-/* Overflow hidden */
-/*.dark .tabitem:nth-child(3) .overflow-hidden:nth-child(1) .overflow-hidden:nth-child(3) .flex-wrap:nth-child(1) > .overflow-hidden:nth-child(2) > .overflow-hidden:nth-child(2){
-  min-width:450px !important;
-  max-width: 610px;
-  flex-direction:column;
-  align-self:center;
- }
-
-.dark .min-h-screen .mx-auto .overflow-hidden:nth-child(1) #tabs .tabitem:nth-child(3) .overflow-hidden:nth-child(1) .overflow-hidden:nth-child(3) .flex-wrap:nth-child(1) > .overflow-hidden:nth-child(2) > .overflow-hidden:nth-child(2){
-  min-width:430px !important;
- }
-
- .tabitem .overflow-hidden .overflow-hidden .flex-wrap > .overflow-hidden > .svelte-10ogue4{
-  padding-top:32px;
- }
-
-/* Trying to fix the Resize issue on inpainting tab */
-
-/*.dark #tabs .tabitem .overflow-hidden .overflow-hidden .flex-wrap .overflow-hidden .flex-col .tabitem .overflow-hidden .overflow-hidden .h-60 .cursor-pointer .h-full .hover\:cursor-none{
-  width: 100% !important;
-  height:100% !important;
- }
-
- /* New img2img buttons reposition and border*/
-
- /*#tabs .tabitem .gr-compact{
-  margin-top:30px;
-  z-index: 100;
-  background-color: transparent;
- }
-
- #tabs .gr-compact .gr-button-secondary{
-  border-color:var(--Secondary_color);
-  border-width:0.5px !important;
- }
-
-/*----------------------------------------------------------------*/
-/*----------------------------------------------------------------*/
-/*----------------------------------------------------------------*/
-
 
 /* Buttons */
 /*----------------------------------------------------------------*/
@@ -708,7 +599,7 @@ border-color: var(--Primary_color);
   max-width: var(--left-column); 
  }
 
-
+ç
 /*-------------------------------------*/
 /*---------------Sliders-------------- */
 /*-------------------------------------*/
