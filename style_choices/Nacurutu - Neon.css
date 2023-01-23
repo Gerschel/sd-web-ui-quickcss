@@ -30,6 +30,7 @@ Original Style.css Edit
     --left-column: calc(20px *var(--left_pannel_width));
 }
 
+
 /* Quickcss extension */
 /*----------------------------------------------------------------*/
 #hidden{
@@ -576,7 +577,7 @@ border-color: var(--Primary_color);
 }
 
 #quicksettings [id^="setting_"] input[type=range]{
-  display:flex;
+  display:flex !important;
   align-items:flex-end !important;
  }
 
@@ -599,102 +600,101 @@ border-color: var(--Primary_color);
   max-width: var(--left-column); 
  }
 
-ç
 /*-------------------------------------*/
 /*---------------Sliders-------------- */
 /*-------------------------------------*/
 
 .gradio-container input[type=range] {
-  -webkit-appearance: none ;
-  background: transparent ;
+  -webkit-appearance: none !important ;
+  background: transparent !important;
 }
 
 .gradio-container input[type=range]:focus {
-  outline: none ;
+  outline: none !important;
 }
 
 .gradio-container input[type=range]::-webkit-slider-runnable-track {
-  cursor: pointer ;
-  height: 6px ;
-  border-radius: 3px ;
-  background:  var(--App_color) ;
-  opacity: 0.6;
+  cursor: pointer !important;
+  height: 6px !important;
+  border-radius: 3px !important;
+  background:  var(--App_color) !important;
+  opacity: 0.6!important;
 }
 
 .gradio-container input[type=range]:hover::-webkit-slider-runnable-track {
-  background-image: linear-gradient(90deg, var(--App_color), var(--Primary_color));
-  background-repeat: no-repeat;
-  opacity: 1;
+  background-image: linear-gradient(90deg, var(--App_color), var(--Primary_color))!important;
+  background-repeat: no-repeat!important;
+  opacity: 1!important;
 }
 
 .gradio-container input[type=range]::-moz-range-track {
-  cursor: pointer ;
-  height: 6px ;
-  border-radius: 3px ;
-  background:  var(--Primary_color) ;
+  cursor: pointer !important;
+  height: 6px !important;
+  border-radius: 3px !important;
+  background:  var(--Primary_color) !important;
 }
 
 .gradio-container input[type=range]:hover::-moz-range-track {
-  background: var(--Secondary_color) ;
+  background: var(--Secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-ms-fill-upper,
 .gradio-container input[type=range]::-ms-fill-lower {
-  cursor: pointer ;
-  height: 6px ;
-  border-radius: 3px ;
-  background:   var(--Primary_color) ;
+  cursor: pointer !important;
+  height: 6px !important;
+  border-radius: 3px !important;
+  background:   var(--Primary_color) !important;
 }
 
 .gradio-container input[type=range]:hover::-ms-fill-upper,
 .gradio-container input[type=range]:hover::-ms-fill-lower {
-  background:   var(--Secondary_color) ;
+  background: var(--Secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-webkit-slider-thumb {
-  box-shadow: 0 0 3px var(--App_color) ;
-  border: 2px solid var(--App_color) ;
-  height: 16px ;
-  width: 16px ;
-  border-radius: 16px ;
-  background:   var(--Primary_color) ;
-  cursor: pointer ;
-  -webkit-appearance: none ;
-  margin-top: -5px ;
+  box-shadow: 0 0 3px var(--App_color) !important;
+  border: 2px solid var(--App_color) !important;
+  height: 16px !important;
+  width: 16px !important;
+  border-radius: 16px !important;
+  background:   var(--Primary_color) !important;
+  cursor: pointer !important;
+  -webkit-appearance: none !important;
+  margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-webkit-slider-thumb {
-  background:   var(--Secondary_color) ;
+  background:   var(--Secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-moz-range-thumb {
-  box-shadow: 0 0 3px var(--App_color) ;
-  border: 2px solid  var(--App_color) ;
-  height: 16px ;
-  width: 16px ;
-  border-radius: 16px ;
-  background:   var(--Primary_color) ;
-  cursor: pointer ;
-  margin-top: -5px ;
+  box-shadow: 0 0 3px var(--App_color) !important;
+  border: 2px solid  var(--App_color) !important;
+  height: 16px !important;
+  width: 16px !important;
+  border-radius: 16px !important;
+  background:   var(--Primary_color) !important;
+  cursor: pointer !important;
+  margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-moz-range-thumb {
-  background:   var(--Secondary_color) ;
+  background:   var(--Secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-ms-thumb {
-  box-shadow: 0 0 3px var(--App_color) ;
-  border: 2px solid  var(--App_color) ;
-  height: 16px ;
-  width: 16px ;
-  border-radius: 16px ;
-  background:   var(--Primary_color) ;
-  cursor: pointer ;
-  margin-top: -5px ;
+  box-shadow: 0 0 3px var(--App_color) !important;
+  border: 2px solid  var(--App_color) !important;
+  height: 16px !important;
+  width: 16px !important;
+  border-radius: 16px !important;
+  background:   var(--Primary_color) !important;
+  cursor: pointer !important;
+  margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-ms-thumb {
-  background:   var(--Secondary_color) ;
+  background: var(--Secondary_color) !important;
 }
 
 
@@ -1071,4 +1071,5 @@ add this to webui.py besides prevent_thread_lock=True, ->
 favicon_path="favicon.svg",
 
 */
+
 
