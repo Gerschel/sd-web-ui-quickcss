@@ -405,10 +405,13 @@ color: var(--Primary_color);
  font-size: 60%;
  text-align: center;
  color: var(--Primary_color);
+ transition: all 0.1s ease-in-out;
+ border-width: 1px;
+ border-color: var(--Secondary_color); 
 }
 
 #tabs .tabitem .card:hover {
-border-width: 4px ;
+border-width: 3px ;
 border-color: var(--Primary_color);
 }
 
@@ -599,7 +602,7 @@ border-color: var(--Primary_color);
 
 /* Gr-block gap and padding */
 /*----------------------------------------------------------------*/
-.gr-block.gr-box {
+.dark .gr-block.gr-box {
   row-gap: 1.1ch;
   padding: 1.1em;
 }
@@ -641,7 +644,7 @@ border-color: var(--Primary_color);
   background-image: linear-gradient(90deg, var(--App_color), var(--Primary_color))!important;
   background-repeat: no-repeat!important;
   opacity: 1!important;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .gradio-container input[type=range]::-moz-range-track {
@@ -653,7 +656,7 @@ border-color: var(--Primary_color);
 
 .gradio-container input[type=range]:hover::-moz-range-track {
   background: var(--Secondary_color) !important;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .gradio-container input[type=range]::-ms-fill-upper,
@@ -667,7 +670,7 @@ border-color: var(--Primary_color);
 .gradio-container input[type=range]:hover::-ms-fill-upper,
 .gradio-container input[type=range]:hover::-ms-fill-lower {
   background: var(--Secondary_color) !important;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .gradio-container input[type=range]::-webkit-slider-thumb {
