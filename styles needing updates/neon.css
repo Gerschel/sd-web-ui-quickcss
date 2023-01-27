@@ -1,0 +1,914 @@
+/*user.css
+Custom Dark theme for Stable Diffusion WebUI 
+Original Style.css Edit
+
+* @Version: alpha-v1.5
+* @Author: Nacurutu
+* @Last Modified: 2023-01-05
+* @Neon
+
+/*----------------------------------------------------------------*/
+/*----------------------------------------------------------------*/
+/*----------------------------------------------------------------*/
+
+/*THEME VARIABLES*/
+:root, * , quickcss_target{
+    --Primary_color: #ff205f;
+    --Secondary_color: #a3133c;
+    --Input_text_color: #65f6ae;
+    --Input_text_color_focus: #ffffff;
+    --App_color: #a7abb1;
+    --Background_color: #000;
+    --Checked_text: #ff205f;
+    /*ENDCOLORPICKERS*/
+    --UI_radius: 0;
+    /*BREAKFILEREADER*/
+    --logo: url('file=logo.png');
+    --favicon: url('file=favicon.svg');
+}
+
+/* Quickcss extension */
+/*----------------------------------------------------------------*/
+#hidden{
+    visibility: hidden;
+}
+
+#quickcss_colorpicker {
+    max-width: 10vw;
+}
+
+input[type=color] {
+    width: 100%;
+}
+
+/*================================================ */
+/* User.css Changes */
+/*================================================ */
+
+/* Import font */
+/*----------------------------------------------------------------*/
+@font-face {
+    font-family: 'Source Code Pro', monospace ;
+    src: url('SourceCodePro-Regular.otf') ;
+}
+
+/*Css hide Gradio animations*/
+/*----------------------------------------------------------------*/
+/* Trying to hide Gradio progress bar here, but still cant figure out how */
+/*----------------------------------------------------------------*/
+
+* .wrap .m-12, 
+* .wrap .z-20,
+* .meta-text-center, 
+* .meta-text,
+* .wrap .m-12 svg, 
+* .wrap .z-20 svg {
+    display:none ;
+} 
+    
+/* gradio 3.8 adds opacity to progressbar which makes it blink; disable it here */
+
+.dark .transition.opacity-20 {
+    opacity: 1 ;
+  }
+
+/* Tab buttons */
+/*----------------------------------------------------------------*/
+
+#tabs > div:first-of-type button {
+    font-size: 90% ;
+    transition: all 0.3s ease-in-out ;
+}
+
+#tabs > div:first-of-type button:hover
+{
+    border-color: 0 0 0 0.2em var(--Input_text_color_focus) ;
+}
+
+/* UI border radius */
+/*----------------------------------------------------------------*/
+
+.gradio-container * {
+    border-radius: calc(1px *var(--UI_radius)) !important;
+}
+
+/* Selected text colors */
+/*----------------------------------------------------------------*/
+
+*::selection {
+    color: var(--Input_text_color_focus);
+        background-color: var(--Secondary_color);
+    
+    }
+
+/* App Colors */
+/*----------------------------------------------------------------*/
+.dark,
+.dark\:bg-gray-900, 
+.dark .gr-button-primary, 
+.dark .dark\:text-gray-200, 
+.dark .text-gray-700, 
+.dark .text-gray-800, 
+.dark .text-gray-900, 
+.dark .\!text-gray-700, 
+.dark .\!text-gray-800 {
+    color: var(--App_color) ;
+}
+
+/* Input Colors */
+/*----------------------------------------------------------------*/
+
+.dark .gr-input {
+    font-family: 'Source Code Pro', monospace ;
+    font: 'Source Code Pro' ;
+    color: var(--Input_text_color) ;
+    transition: all 0.3s ease-in-out ;
+}
+
+.dark .gr-input:focus, 
+.dark .gr-input:hover  {
+    color: var(--Input_text_color_focus);
+    background-color: var(--Secondary_color);
+    border-color: var(--Input_text_color_focus);
+}
+
+.dark .gr-input::selection {
+    color: var(--Input_text_color_focus);
+    background-color: var(--Background_color);
+}
+
+/* Background colors */
+/*----------------------------------------------------------------*/
+.dark, 
+.dark .gr-button, 
+.dark .bg-white, 
+.dark .gr-panel, 
+.dark .gr-button-lg, 
+.dark .gr-box,
+.dark .gr-button-tool, 
+.dark .dark\:bg-gray-700, 
+.dark .dark\:bg-gray-950,
+.dark fieldset span.text-gray-500, 
+.dark .gr-block.gr-box span.text-gray-500,
+.dark label.block span {
+    background-color: var(--Background_color) ;
+}
+
+
+#img2img_image, #img2img_image > .h-60, #img2img_image > .h-60 > div, #img2img_image > .h-60 > div > img,
+img2maskimg, #img2maskimg > .h-60, #img2maskimg > .h-60 > div, #img2maskimg > .h-60 > div > img
+{
+    background-color: var(--Background_color); 
+}
+
+/* Galleries */
+/*----------------------------------------------------------------*/
+#txt2img_gallery, 
+#img2img_gallery,
+#extras_gallery,
+#depthmap_gallery,
+#ti_gallery,
+#sp_gallery,
+#txt2img_images_history_gallery,
+#img2img_images_history_gallery,
+#txt2img-grids_images_history_gallery,
+#img2img-grids_images_history_gallery,
+#Extras_images_history_gallery, 
+#Favorites_images_history_gallery {
+    border-radius: calc(1px *var(--UI_radius)) !important;
+    background-image: var(--logo) !important;
+    background: none;
+    background-size: cover ;
+    background-position: center center ;
+    background-repeat: no-repeat ;
+    transition: all 1s ease-in-out ;
+    box-shadow: 0 0 0 0.2em transparent;
+} 
+
+#txt2img_gallery:hover,
+#img2img_gallery:hover,
+#extras_gallery:hover,
+#depthmap_gallery:hover,
+#ti_gallery:hover,
+#sp_gallery:hover {
+    box-shadow: 0 0 0 0.5em transparent;
+    animation: pulse2 .3s, change-color-border 5s linear infinite;
+    -webkit-animation: pulse2 0.3s, change-color-border 5s linear infinite;
+    -moz-animation: pulse2 0.3s, change-color-border 5s linear infinite;
+    -o-animation: pulse2 0.3s, change-color-border 5s linear infinite;
+}
+
+@keyframes change-color-border {
+    0% {border-color: var(--Input_text_color_focus);}
+    25% {border-color: var(--Secondary_color);}
+    50% {border-color: var(--Input_text_color_focus);}
+    75% {border-color: var(--Background_color);}
+    100% {border-color: var(--Input_text_color_focus);}    
+}
+
+#txt2img_gallery svg, 
+#img2img_gallery svg,
+#extras_gallery svg,
+#depthmap_gallery svg,
+#ti_gallery svg,
+#sp_gallery svg,
+#txt2img_images_history_gallery svg,
+#img2img_images_history_gallery svg,
+#txt2img-grids_images_history_gallery svg,
+#img2img-grids_images_history_gallery svg,
+#Extras_images_history_gallery svg, 
+#Favorites_images_history_gallery svg {
+    display: none ;
+}
+
+.dark .gr-input-label, 
+.dark .gr-button {
+    background-image:  none ;
+    transition: all 0.3s ease-in-out ;
+}
+
+
+
+/* Checks */
+/*----------------------------------------------------------------*/
+.dark .gr-check-radio:checked {
+    background-color: var(--Primary_color) ;
+    
+}
+
+.dark .gr-input-label:hover {
+    border-color: var(--Secondary_color);
+    color: var(--Input_text_color_focus);
+    animation: pulse3 0.3s;
+    -webkit-animation: pulse3 0.3s;
+    -moz-animation: pulse3 0.3s;
+    -o-animation: pulse3 0.3s;
+    box-shadow: 0 0 0 0.5em transparent;
+}
+      @keyframes pulse3 {
+        0% { box-shadow: 0 0 0 0 var(--Secondary_color); }
+}
+
+input[type=checkbox]:checked + span, input[type=radio]:checked + span {
+  color: var(--Primary_color);
+}
+
+/* Generate progress bar style */
+/*----------------------------------------------------------------*/
+.dark .progressDiv .progress {
+    font-family: 'Source Code Pro', monospace ;
+    font: 'Source Code Pro';
+    background: var(--Primary_color) ;
+    color: var(--Input_text_color_focus);
+    font-weight: bold ;
+    line-height: 20px ;
+    text-align: right ;
+    border-radius: calc(1px *var(--UI_radius)) !important;
+}
+
+/* Buttons */
+/*----------------------------------------------------------------*/
+#txt2img_generate, 
+#img2img_generate {
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out ;   
+}
+
+#txt2img_interrupt, 
+#img2img_interrupt, 
+#txt2img_skip, 
+#img2img_skip {
+    background: var(--Background_color) ;
+    z-index: 11;
+    transition: all 0.3s ease-in-out ;
+}
+  
+#txt2img_interrupt:hover, 
+#img2img_interrupt:hover, 
+#txt2img_skip:hover, 
+#img2img_skip:hover {
+    background: var(--Secondary_color) ;
+    color: var(--Input_text_color_focus) ;
+    z-index: 11;
+}
+
+.dark .gr-button-primary,
+#modelmerger_merge, 
+#deforum_generate, 
+#depthmap_generate, 
+#vxa_gen_btn {
+    font-family: 'Source Code Pro', monospace ;
+    font: 'Source Code Pro' ;
+    text-transform: uppercase;
+    border-color: var(--Primary_color) ;
+    border-width: 4px ;
+    background-image: var(--logo) ;
+    background-size: cover ;
+    background-position: center center ;
+    background-repeat: no-repeat ;
+    color: var(--App_color) ;
+    z-index: 10;
+    transition: all 0.3s ease-in-out ;
+}
+
+.dark .gr-button-secondary, .dark .gr-button-tool {
+    font-family: 'Source Code Pro', monospace ;
+    font: 'Source Code Pro' ;
+    border-color: var(--Secondary_color) ;
+    border-width: 1px ;
+    color: var(--App_color) ;
+    transition: all 0.3s ease-in-out ;
+}
+
+/* Buttons pulse effect */
+/*----------------------------------------------------------------*/
+
+/*Generate*/
+#txt2img_generate:hover, #img2img_generate:hover {
+    letter-spacing: 1rem;
+    box-shadow: 0 0 0 2em transparent;
+} 
+
+#txt2img_generate:active, #img2img_generate:active {
+    animation: pulse 0.3s;
+    -webkit-animation: pulse 0.3s; 
+    -moz-animation: pulse 0.3s;
+    -o-animation: pulse 0.3s;
+}   
+@keyframes pulse {
+      0% { box-shadow: 0 0 0 0 var(--Primary_color) }
+}   
+ /*Primary*/
+.dark .gr-button-primary:hover,
+#modelmerger_merge:hover, 
+#deforum_generate:hover, 
+#depthmap_generate:hover, 
+#vxa_gen_btn:hover 
+{
+    border-color: var(--Input_text_color_focus);
+    border-width: 4px ;
+    background-color: var(--Primary_color) ;
+    color: var(--Input_text_color_focus) ;
+    animation: pulse2 0.3s;
+    -webkit-animation: pulse2 0.3s;
+    -moz-animation: pulse2 0.3s;
+    -o-animation: pulse2 0.3s;
+    box-shadow: 0 0 0 0.5em transparent;
+}  
+
+/*Secondary*/
+.dark .gr-button-secondary:hover, .dark .gr-button-tool:hover {
+    border-color: var(--Input_text_color_focus);
+    border-width: 1px ;
+    background-color: var(--Secondary_color);
+    color: var(--Input_text_color_focus) ;
+    box-shadow: 0 0 0 0.5em transparent;
+    animation: pulse2 0.3s;
+    -webkit-animation: pulse2 0.3s;
+    -moz-animation: pulse2 0.3s;
+    -o-animation: pulse2 0.3s;
+    }
+    
+    @keyframes pulse2 {
+      0% { box-shadow: 0 0 0 0 var(--Input_text_color_focus); }
+}
+
+/* gradio 3.4.1 stuff for editable scrollbar values */
+/*----------------------------------------------------------------*/
+.dark .gr-box > div > div > input.gr-text-input{
+    position: absolute ;
+    right: 0.5em ;
+    top: -0.6em ;
+    z-index: 200 ;
+    width: 8em ;
+    border-color: var(--Secondary_color) ;
+}
+
+.dark .gr-box > div > div > input.gr-text-input:hover, 
+.dark .gr-box > div > div > input.gr-text-input:focus {
+    border-color: var(--Input_text_color_focus) ;
+}
+
+/* Gallery */
+/*----------------------------------------------------------------*/
+#gallery_item {
+    border-width: 2px ;
+}
+
+.dark .gallery-item.svelte-1g9btlg.svelte-1g9btlg {
+    --tw-ring-color: var(--Primary_color) !important;
+}
+
+.dark .dark\:bg-gray-900 {
+    --tw-bg-opacity: 1;
+    background-color: var(--Background_color) ;
+}
+
+/* Context menu */
+/*----------------------------------------------------------------*/
+#context-menu {
+    font-family: 'Source Code Pro', monospace ;
+    font: 'Source Code Pro';
+    border-color: var(--Primary_color);
+    /*box-shadow: 1px 1px 2px var(--Primary_color) ;*/
+}
+
+.dark .context-menu-items a:hover {
+    background: var(--Secondary_color) ;
+    color: var(--Input_text_color_focus) ;
+    /*box-shadow: 1px 1px 2px var(--Secondary_color) ;*/
+    
+}
+.dark .context-menu-items {
+        transition: all 0.3s ease-in-out ;
+
+}
+
+/* Quicksettings */
+/*----------------------------------------------------------------*/
+#setting_sd_hypernetwork_strength, 
+#setting_CLIP_stop_at_last_layers, 
+#setting_inpainting_mask_weight {
+    display: grid ;
+    row-gap: 1em ;
+          
+}
+
+/*-------------------------------------*/
+/*---------------Sliders-------------- */
+/*-------------------------------------*/
+
+.gradio-container input[type=range] {
+    -webkit-appearance: none ;
+    background: transparent ;
+}
+
+.gradio-container input[type=range]:focus {
+    outline: none ;
+}
+
+.gradio-container input[type=range]::-webkit-slider-runnable-track {
+    cursor: pointer ;
+    height: 6px ;
+    border-radius: 3px ;
+    background:  var(--App_color) ;
+    
+}
+
+.gradio-container input[type=range]:hover::-webkit-slider-runnable-track {
+    background-image: linear-gradient(90deg, var(--App_color), var(--Primary_color));
+    background-repeat: no-repeat;
+}
+
+.gradio-container input[type=range]::-moz-range-track {
+    cursor: pointer ;
+    height: 6px ;
+    border-radius: 3px ;
+    background:  var(--Primary_color) ;
+}
+
+.gradio-container input[type=range]:hover::-moz-range-track {
+    background: var(--Secondary_color) ;
+}
+
+.gradio-container input[type=range]::-ms-fill-upper,
+.gradio-container input[type=range]::-ms-fill-lower {
+    cursor: pointer ;
+    height: 6px ;
+    border-radius: 3px ;
+    background:   var(--Primary_color) ;
+}
+
+.gradio-container input[type=range]:hover::-ms-fill-upper,
+.gradio-container input[type=range]:hover::-ms-fill-lower {
+    background:   var(--Secondary_color) ;
+}
+
+.gradio-container input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0 0 3px var(--App_color) ;
+    border: 2px solid var(--App_color) ;
+    height: 16px ;
+    width: 16px ;
+    border-radius: 16px ;
+    background:   var(--Primary_color) ;
+    cursor: pointer ;
+    -webkit-appearance: none ;
+    margin-top: -5px ;
+}
+
+.gradio-container input[type=range]:active::-webkit-slider-thumb {
+    background:   var(--Secondary_color) ;
+}
+
+.gradio-container input[type=range]::-moz-range-thumb {
+    box-shadow: 0 0 3px var(--App_color) ;
+    border: 2px solid  var(--App_color) ;
+    height: 16px ;
+    width: 16px ;
+    border-radius: 16px ;
+    background:   var(--Primary_color) ;
+    cursor: pointer ;
+    margin-top: -5px ;
+}
+
+.gradio-container input[type=range]:active::-moz-range-thumb {
+    background:   var(--Secondary_color) ;
+}
+
+.gradio-container input[type=range]::-ms-thumb {
+    box-shadow: 0 0 3px var(--App_color) ;
+    border: 2px solid  var(--App_color) ;
+    height: 16px ;
+    width: 16px ;
+    border-radius: 16px ;
+    background:   var(--Primary_color) ;
+    cursor: pointer ;
+    margin-top: -5px ;
+}
+
+.gradio-container input[type=range]:active::-ms-thumb {
+    background:   var(--Secondary_color) ;
+}
+
+
+
+
+/*----------------------------------------------------------------*/
+/* End of changes */
+/*----------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------*/
+/* Normalize.css */
+
+/*Normalize.css makes browsers render all elements more consistently and in line with modern standards. 
+It precisely targets only the styles that need normalizing.
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+ html {
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+  }
+  
+  /* Sections
+     ========================================================================== */
+  
+  /**
+   * Remove the margin in all browsers.
+   */
+  
+  body {
+    margin: 0;
+  }
+  
+  /**
+   * Render the `main` element consistently in IE.
+   */
+  
+  main {
+    display: block;
+  }
+  
+  /**
+   * Correct the font size and margin on `h1` elements within `section` and
+   * `article` contexts in Chrome, Firefox, and Safari.
+   */
+  
+  h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+  
+  /* Grouping content
+     ========================================================================== */
+  
+  /**
+   * 1. Add the correct box sizing in Firefox.
+   * 2. Show the overflow in Edge and IE.
+   */
+  
+  hr {
+    box-sizing: content-box; /* 1 */
+    height: 0; /* 1 */
+    overflow: visible; /* 2 */
+  }
+  
+  /**
+   * 1. Correct the inheritance and scaling of font size in all browsers.
+   * 2. Correct the odd `em` font sizing in all browsers.
+   */
+  
+  pre {
+    font-family: monospace, monospace; /* 1 */
+    font-size: 1em; /* 2 */
+  }
+  
+  /* Text-level semantics
+     ========================================================================== */
+  
+  /**
+   * Remove the gray background on active links in IE 10.
+   */
+  
+  a {
+    background-color: transparent;
+  }
+  
+  /**
+   * 1. Remove the bottom border in Chrome 57-
+   * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+   */
+  
+  abbr[title] {
+    border-bottom: none; /* 1 */
+    text-decoration: underline; /* 2 */
+    text-decoration: underline dotted; /* 2 */
+  }
+  
+  /**
+   * Add the correct font weight in Chrome, Edge, and Safari.
+   */
+  
+  b,
+  strong {
+    font-weight: bolder;
+  }
+  
+  /**
+   * 1. Correct the inheritance and scaling of font size in all browsers.
+   * 2. Correct the odd `em` font sizing in all browsers.
+   */
+  
+  code,
+  kbd,
+  samp {
+    font-family: monospace, monospace; /* 1 */
+    font-size: 1em; /* 2 */
+  }
+  
+  /**
+   * Add the correct font size in all browsers.
+   */
+  
+  small {
+    font-size: 80%;
+  }
+  
+  /**
+   * Prevent `sub` and `sup` elements from affecting the line height in
+   * all browsers.
+   */
+  
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  
+  sub {
+    bottom: -0.25em;
+  }
+  
+  sup {
+    top: -0.5em;
+  }
+  
+  /* Embedded content
+     ========================================================================== */
+  
+  /**
+   * Remove the border on images inside links in IE 10.
+   */
+  
+  img {
+    border-style: none;
+  }
+  
+  /* Forms
+     ========================================================================== */
+  
+  /**
+   * 1. Change the font styles in all browsers.
+   * 2. Remove the margin in Firefox and Safari.
+   */
+  
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 1 */
+    line-height: 1.15; /* 1 */
+    margin: 0; /* 2 */
+  }
+  
+  /**
+   * Show the overflow in IE.
+   * 1. Show the overflow in Edge.
+   */
+  
+  button,
+  input { /* 1 */
+    overflow: visible;
+  }
+  
+  /**
+   * Remove the inheritance of text transform in Edge, Firefox, and IE.
+   * 1. Remove the inheritance of text transform in Firefox.
+   */
+  
+  button,
+  select { /* 1 */
+    text-transform: none;
+  }
+  
+  /**
+   * Correct the inability to style clickable types in iOS and Safari.
+   */
+  
+  button,
+  [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    -webkit-appearance: button;
+  }
+  
+  /**
+   * Remove the inner border and padding in Firefox.
+   */
+  
+  button::-moz-focus-inner,
+  [type="button"]::-moz-focus-inner,
+  [type="reset"]::-moz-focus-inner,
+  [type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+  
+  /**
+   * Restore the focus styles unset by the previous rule.
+   */
+  
+  button:-moz-focusring,
+  [type="button"]:-moz-focusring,
+  [type="reset"]:-moz-focusring,
+  [type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+  
+  /**
+   * Correct the padding in Firefox.
+   */
+  
+  fieldset {
+    padding: 0.35em 0.75em 0.625em;
+  }
+  
+  /**
+   * 1. Correct the text wrapping in Edge and IE.
+   * 2. Correct the color inheritance from `fieldset` elements in IE.
+   * 3. Remove the padding so developers are not caught out when they zero out
+   *    `fieldset` elements in all browsers.
+   */
+  
+  legend {
+    box-sizing: border-box; /* 1 */
+    color: inherit; /* 2 */
+    display: table; /* 1 */
+    max-width: 100%; /* 1 */
+    padding: 0; /* 3 */
+    white-space: normal; /* 1 */
+  }
+  
+  /**
+   * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+   */
+  
+  progress {
+    vertical-align: baseline;
+  }
+  
+  /**
+   * Remove the default vertical scrollbar in IE 10+.
+   */
+  
+  textarea {
+    overflow: auto;
+  }
+  
+  /**
+   * 1. Add the correct box sizing in IE 10.
+   * 2. Remove the padding in IE 10.
+   */
+  
+  [type="checkbox"],
+  [type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+  }
+  
+  /**
+   * Correct the cursor style of increment and decrement buttons in Chrome.
+   */
+  
+  [type="number"]::-webkit-inner-spin-button,
+  [type="number"]::-webkit-outer-spin-button {
+    height: auto;
+  }
+  
+  /**
+   * 1. Correct the odd appearance in Chrome and Safari.
+   * 2. Correct the outline style in Safari.
+   */
+  
+  [type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    outline-offset: -2px; /* 2 */
+  }
+  
+  /**
+   * Remove the inner padding in Chrome and Safari on macOS.
+   */
+  
+  [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  
+  /**
+   * 1. Correct the inability to style clickable types in iOS and Safari.
+   * 2. Change font properties to `inherit` in Safari.
+   */
+  
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button; /* 1 */
+    font: inherit; /* 2 */
+  }
+  
+  /* Interactive
+     ========================================================================== */
+  
+  /*
+   * Add the correct display in Edge, IE 10+, and Firefox.
+   */
+  
+  details {
+    display: block;
+  }
+  
+  /*
+   * Add the correct display in all browsers.
+   */
+  
+  summary {
+    display: list-item;
+  }
+  
+  /* Misc
+     ========================================================================== */
+  
+  /**
+   * Add the correct display in IE 10+.
+   */
+  
+  template {
+    display: none;
+  }
+  
+  /**
+   * Add the correct display in IE 10.
+   */
+  
+  [hidden] {
+    display: none;
+  }
+  
+
+
+/*----------------------------------------------------------------*/
+/* Test code space*/
+/*----------------------------------------------------------------*/
+
+/* To get the favicon working, 
+add this to webui.py besides prevent_thread_lock=True,
+
+favicon_path="favicon.svg",
+
+*/
+input[type=checkbox]:checked + span, input[type=radio]:checked + span {
+    color: var(--Checked_text);
+}
