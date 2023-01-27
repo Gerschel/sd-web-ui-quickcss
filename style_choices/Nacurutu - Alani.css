@@ -195,13 +195,14 @@ input[type=color] {
 .dark label.block span,
 #quicksettings,
 #tabs .tabitem .gr-compact {
- 
   background-color: var(--Background_color);
 }
 
 .dark .dark\:bg-gray-200, 
-.dark .bg-gray-200 {
-background-color: transparent !important;
+.dark .bg-gray-200.\!text-gray-700,
+#txt2img_toprow,
+#txt2img_gallery_container .livePreview {
+  background-color: transparent !important;
 }
 
 /* Galleries */
@@ -259,14 +260,9 @@ background-color: transparent !important;
  }
  
  /* Svg */
- .dark .backdrop-blur .modify-upload svg{
+.dark .backdrop-blur .modify-upload svg{
   display:block !important;
 }
-
-/* Live preview */
-#txt2img_gallery_container .livePreview{
-  background-color:transparent;
- }
 
 /* Gallery items*/
 /*----------------------------------------------------------------*/
@@ -424,9 +420,11 @@ border-color: var(--Primary_color);
 
 /* Options Row */
 /*----------------------------------------------------------------*/
-.dark .flex-col:nth-child(2) .flex-wrap:nth-child(2){
-  justify-content:center;
- }
+
+#txt2img_tools, #img2img_tools{
+  gap: 0.4em;
+  justify-content: center;
+}
 
 /* New img2img buttons reposition and border*/
 /*----------------------------------------------------------------*/

@@ -1,0 +1,15 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+	<title>favicon Neon-svg</title>
+	<style>
+		.s0 { opacity: .8;fill: #ff205f } 
+		.s1 { fill: #ff205f } 
+		.s2 { opacity: .4;fill: #ff205f } 
+		.s3 { opacity: .2;fill: #ff205f } 
+		.s4 { opacity: .6;fill: #ff205f } 
+	</style>
+	<path id="Layer" class="s0" d="m448.9 351.4h52.5l149.9 321.2h-26.3l-137.4-293.9h-25.9z"/>
+	<path id="Layer" class="s1" d="m296.6 672.6l150.1-321.2 150.4 321.2h-99.6l-51.7-101.4-50.7 101.4z"/>
+	<path id="Layer" class="s2" d="m552.8 351.5l149.9 321.1h-26.3l-150.1-321.1z"/>
+	<path id="Layer" class="s3" d="m578.4 351.5l150 321.1h-26.3l-150.1-321.1z"/>
+	<path id="Layer" class="s4" d="m527.1 351.5l149.9 321.1h-26.3l-150.1-321.1z"/>
+</svg>
