@@ -1,0 +1,298 @@
+/*
+* user.css / ml-a1111-sdwebui-styles.css
+*
+* Minimal dark theme stylesheet
+* for AUTOMATIC1111 Stable Diffusion web UI
+*
+* @Version: 0.3
+* @Author: Masslevel
+* @Date: 2022-09-28 21:09:44
+* @Last Modified time: 2022-12-27 04:30:44
+*/
+
+/* gradio ml-styles */
+
+/* colors */
+:root, * quickcss_target{
+  --ml-color-grey:#40444d;
+  --ml-color-lightgrey:#6b7280;
+  --ml-color-highlight:#65f6c0;
+  --ml-color-dark: #0f0f0f;
+  --ml-color-pink: #ff205f;
+  --ml-color-range-accent:#6b7280;
+  --ml-color-range-accent-darker:#ff205f;
+  --ml-color-range-border:#6b7280;
+  --ml-color-range-shadow:#6b7280;
+  --checked_text: #008080;
+  /*ENDCOLORPICKERS*/
+  --all_border_radius:0;
+  /*BREAKFILEREADER*/
+}
+
+/* global */
+.gradio-container *:not(img){
+    border-radius: calc(1px *var(--all_border_radius)) !important;
+}
+.gradio-container div[id*=tab][class*=tabitem] {
+    border-radius: 0px !important;
+}
+.gradio-container div #tabs button[class*=bg-white] {
+    border-radius: 0px!important;
+}
+.gradio-container {
+    font-family: PragmataPro, 'Source Code Pro', monospace, Arial, sans-serif;
+}
+
+/*#quicksettings {
+    scale: 0.6;
+}*/
+
+/* gradio theme overwrites */
+.dark,
+.gradio-container,
+.dark .dark\:bg-gray-950,
+.dark .gr-box,
+.dark .bg-white,
+.dark .gr-panel
+{
+    background: var(--ml-color-dark);
+}
+
+/* quick settings */
+#setting_sd_hypernetwork_strength input {
+    font-size: .5rem;
+    border: 0;
+    background: none!important;
+}
+
+/* tabs */
+#tabs > div:first-of-type button {
+    font-size: 75% !important
+}
+
+/* value input boxes */
+input.gr-box.gr-input.gr-text-input.text-center.h-6 {
+    color: var(--ml-color-highlight);
+    background-color: var(--ml-color-dark) !important;
+}
+
+/* input */
+.dark .gr-check-radio:checked {
+    --tw-bg-opacity: 1;
+    background-color: var(--ml-color-pink);
+}
+
+/* drop down */
+.dark .gr-input,
+.dark .gr-input:focus
+{
+    color: var(--ml-color-highlight);
+    background-color: var(--ml-color-dark) !important;
+}
+
+/* form fields */
+.gr-form,
+#negative_prompt label,
+.gr-form .gr-box,
+.gr-form .dark .bg-gray-5
+{
+    background: none !important;
+    /*border: 1px solid rgb(25, 25, 25) !important;*/
+}
+
+#negative_prompt label {
+    border: 1px solid var(--ml-color-grey);
+}
+
+textarea {
+/*  border: 1px solid rgb(64, 68, 77) !important;*/
+}
+
+.dark fieldset span.text-gray-500, .dark .gr-block.gr-box span.text-gray-500, .dark label.block span  /* container names */ {
+    color: var(--ml-color-lightgrey);
+    background-color: var(--ml-color-dark);
+}
+
+/* buttons */
+.gr-button.gr-button-primary,
+.dark .gr-button,
+.dark .bg-gray-50,
+.bg-gray-50,
+.dark fieldset span.text-gray-500, .dark .gr-block.gr-box span.text-gray-500, .dark label.block span,  /* container names */
+label,
+.gr-form div /* number */
+{
+    background-image: transparent !important;
+    background: 0;
+    color: var(--ml-color-lightgrey);
+}
+
+button.gr-button.gr-button-lg.gr-button-primary {
+    border: 1px solid var(--ml-color-pink) !important;
+}
+button.gr-button.gr-button-lg.gr-button-primary:hover {
+    border: 1px solid white !important;
+}
+
+label.gr-input-label,
+label span
+{
+    color: var(--ml-color-lightgrey);
+}
+
+#txt2img_generate {
+    border: 1px solid var(--ml-color-highlight);
+    transition: all .1s ease-in;
+}
+
+#txt2img_generate:hover {
+    color: black !important;
+    background: var(--ml-color-highlight) !important;
+}
+
+.gr-button:hover,
+#txt2img_sampling label:hover {
+    border: 1px solid white;
+}
+
+label {
+    background-color: transparent !important;
+    background-image: transparent !important;
+    background: 0 !important;
+    color: var(--ml-color-lightgrey);
+}
+
+.dark fieldset span.text-gray-500, .dark .gr-block.gr-box span.text-gray-500, .dark label.block span  /* container names */ {
+    background-color: var(--ml-color-dark);
+    background: var(--ml-color-dark);
+}
+
+/* prompts */
+#component-5 > div:nth-child(1) > div:nth-child(1) > label:nth-child(2) > textarea:nth-child(2),
+#component-15 > div:nth-child(1) > div:nth-child(1) > label:nth-child(2) > textarea:nth-child(2) {
+    border: 1px solid var(--ml-color-grey);
+}
+
+/* image preview bg */
+#txt2img_gallery {
+    border: 1px solid var(--ml-color-grey) !important;
+}
+
+/*#txt2img_gallery {
+    border:  1px solid rgb(64, 68, 77)!important;
+}
+*/
+
+/* image preview bg after render */
+.dark .dark\:bg-gray-900 {
+    background-color: var(--ml-color-dark);
+}
+
+/* range sliders */
+
+.gradio-container input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+
+.gradio-container input[type=range]:focus {
+    outline: none;
+}
+
+.gradio-container input[type=range]::-webkit-slider-runnable-track {
+    cursor: pointer;
+    height: 6px;
+    border-radius: 3px;
+    background:  var(--ml-color-range-accent);
+}
+
+.gradio-container input[type=range]:hover::-webkit-slider-runnable-track {
+    background: var(--ml-color-range-accent-darker);
+}
+
+.gradio-container input[type=range]::-moz-range-track {
+    cursor: pointer;
+    height: 6px;
+    border-radius: 3px;
+    background:  var(--ml-color-range-accent);
+}
+
+.gradio-container input[type=range]:hover::-moz-range-track {
+    background: var(--ml-color-range-accent-darker);
+}
+
+.gradio-container input[type=range]::-ms-fill-upper,
+.gradio-container input[type=range]::-ms-fill-lower {
+    cursor: pointer;
+    height: 6px;
+    border-radius: 3px;
+    background:   var(--ml-color-range-accent);
+}
+
+.gradio-container input[type=range]:hover::-ms-fill-upper,
+.gradio-container input[type=range]:hover::-ms-fill-lower {
+    background:   var(--ml-color-range-accent-darker);
+}
+
+.gradio-container input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0 0 3px var(--ml-color-range-shadow);
+    border: 2px solid var(--ml-color-range-border);
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background:   var(--ml-color-range-accent);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -5px;
+}
+
+.gradio-container input[type=range]:active::-webkit-slider-thumb {
+    background:   var(--ml-color-range-accent-darker);
+}
+
+.gradio-container input[type=range]::-moz-range-thumb {
+    box-shadow: 0 0 3px var(--ml-color-range-shadow);
+    border: 2px solid  var(--ml-color-range-border);
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background:   var(--ml-color-range-accent);
+    cursor: pointer;
+    margin-top: -5px;
+}
+
+.gradio-container input[type=range]:active::-moz-range-thumb {
+    background:   var(--ml-color-range-accent-darker);
+}
+
+.gradio-container input[type=range]::-ms-thumb {
+    box-shadow: 0 0 3px var(--ml-color-range-shadow);
+    border: 2px solid  var(--ml-color-range-border);
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background:   var(--ml-color-range-accent);
+    cursor: pointer;
+    margin-top: -5px;
+}
+
+.gradio-container input[type=range]:active::-ms-thumb {
+    background:   var(--ml-color-range-accent-darker);
+}
+
+#hidden{
+    visibility: hidden;
+}
+input[type=checkbox]:checked + span, input[type=radio]:checked + span {
+    color: var(--checked_text)!important;
+}
+
+#quickcss_colorpicker {
+    max-width: 10vw;
+    border-radius: calc(1px * var(--all_border_radius))!important;
+}
+
+input[type=color] {
+    width: 100%!important;
+}
