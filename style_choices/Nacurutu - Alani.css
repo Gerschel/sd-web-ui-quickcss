@@ -25,8 +25,8 @@ Original Style.css Edit
     --left_pannel_width: 42;
     --cards_size: 50;
     /*BREAKFILEREADER*/
-    --logo: url('file=logo.png');
-    --favicon: url('file=favicon.svg');
+    --logo: url('file=static/logo.png');
+    --favicon: url('file=static/favicon.svg');
     --left-column: calc(20px *var(--left_pannel_width));
     
 }
