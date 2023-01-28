@@ -12,12 +12,10 @@ class FaviconHandler {
         document.getElementsByTagName('head')[0].appendChild(link);
     }
     static async conditionalTrigger() {
-        while (true) {
-            if (gradioApp().querySelector('.icon-container')) {
-                FaviconHandler.setFavicon();
-            }
-            await AwaitDelayCallback.delay(500);
+        while (!gradioApp().querySelector('.icon-container')) {
+            await AwaitDelayCallback.delay(2000);
         }
+        FaviconHandler.setFavicon();
     }
 }
 document.addEventListener("DOMContentLoaded", async function () { await FaviconHandler.conditionalTrigger(); });
