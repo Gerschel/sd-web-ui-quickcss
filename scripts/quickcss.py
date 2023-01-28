@@ -25,6 +25,8 @@ class MyTab():
         self.javascript_folder = os.path.join(self.extensiondir, "javascript")
         self.static_folder = os.path.join(self.webui_dir, "static")
 
+        self.favicon_workaround = gr.HTML(value='<div class="icon-container !hidden"></div>', render=False)
+
 
         self.styles_list = self.get_files(self.style_folder)
         self.backgrounds_list = self.get_files(self.backgrounds_folder)
@@ -127,6 +129,7 @@ class MyTab():
 
     def ui(self, *args, **kwargs):
         with gr.Blocks(analytics_enabled=False) as ui:
+            self.favicon_workaround.render()
             with gr.Accordion(label="Some instructions", open=False):
                 gr.Markdown(value="""<center>This is a mix from old style to new style. It is not in it's finished state</center>
 <center>To see effects, you must use dropdown, select as sheet, click apply, click restart. More options will be available on restart</center>
