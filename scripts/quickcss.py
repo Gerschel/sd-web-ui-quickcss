@@ -253,12 +253,12 @@ class MyTab():
             )
 
             self.apply_logo_bttn.click(
-                fn = self.apply_choice_wrapper(self.logos_folder, self.webui_dir, "logo.png"),#TODO Update css files and change dir to static
+                fn = self.apply_choice_wrapper(self.logos_folder, self.static_folder, "logo.png"),#TODO Update css files and change dir to static
                 inputs = self.logos_dropdown,
             )
 
             self.apply_favicon_bttn.click(
-                fn = self.apply_choice_wrapper(self.favicon_folder, self.webui_dir, "favicon.png"),#TODO update css files and change dir to static
+                fn = self.apply_choice_wrapper(self.favicon_folder, self.static_folder, "favicon.png"),#TODO update css files and change dir to static
                 inputs = self.favicon_dropdown
             )
 
