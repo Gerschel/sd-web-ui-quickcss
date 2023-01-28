@@ -45,6 +45,11 @@ input[type=color] {
   width: 100%;
 }
 
+.icon-container {
+  background-image: var(--favicon);
+}
+
+
 /*================================================ */
 /* User.css Changes */
 /*================================================ */

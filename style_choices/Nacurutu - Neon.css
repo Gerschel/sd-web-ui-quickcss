@@ -44,6 +44,11 @@ input[type=color] {
   width: 100%;
 }
 
+/* Favicon workaround */
+.icon-container {
+  background-image: var(--favicon);
+}
+
 /*================================================ */
 /* User.css Changes */
 /*================================================ */
