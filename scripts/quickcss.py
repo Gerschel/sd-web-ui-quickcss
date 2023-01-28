@@ -25,7 +25,7 @@ class MyTab():
         self.javascript_folder = os.path.join(self.extensiondir, "javascript")
         self.static_folder = os.path.join(self.webui_dir, "static")
 
-        self.favicon_workaround = gr.HTML(value='<div class="icon-container !hidden"></div>', render=False)
+        self.favicon_workaround = gr.HTML(value='<div class="icon-container"></div>', render=False)
 
 
         self.styles_list = self.get_files(self.style_folder)
