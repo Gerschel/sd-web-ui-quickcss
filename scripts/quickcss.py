@@ -261,7 +261,7 @@ class MyTab():
             )
 
             self.apply_favicon_bttn.click(
-                fn = self.apply_choice_wrapper(self.favicon_folder, self.static_folder, "favicon.png"),#TODO update css files and change dir to static
+                fn = self.apply_choice_wrapper(self.favicon_folder, self.static_folder, "favicon.svg"),#TODO update css files and change dir to static
                 inputs = self.favicon_dropdown
             )
 
