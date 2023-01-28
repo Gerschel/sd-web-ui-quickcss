@@ -40,8 +40,8 @@ class BasicUpdater:
         self.javascript_folder = os.path.join(self.extensions_dir, "javascript")
 
         self.file_defaults = [
-            DefaultFile(og_file="208246354-e80714ab-71e9-48dd-a233-7012bf87335f.png", current_path=self.logos_folder, dir=self.static_dir, save_as_filename="logo.png"),
-            DefaultFile("196555507-ca0df84e-5fe3-4dbf-9a72-11e8081f16bb.svg", self.favicon_folder, self.static_dir, "favicon.svg"),
+            DefaultFile(og_file="logo.png", current_path=self.logos_folder, dir=self.static_dir, save_as_filename="logo.png"),
+            DefaultFile(r"favicon Original.svg", self.favicon_folder, self.static_dir, "favicon.svg"),
             DefaultFile("blankbackground.png", self.backgrounds_folder, self.static_dir, "background.png")
         ]
 
