@@ -13,40 +13,40 @@ Original Style.css Edit
 
 /*THEME VARIABLES*/
 :root, * , quickcss_target{
-    --Primary_color: #E94822;
-    --Secondary_color: #F2910A;
-    --Input_text_color: #EFD510;
-    --Input_text_color_focus: #ffffff;
-    --App_color: #F2910A;
-    --Background_color: #1C1D21;
-    --Checked_text: #F2910A;
-    /*ENDCOLORPICKERS*/
-    --UI_radius: 0;
-    --left_pannel_width: 42;
-    --cards_size: 50;
-    /*BREAKFILEREADER*/
-    --logo: url('file=static/logo.png');
-    --favicon: url('file=static/favicon.svg');
-    --left-column: calc(20px *var(--left_pannel_width));
-    
+  --Primary_color: #E94822;
+  --Secondary_color: #F2910A;
+  --Input_text_color: #EFD510;
+  --Input_text_color_focus: #ffffff;
+  --App_color: #F2910A;
+  --Background_color: #1C1D21;
+  --Checked_text: #F2910A;
+  /*ENDCOLORPICKERS*/
+  --UI_radius: 0;
+  --left_pannel_width: 42;
+  --cards_size: 50;
+  /*BREAKFILEREADER*/
+  --logo: url('file=static/logo.png');
+  --favicon: url('file=static/favicon.svg');
+  --left-column: calc(20px *var(--left_pannel_width));
+  
 }
 
 /* Quickcss extension */
 /*----------------------------------------------------------------*/
 #hidden{
-  visibility: hidden;
+visibility: hidden;
 }
 
 #quickcss_colorpicker {
-  max-width: 10vw;
+max-width: 10vw;
 }
 
 input[type=color] {
-  width: 100%;
+width: 100%;
 }
 
 .icon-container {
-  background-image: var(--favicon);
+background-image: var(--favicon);
 }
 
 /*================================================ */
@@ -60,18 +60,18 @@ input[type=color] {
 .dark .flex-wrap,
 .dark * .flex-wrap .rounded-t-lg,
 .dark * .flex-wrap .border-transparent { 
-  font-family: "Segoe UI" ; 
-  font-variant: small-caps ;
-  transition: all 0.3s ease-in-out; 
-  }
+font-family: "Segoe UI" ; 
+font-variant: small-caps ;
+transition: all 0.3s ease-in-out; 
+}
 
 
 /* Import font for inputs */
 /*----------------------------------------------------------------*/
 
 @font-face {
-  font-family: 'Source Code Pro', monospace ;
-  src: url('SourceCodePro-Regular.otf') ;
+font-family: 'Source Code Pro', monospace ;
+src: url('SourceCodePro-Regular.otf') ;
 }
 
 /*Css hide Gradio text, progress bar and animations*/
@@ -83,48 +83,48 @@ input[type=color] {
 * .wrap.m-12 svg, 
 * .wrap.z-20 svg,
 * .wrap.svelte-5usjvi {
-  display:none ;
-  inset: 100% ;
+display:none ;
+inset: 100% ;
 } 
 
-/*Css show loading text on SD models selector*/
+/*Css show loading bar on SD models selector*/
 /*----------------------------------------------------------------*/
 #setting_sd_model_checkpoint .wrap.svelte-5usjvi,
 #setting_sd_model_checkpoint .meta-text-center,
 #setting_sd_model_checkpoint .meta-text {
-  inset: 0 ;
-  display: flex;
-  justify-content: center;
-  color: var(--Input_text_color);
+inset: 0 ;
+display: flex;
+justify-content: center;
+color: var(--Input_text_color);
 } 
 
 #setting_sd_model_checkpoint .wrap.svelte-5usjvi {
-  inset: 0 ;
-  display: flex;
-  justify-content: center;
-  color: var(--Input_text_color);
+inset: 0 ;
+display: flex;
+justify-content: center;
+color: var(--Input_text_color);
 } 
 
 /* gradio 3.8 adds opacity to progressbar which makes it blink; disable it here */
 .dark .transition.opacity-20 {
-  opacity: 1 ;
+opacity: 1 ;
 }
 
 /* Tab buttons */
 /*----------------------------------------------------------------*/
 #tabs > div:first-of-type button {
-  font-family: "Segoe UI"; 
-  font-variant: small-caps;
-  font-size: 90% ;
-  transition: all 0.3s ease-in-out ;
-  border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
+font-family: "Segoe UI"; 
+font-variant: small-caps;
+font-size: 90% ;
+transition: all 0.3s ease-in-out ;
+border-bottom-left-radius: 0px !important;
+border-bottom-right-radius: 0px !important;
 }
 
 #tabs > div:first-of-type button:hover {
-  border-color: 0 0 0 0.2em var(--Input_text_color_focus) ;
-  border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
+border-color: 0 0 0 0.2em var(--Input_text_color_focus) ;
+border-bottom-left-radius: 0px !important;
+border-bottom-right-radius: 0px !important;
 }
 
 /* UI border radius */
@@ -135,14 +135,14 @@ input[type=color] {
 .dark .tabitem *,
 .dark .flex-wrap *,
 .dark .svelte-10ogue4 > .flex-col {
-  border-radius: calc(0.25px *var(--UI_radius)) !important;
+border-radius: calc(0.25px *var(--UI_radius)) !important;
 }
 
 /* Selected text colors */
 /*----------------------------------------------------------------*/
 *::selection {
-  color: var(--Input_text_color_focus);
-      background-color: var(--Secondary_color);
+color: var(--Input_text_color_focus);
+    background-color: var(--Secondary_color);
 }
 
 /* App Colors */
@@ -157,28 +157,28 @@ input[type=color] {
 .dark .text-gray-500,  
 .dark .\!text-gray-700, 
 .dark .\!text-gray-800 {
-  color: var(--App_color) ;
+color: var(--App_color) ;
 }
 
 /* Input Colors */
 /*----------------------------------------------------------------*/
 .dark .gr-input {
-  font-family: 'Source Code Pro', monospace ;
-  font: 'Source Code Pro' ;
-  color: var(--Input_text_color) ;
-  transition: all 0.3s ease-in-out ;
+font-family: 'Source Code Pro', monospace ;
+font: 'Source Code Pro' ;
+color: var(--Input_text_color) ;
+transition: all 0.3s ease-in-out ;
 }
 
 .dark .gr-input:focus, 
 .dark .gr-input:hover  {
-  color: var(--Input_text_color_focus);
-  background-color: var(--Secondary_color);
-  border-color: var(--Input_text_color_focus);
+color: var(--Input_text_color_focus);
+background-color: var(--Secondary_color);
+border-color: var(--Input_text_color_focus);
 }
 
 .dark .gr-input::selection {
-  color: var(--Input_text_color_focus);
-  background-color: var(--Background_color);
+color: var(--Input_text_color_focus);
+background-color: var(--Background_color);
 }
 
 /* Background colors */
@@ -199,35 +199,36 @@ input[type=color] {
 .dark label.block span,
 #quicksettings,
 #tabs .tabitem .gr-compact {
-  background-color: var(--Background_color);
+background-color: var(--Background_color);
 }
 
 .dark .dark\:bg-gray-200, 
 .dark .bg-gray-200.\!text-gray-700,
 #txt2img_toprow,
-#txt2img_gallery_container .livePreview {
-  background-color: transparent !important;
+#txt2img_gallery_container .livePreview,
+#tabs .gr-compact .h-60 {
+background-color: transparent !important;
 }
 
 /* Galleries */
 /*----------------------------------------------------------------*/
 [id$="_gallery"].gr-block.gr-box {
-  border-radius: calc(0.25px *var(--UI_radius)) !important;
-  background-image: var(--logo) !important;
-  background: none;
-  background-size: cover ;
-  background-position: center center ;
-  background-repeat: no-repeat ;
-  transition: all 1s ease-in-out ;
-  box-shadow: 0 0 0 0.2em transparent;
+border-radius: calc(0.25px *var(--UI_radius)) !important;
+background-image: var(--logo) !important;
+background: none;
+background-size: cover ;
+background-position: center center ;
+background-repeat: no-repeat ;
+transition: all 1s ease-in-out ;
+box-shadow: 0 0 0 0.2em transparent;
 }
 
 .dark .group {
-  max-height: 60vh;
+max-height: 60vh;
 }
 
 [id$="_gallery"] svg{
-  display: none ;
+display: none ;
 }
 
 #txt2img_gallery:hover,
@@ -236,51 +237,51 @@ input[type=color] {
 #depthmap_gallery:hover,
 #ti_gallery:hover,
 #sp_gallery:hover {
-  box-shadow: 0 0 0 0.5em transparent;
-  animation: pulse2 .3s, change-color-border 5s linear infinite;
-  -webkit-animation: pulse2 0.3s, change-color-border 5s linear infinite;
-  -moz-animation: pulse2 0.3s, change-color-border 5s linear infinite;
-  -o-animation: pulse2 0.3s, change-color-border 5s linear infinite;
+box-shadow: 0 0 0 0.5em transparent;
+animation: pulse2 .3s, change-color-border 5s linear infinite;
+-webkit-animation: pulse2 0.3s, change-color-border 5s linear infinite;
+-moz-animation: pulse2 0.3s, change-color-border 5s linear infinite;
+-o-animation: pulse2 0.3s, change-color-border 5s linear infinite;
 }
 
 @keyframes change-color-border {
-  0% {border-color: var(--Input_text_color_focus);}
-  25% {border-color: var(--Secondary_color);}
-  50% {border-color: var(--Input_text_color_focus);}
-  75% {border-color: var(--Background_color);}
-  100% {border-color: var(--Input_text_color_focus);}    
+0% {border-color: var(--Input_text_color_focus);}
+25% {border-color: var(--Secondary_color);}
+50% {border-color: var(--Input_text_color_focus);}
+75% {border-color: var(--Background_color);}
+100% {border-color: var(--Input_text_color_focus);}    
 }
 
 .dark .gr-input-label, 
 .dark .gr-button {
-  background-image:  none ;
-  transition: all 0.3s ease-in-out ;
+background-image:  none ;
+transition: all 0.3s ease-in-out ;
 }
 
 .dark .backdrop-blur .modify-upload .hover\:shadow-xl{
-  border-style:solid;
-  border-color: var(--Secondary_color);
-  border-width:1px;
- }
- 
- /* Svg */
+border-style:solid;
+border-color: var(--Secondary_color);
+border-width:1px;
+}
+
+/* Svg */
 .dark .backdrop-blur .modify-upload svg{
-  display:block !important;
+display:block !important;
 }
 
 /* Gallery items*/
 /*----------------------------------------------------------------*/
 #gallery_item {
-  border-width: 2px ;
+border-width: 2px ;
 }
 
 .dark .gallery-item.svelte-1g9btlg.svelte-1g9btlg {
-  --tw-ring-color: var(--Primary_color) !important;
+--tw-ring-color: var(--Primary_color) !important;
 }
 
 .dark .dark\:bg-gray-900 {
-  --tw-bg-opacity: 1;
-  background-color: var(--Background_color) ;
+--tw-bg-opacity: 1;
+background-color: var(--Background_color) ;
 }
 
 /* Gallery items fix */
@@ -299,28 +300,28 @@ input[type=color] {
 #inpaint_sketch, #inpaint_sketch > .h-60, 
 #inpaint_sketch > .h-60 > div, 
 #inpaint_sketch > .h-60 > div > img {
-  height: 550px;
-  max-height: 100% !important;
-  min-height: 90% !important;
+height: 550px;
+max-height: 100% !important;
+min-height: 90% !important;
 }
 
 /* Checks */
 /*----------------------------------------------------------------*/
 .dark .gr-check-radio:checked {
-  background-color: var(--Primary_color) ;
+background-color: var(--Primary_color) ;
 }
 
 .dark .gr-input-label:hover {
-  border-color: var(--Secondary_color);
-  color: var(--Input_text_color_focus);
-  animation: pulse3 0.3s;
-  -webkit-animation: pulse3 0.3s;
-  -moz-animation: pulse3 0.3s;
-  -o-animation: pulse3 0.3s;
-  box-shadow: 0 0 0 0.5em transparent;
+border-color: var(--Secondary_color);
+color: var(--Input_text_color_focus);
+animation: pulse3 0.3s;
+-webkit-animation: pulse3 0.3s;
+-moz-animation: pulse3 0.3s;
+-o-animation: pulse3 0.3s;
+box-shadow: 0 0 0 0.5em transparent;
 }
-    @keyframes pulse3 {
-      0% { box-shadow: 0 0 0 0 var(--Checked_text); }
+  @keyframes pulse3 {
+    0% { box-shadow: 0 0 0 0 var(--Checked_text); }
 }
 
 input[type=checkbox]:checked + span, 
@@ -329,85 +330,85 @@ color: var(--Primary_color);
 }
 
 .dark\:bg-transparent:hover {
-  color: var(--Input_text_color_focus);
-  transition: all 0.3s ease-in-out;
+color: var(--Input_text_color_focus);
+transition: all 0.3s ease-in-out;
 }
 
 /* Generate progress bar style */
 /*----------------------------------------------------------------*/
 .dark .progressDiv{
-  width: 100%;
-  height: 22px;
-  background: var(--Background_color);
-  border-color: var(--Secondary_color);
-  border-width: 0.5px;
-  border-radius: calc(0.25px *var(--UI_radius)) !important;
-  cursor: progress;
+width: 100%;
+height: 22px;
+background: var(--Background_color);
+border-color: var(--Secondary_color);
+border-width: 0.5px;
+border-radius: calc(0.25px *var(--UI_radius)) !important;
+cursor: progress;
 }
 
 .dark .progressDiv .progress {
-  font-family: 'Source Code Pro', monospace ;
-  font: 'Source Code Pro';
-  background: var(--Primary_color) ;
-  color: var(--Input_text_color_focus);
-  font-weight: bold ;
-  line-height: 20px;
-  text-align: right ;
-  border-radius: calc(0.25px *var(--UI_radius)) !important;
-  cursor: progress;
+font-family: 'Source Code Pro', monospace ;
+font: 'Source Code Pro';
+background: var(--Primary_color) ;
+color: var(--Input_text_color_focus);
+font-weight: bold ;
+line-height: 20px;
+text-align: right ;
+border-radius: calc(0.25px *var(--UI_radius)) !important;
+cursor: progress;
 }
 
 /*Generate progress bar position*/
 #txt2img_progressbar, 
 #img2img_progressbar, 
 #ti_progressbar{
-  position: absolute;
-  z-index: 1000;
-  right: 0;
-  padding-left: 5px;
-  padding-right: 5px;
-  display: block;
-  cursor: progress;
-}
-  
-#txt2img_progress_row, 
-#img2img_progress_row{
-  margin-bottom: 10px;
-  margin-top: -18px;
-  flex-direction:column;
-  gap: 0;
+position: absolute;
+z-index: 1000;
+right: 0;
+padding-left: 5px;
+padding-right: 5px;
+display: block;
+cursor: progress;
 }
 
- #txt2img_progress_row > div { 
-  min-width: calc(var(--left-column)); 
-  max-width: var(--left-column);
+#txt2img_progress_row, 
+#img2img_progress_row{
+margin-bottom: 10px;
+margin-top: -18px;
+flex-direction:column;
+gap: 0;
+}
+
+#txt2img_progress_row > div { 
+min-width: calc(var(--left-column)); 
+max-width: var(--left-column);
 }
 
 /* txt2img generation parameters left panel width */
 /*----------------------------------------------------------------*/
 #txt2img_settings { 
-  min-width: var(--left-column); 
-  max-width: var(--left-column); 
+min-width: var(--left-column); 
+max-width: var(--left-column); 
 }
 
 .dark .overflow-hidden .flex .flex-col .relative col .gap-4 { 
-  min-width: var(--left-column); 
-  max-width: var(--left-column); 
+min-width: var(--left-column); 
+max-width: var(--left-column); 
 }
 
-/* TI - HN - LoRa Cards */
+/* TI - HN - LoRa Cards - Checkpoints*/
 /*----------------------------------------------------------------*/
 #tabs .tabitem .card{
- width: calc(3px *var(--cards_size));
- height: calc(4.48px *var(--cards_size));
- min-width: 50px !important;
- min-height: 74.6px !important;
- font-size: 60%;
- text-align: center;
- color: var(--Primary_color);
- transition: all 0.1s ease-in-out;
- border-width: 1px;
- border-color: var(--Secondary_color); 
+width: calc(3px *var(--cards_size));
+height: calc(4.48px *var(--cards_size));
+min-width: 50px !important;
+min-height: 74.6px !important;
+font-size: 60%;
+text-align: center;
+color: var(--Primary_color);
+transition: all 0.1s ease-in-out;
+border-width: 1px;
+border-color: var(--Secondary_color); 
 }
 
 #tabs .tabitem .card:hover {
@@ -417,56 +418,104 @@ border-color: var(--Primary_color);
 
 /* Extra network cards */
 #tabs .tabitem .extra-network-cards{
- display:flex;
- flex-wrap:wrap;
- justify-content:center;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
 }
+
+/* Cards Animations */
+
+
+.extra-network-cards .card{
+
+transition-property: transform;
+transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .5s;
+  transform: rotateX(0) rotateY(12deg);
+}
+
+    
+  .extra-network-cards .card:hover{
+  box-shadow: 0 0 2px 0.3em rgba(0, 128, 255, 0.35);
+
+  transform-style: preserve-3d;
+animation: hovering 5s ease infinite;
+
+  transform-style: preserve-3d;
+animation: hovering 5s ease infinite;
+}
+
+
+
+@keyframes hovering {
+0% {
+  transform: rotateX(0) rotateY(12deg)
+}
+
+25% {
+  transform: rotateX(12deg) rotateY(0)
+}
+
+50% {
+  transform: rotateX(0) rotateY(-12deg)
+}
+
+75% {
+  transform: rotateX(-12deg) rotateY(0)
+}
+
+to {
+  transform: rotateX(0) rotateY(12deg)
+}
+
+}
+
 
 /* Options Row */
 /*----------------------------------------------------------------*/
 
 #txt2img_tools, #img2img_tools{
-  gap: 0.4em;
-  justify-content: center;
+gap: 0.4em;
+justify-content: center;
 }
 
 /* New img2img buttons reposition and border*/
 /*----------------------------------------------------------------*/
 #tabs .flex-wrap .tabitem .gr-compact{
- margin-left:0px;
- z-index: 10;
- border-color: var(--Secondary_color);
+margin-left:0px;
+z-index: 10;
+border-color: var(--Secondary_color);
 }
 
 .dark .gr-compact .flex-col .tabitem .flex-col .gr-compact .gr-button-secondary{
- border-width:1px !important;
+border-width:1px !important;
 }
 
 /* Buttons */
 /*----------------------------------------------------------------*/
 #txt2img_generate, 
 #img2img_generate {
-  letter-spacing: .2rem;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out ; 
+letter-spacing: .2rem;
+font-weight: bold;
+transition: all 0.3s ease-in-out ; 
 }
 
 #txt2img_interrupt, 
 #img2img_interrupt, 
 #txt2img_skip, 
 #img2img_skip {
-  background: var(--Background_color) ;
-  z-index: 11;
-  transition: all 0.3s ease-in-out ;
+background: var(--Background_color) ;
+z-index: 11;
+transition: all 0.3s ease-in-out ;
 }
 
 #txt2img_interrupt:hover, 
 #img2img_interrupt:hover, 
 #txt2img_skip:hover, 
 #img2img_skip:hover {
-  background: var(--Secondary_color) ;
-  color: var(--Input_text_color_focus) ;
-  z-index: 11;
+background: var(--Secondary_color) ;
+color: var(--Input_text_color_focus) ;
+z-index: 11;
 }
 
 .dark .gr-button-primary,
@@ -474,29 +523,29 @@ border-color: var(--Primary_color);
 #deforum_generate, 
 #depthmap_generate, 
 #vxa_gen_btn {
-  font-family: "Segoe UI"; 
-  font-variant: small-caps; 
-  border-color: var(--Primary_color) ;
-  border-width: 4px !important;
-  background-image: var(--logo) ;
-  background-size: cover ;
-  background-position: center center ;
-  background-repeat: no-repeat ;
-  color: var(--App_color) ;
-  z-index: 10;
-  transition: all 0.3s ease-in-out ;
-  border-radius: calc(0.25px *var(--UI_radius)) !important;
+font-family: "Segoe UI"; 
+font-variant: small-caps; 
+border-color: var(--Primary_color) ;
+border-width: 4px !important;
+background-image: var(--logo) ;
+background-size: cover ;
+background-position: center center ;
+background-repeat: no-repeat ;
+color: var(--App_color) ;
+z-index: 10;
+transition: all 0.3s ease-in-out ;
+border-radius: calc(0.25px *var(--UI_radius)) !important;
 }
 
 .dark .gr-button-secondary, 
 .dark .gr-button-tool {
-  font-family: "Segoe UI"; 
-  font-variant: small-caps; 
-  border-color: var(--Secondary_color) ;
-  border-width: 1px ;
-  color: var(--App_color) ;
-  transition: all 0.3s ease-in-out ;
-  border-radius: calc(0.25px *var(--UI_radius)) !important;
+font-family: "Segoe UI"; 
+font-variant: small-caps; 
+border-color: var(--Secondary_color) ;
+border-width: 1px ;
+color: var(--App_color) ;
+transition: all 0.3s ease-in-out ;
+border-radius: calc(0.25px *var(--UI_radius)) !important;
 }
 
 /* Buttons pulse effect */
@@ -505,19 +554,19 @@ border-color: var(--Primary_color);
 /*Generate*/
 #txt2img_generate:hover, 
 #img2img_generate:hover {
-  letter-spacing: 1rem;
-  box-shadow: 0 0 0 2em transparent;
+letter-spacing: 1rem;
+box-shadow: 0 0 0 2em transparent;
 } 
 
 #txt2img_generate:active, 
 #img2img_generate:active {
-  animation: pulse 0.3s;
-  -webkit-animation: pulse 0.3s; 
-  -moz-animation: pulse 0.3s;
-  -o-animation: pulse 0.3s;
+animation: pulse 0.3s;
+-webkit-animation: pulse 0.3s; 
+-moz-animation: pulse 0.3s;
+-o-animation: pulse 0.3s;
 }   
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 var(--Primary_color) }
+  0% { box-shadow: 0 0 0 0 var(--Primary_color) }
 }   
 
 /*Primary*/
@@ -526,199 +575,199 @@ border-color: var(--Primary_color);
 #deforum_generate:hover, 
 #depthmap_generate:hover, 
 #vxa_gen_btn:hover {
-  border-color: var(--Input_text_color_focus);
-  border-width: 4px ;
-  background-color: var(--Primary_color) ;
-  color: var(--Input_text_color_focus) ;
-  animation: pulse2 0.3s;
-  -webkit-animation: pulse2 0.3s;
-  -moz-animation: pulse2 0.3s;
-  -o-animation: pulse2 0.3s;
-  box-shadow: 0 0 0 0.5em transparent;
+border-color: var(--Input_text_color_focus);
+border-width: 4px ;
+background-color: var(--Primary_color) ;
+color: var(--Input_text_color_focus) ;
+animation: pulse2 0.3s;
+-webkit-animation: pulse2 0.3s;
+-moz-animation: pulse2 0.3s;
+-o-animation: pulse2 0.3s;
+box-shadow: 0 0 0 0.5em transparent;
 }  
 
 /*Secondary*/
 .dark .gr-button-secondary:hover, 
 .dark .gr-button-tool:hover {
-  border-color: var(--Input_text_color_focus);
-  border-width: 1px ;
-  background-color: var(--Secondary_color);
-  color: var(--Input_text_color_focus) ;
-  box-shadow: 0 0 0 0.5em transparent;
-  animation: pulse2 0.3s;
-  -webkit-animation: pulse2 0.3s;
-  -moz-animation: pulse2 0.3s;
-  -o-animation: pulse2 0.3s;
+border-color: var(--Input_text_color_focus);
+border-width: 1px ;
+background-color: var(--Secondary_color);
+color: var(--Input_text_color_focus) ;
+box-shadow: 0 0 0 0.5em transparent;
+animation: pulse2 0.3s;
+-webkit-animation: pulse2 0.3s;
+-moz-animation: pulse2 0.3s;
+-o-animation: pulse2 0.3s;
 }
 @keyframes pulse2 {
-    0% { box-shadow: 0 0 0 0 var(--Input_text_color_focus); }
+  0% { box-shadow: 0 0 0 0 var(--Input_text_color_focus); }
 }
 
 /* Context menu */
 /*----------------------------------------------------------------*/
 #context-menu {
-  font-family: 'Source Code Pro', monospace ;
-  font: 'Source Code Pro';
-  border-color: var(--Primary_color);
-  /*box-shadow: 1px 1px 2px var(--Primary_color) ;*/
+font-family: 'Source Code Pro', monospace ;
+font: 'Source Code Pro';
+border-color: var(--Primary_color);
+/*box-shadow: 1px 1px 2px var(--Primary_color) ;*/
 }
 
 .dark .context-menu-items a:hover {
-  background: var(--Secondary_color) ;
-  color: var(--Input_text_color_focus) ;
-  /*box-shadow: 1px 1px 2px var(--Secondary_color) ;*/
-  
+background: var(--Secondary_color) ;
+color: var(--Input_text_color_focus) ;
+/*box-shadow: 1px 1px 2px var(--Secondary_color) ;*/
+
 }
 .dark .context-menu-items {
-      transition: all 0.3s ease-in-out ;
+    transition: all 0.3s ease-in-out ;
 
 }
 
 /* gradio 3.4.1 stuff for editable scrollbar values */
 /*----------------------------------------------------------------*/
 .dark .gr-box > div > div > input.gr-text-input{
-  position: absolute ;
-  right: 0.5em ;
-  top: -0.6em ;
-  z-index: 200 ;
-  width: 8em ;
-  border-color: var(--Secondary_color) ;
+position: absolute ;
+right: 0.5em ;
+top: -0.6em ;
+z-index: 200 ;
+width: 8em ;
+border-color: var(--Secondary_color) ;
 }
 
 .dark .gr-box > div > div > input.gr-text-input:hover, 
 .dark .gr-box > div > div > input.gr-text-input:focus {
-  border-color: var(--Input_text_color_focus) ;
+border-color: var(--Input_text_color_focus) ;
 }
 
 /* Quicksettings Range*/
 /*----------------------------------------------------------------*/
 #quicksettings [id^="setting_"] {
-  display: grid ;
-  
+display: grid ;
+
 }
 
 #quicksettings [id^="setting_"] input[type=range]{
-  display:flex !important;
-  align-items:flex-end !important;
- }
+display:flex !important;
+align-items:flex-end !important;
+}
 
 /* Gr-block gap and padding */
 /*----------------------------------------------------------------*/
 .dark .gr-block.gr-box {
-  row-gap: 1.1ch;
-  padding: 1.1em;
+row-gap: 1.1ch;
+padding: 1.1em;
 }
 
 
 /* Promtgen extension*/
 /*----------------------------------------------------------------*/
 #promptgen_results_column tr .sendto{
-  display:inline;
- }
+display:inline;
+}
 
- #promptgen_main .gr-compact{
-  min-width: var(--left-column); 
-  max-width: var(--left-column); 
- }
+#promptgen_main .gr-compact{
+min-width: var(--left-column); 
+max-width: var(--left-column); 
+}
 
 /*-------------------------------------*/
 /*---------------Sliders-------------- */
 /*-------------------------------------*/
 
 .gradio-container input[type=range] {
-  -webkit-appearance: none !important ;
-  background: transparent !important;
+-webkit-appearance: none !important ;
+background: transparent !important;
 }
 
 .gradio-container input[type=range]:focus {
-  outline: none !important;
+outline: none !important;
 }
 
 .gradio-container input[type=range]::-webkit-slider-runnable-track {
-  cursor: pointer !important;
-  height: 6px !important;
-  border-radius: 3px !important;
-  background:  var(--App_color) !important;
-  opacity: 0.6!important;
+cursor: pointer !important;
+height: 6px !important;
+border-radius: 3px !important;
+background:  var(--App_color) !important;
+opacity: 0.6!important;
 }
 
 .gradio-container input[type=range]:hover::-webkit-slider-runnable-track {
-  background-image: linear-gradient(90deg, var(--App_color), var(--Primary_color))!important;
-  background-repeat: no-repeat!important;
-  opacity: 1!important;
-  transition: all 0.2s ease-in-out;
+background-image: linear-gradient(90deg, var(--App_color), var(--Primary_color))!important;
+background-repeat: no-repeat!important;
+opacity: 1!important;
+transition: all 0.2s ease-in-out;
 }
 
 .gradio-container input[type=range]::-moz-range-track {
-  cursor: pointer !important;
-  height: 6px !important;
-  border-radius: 3px !important;
-  background:  var(--Primary_color) !important;
+cursor: pointer !important;
+height: 6px !important;
+border-radius: 3px !important;
+background:  var(--Primary_color) !important;
 }
 
 .gradio-container input[type=range]:hover::-moz-range-track {
-  background: var(--Secondary_color) !important;
-  transition: all 0.2s ease-in-out;
+background: var(--Secondary_color) !important;
+transition: all 0.2s ease-in-out;
 }
 
 .gradio-container input[type=range]::-ms-fill-upper,
 .gradio-container input[type=range]::-ms-fill-lower {
-  cursor: pointer !important;
-  height: 6px !important;
-  border-radius: 3px !important;
-  background:   var(--Primary_color) !important;
+cursor: pointer !important;
+height: 6px !important;
+border-radius: 3px !important;
+background:   var(--Primary_color) !important;
 }
 
 .gradio-container input[type=range]:hover::-ms-fill-upper,
 .gradio-container input[type=range]:hover::-ms-fill-lower {
-  background: var(--Secondary_color) !important;
-  transition: all 0.2s ease-in-out;
+background: var(--Secondary_color) !important;
+transition: all 0.2s ease-in-out;
 }
 
 .gradio-container input[type=range]::-webkit-slider-thumb {
-  box-shadow: 0 0 3px var(--App_color) !important;
-  border: 2px solid var(--App_color) !important;
-  height: 16px !important;
-  width: 16px !important;
-  border-radius: 16px !important;
-  background:   var(--Primary_color) !important;
-  cursor: pointer !important;
-  -webkit-appearance: none !important;
-  margin-top: -5px !important;
+box-shadow: 0 0 3px var(--App_color) !important;
+border: 2px solid var(--App_color) !important;
+height: 16px !important;
+width: 16px !important;
+border-radius: 16px !important;
+background:   var(--Primary_color) !important;
+cursor: pointer !important;
+-webkit-appearance: none !important;
+margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-webkit-slider-thumb {
-  background:   var(--Secondary_color) !important;
+background:   var(--Secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-moz-range-thumb {
-  box-shadow: 0 0 3px var(--App_color) !important;
-  border: 2px solid  var(--App_color) !important;
-  height: 16px !important;
-  width: 16px !important;
-  border-radius: 16px !important;
-  background:   var(--Primary_color) !important;
-  cursor: pointer !important;
-  margin-top: -5px !important;
+box-shadow: 0 0 3px var(--App_color) !important;
+border: 2px solid  var(--App_color) !important;
+height: 16px !important;
+width: 16px !important;
+border-radius: 16px !important;
+background:   var(--Primary_color) !important;
+cursor: pointer !important;
+margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-moz-range-thumb {
-  background:   var(--Secondary_color) !important;
+background:   var(--Secondary_color) !important;
 }
 
 .gradio-container input[type=range]::-ms-thumb {
-  box-shadow: 0 0 3px var(--App_color) !important;
-  border: 2px solid  var(--App_color) !important;
-  height: 16px !important;
-  width: 16px !important;
-  border-radius: 16px !important;
-  background:   var(--Primary_color) !important;
-  cursor: pointer !important;
-  margin-top: -5px !important;
+box-shadow: 0 0 3px var(--App_color) !important;
+border: 2px solid  var(--App_color) !important;
+height: 16px !important;
+width: 16px !important;
+border-radius: 16px !important;
+background:   var(--Primary_color) !important;
+cursor: pointer !important;
+margin-top: -5px !important;
 }
 
 .gradio-container input[type=range]:active::-ms-thumb {
-  background: var(--Secondary_color) !important;
+background: var(--Secondary_color) !important;
 }
 
 
@@ -740,7 +789,7 @@ Use a better box model (opinionated).
 *,
 ::before,
 ::after {
-	box-sizing: border-box;
+box-sizing: border-box;
 }
 
 /**
@@ -750,10 +799,10 @@ Use a better box model (opinionated).
 */
 
 html {
-	line-height: 1.15; /* 1 */
-	-webkit-text-size-adjust: 100%; /* 2 */
-	-moz-tab-size: 4; /* 3 */
-	tab-size: 4; /* 3 */
+line-height: 1.15; /* 1 */
+-webkit-text-size-adjust: 100%; /* 2 */
+-moz-tab-size: 4; /* 3 */
+tab-size: 4; /* 3 */
 }
 
 /*
@@ -767,16 +816,16 @@ Sections
 */
 
 body {
-	margin: 0; /* 1 */
-	font-family:
-		system-ui,
-		'Segoe UI',
-		Roboto,
-		Helvetica,
-		Arial,
-		sans-serif,
-		'Apple Color Emoji',
-		'Segoe UI Emoji'; /* 2 */
+margin: 0; /* 1 */
+font-family:
+  system-ui,
+  'Segoe UI',
+  Roboto,
+  Helvetica,
+  Arial,
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji'; /* 2 */
 }
 
 /*
@@ -790,8 +839,8 @@ Grouping content
 */
 
 hr {
-	height: 0; /* 1 */
-	color: inherit; /* 2 */
+height: 0; /* 1 */
+color: inherit; /* 2 */
 }
 
 /*
@@ -804,7 +853,7 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
 abbr[title] {
-	text-decoration: underline dotted;
+text-decoration: underline dotted;
 }
 
 /**
@@ -813,7 +862,7 @@ Add the correct font weight in Edge and Safari.
 
 b,
 strong {
-	font-weight: bolder;
+font-weight: bolder;
 }
 
 /**
@@ -825,14 +874,14 @@ code,
 kbd,
 samp,
 pre {
-	font-family:
-		ui-monospace,
-		SFMono-Regular,
-		Consolas,
-		'Liberation Mono',
-		Menlo,
-		monospace; /* 1 */
-	font-size: 1em; /* 2 */
+font-family:
+  ui-monospace,
+  SFMono-Regular,
+  Consolas,
+  'Liberation Mono',
+  Menlo,
+  monospace; /* 1 */
+font-size: 1em; /* 2 */
 }
 
 /**
@@ -840,7 +889,7 @@ Add the correct font size in all browsers.
 */
 
 small {
-	font-size: 80%;
+font-size: 80%;
 }
 
 /**
@@ -849,18 +898,18 @@ Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
 
 sub,
 sup {
-	font-size: 75%;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
+font-size: 75%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
 }
 
 sub {
-	bottom: -0.25em;
+bottom: -0.25em;
 }
 
 sup {
-	top: -0.5em;
+top: -0.5em;
 }
 
 /*
@@ -874,8 +923,8 @@ Tabular data
 */
 
 table {
-	text-indent: 0; /* 1 */
-	border-color: inherit; /* 2 */
+text-indent: 0; /* 1 */
+border-color: inherit; /* 2 */
 }
 
 /*
@@ -893,10 +942,10 @@ input,
 optgroup,
 select,
 textarea {
-	font-family: inherit; /* 1 */
-	font-size: 100%; /* 1 */
-	line-height: 1.15; /* 1 */
-	margin: 0; /* 2 */
+font-family: inherit; /* 1 */
+font-size: 100%; /* 1 */
+line-height: 1.15; /* 1 */
+margin: 0; /* 2 */
 }
 
 /**
@@ -905,7 +954,7 @@ Remove the inheritance of text transform in Edge and Firefox.
 
 button,
 select {
-	text-transform: none;
+text-transform: none;
 }
 
 /**
@@ -916,7 +965,7 @@ button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
-	-webkit-appearance: button;
+-webkit-appearance: button;
 }
 
 /**
@@ -924,8 +973,8 @@ Remove the inner border and padding in Firefox.
 */
 
 ::-moz-focus-inner {
-	border-style: none;
-	padding: 0;
+border-style: none;
+padding: 0;
 }
 
 /**
@@ -933,7 +982,7 @@ Restore the focus styles unset by the previous rule.
 */
 
 :-moz-focusring {
-	outline: 1px dotted ButtonText;
+outline: 1px dotted ButtonText;
 }
 
 /**
@@ -942,7 +991,7 @@ See: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d4
 */
 
 :-moz-ui-invalid {
-	box-shadow: none;
+box-shadow: none;
 }
 
 /**
@@ -950,7 +999,7 @@ Remove the padding so developers are not caught out when they zero out 'fieldset
 */
 
 legend {
-	padding: 0;
+padding: 0;
 }
 
 /**
@@ -958,7 +1007,7 @@ Add the correct vertical alignment in Chrome and Firefox.
 */
 
 progress {
-	vertical-align: baseline;
+vertical-align: baseline;
 }
 
 /**
@@ -967,7 +1016,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
-	height: auto;
+height: auto;
 }
 
 /**
@@ -976,8 +1025,8 @@ Correct the cursor style of increment and decrement buttons in Safari.
 */
 
 [type='search'] {
-	-webkit-appearance: textfield; /* 1 */
-	outline-offset: -2px; /* 2 */
+-webkit-appearance: textfield; /* 1 */
+outline-offset: -2px; /* 2 */
 }
 
 /**
@@ -985,7 +1034,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 */
 
 ::-webkit-search-decoration {
-	-webkit-appearance: none;
+-webkit-appearance: none;
 }
 
 /**
@@ -994,8 +1043,8 @@ Remove the inner padding in Chrome and Safari on macOS.
 */
 
 ::-webkit-file-upload-button {
-	-webkit-appearance: button; /* 1 */
-	font: inherit; /* 2 */
+-webkit-appearance: button; /* 1 */
+font: inherit; /* 2 */
 }
 
 /*
@@ -1008,7 +1057,7 @@ Add the correct display in Chrome and Safari.
 */
 
 summary {
-	display: list-item;
+display: list-item;
 }
 
 

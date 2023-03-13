@@ -29,7 +29,6 @@ Original Style.css Edit
     --favicon: url('file=static/favicon.svg');
     --left-column: calc(20px *var(--left_pannel_width));
 }
-
 /* Quickcss extension */
 /*----------------------------------------------------------------*/
 #hidden{
@@ -44,7 +43,6 @@ input[type=color] {
   width: 100%;
 }
 
-/* Favicon workaround */
 .icon-container {
   background-image: var(--favicon);
 }
@@ -87,7 +85,7 @@ input[type=color] {
   inset: 100% ;
 } 
 
-/*Css show loading text on SD models selector*/
+/*Css show loading bar on SD models selector*/
 /*----------------------------------------------------------------*/
 #setting_sd_model_checkpoint .wrap.svelte-5usjvi,
 #setting_sd_model_checkpoint .meta-text-center,
@@ -205,7 +203,8 @@ input[type=color] {
 .dark .dark\:bg-gray-200, 
 .dark .bg-gray-200.\!text-gray-700,
 #txt2img_toprow,
-#txt2img_gallery_container .livePreview {
+#txt2img_gallery_container .livePreview,
+#tabs .gr-compact .h-60 {
   background-color: transparent !important;
 }
 
@@ -395,7 +394,7 @@ color: var(--Primary_color);
   max-width: var(--left-column); 
 }
 
-/* TI - HN - LoRa Cards */
+/* TI - HN - LoRa Cards - Checkpoints*/
 /*----------------------------------------------------------------*/
 #tabs .tabitem .card{
  width: calc(3px *var(--cards_size));
@@ -421,6 +420,54 @@ border-color: var(--Primary_color);
  flex-wrap:wrap;
  justify-content:center;
 }
+
+/* Cards Animations */
+
+
+.extra-network-cards .card{
+
+transition-property: transform;
+	transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .5s;
+    transform: rotateX(0) rotateY(12deg);
+}
+
+      
+    .extra-network-cards .card:hover{
+    box-shadow: 0 0 2px 0.3em rgba(0, 128, 255, 0.35);
+
+    transform-style: preserve-3d;
+	animation: hovering 5s ease infinite;
+
+    transform-style: preserve-3d;
+	animation: hovering 5s ease infinite;
+}
+
+  
+
+@keyframes hovering {
+	0% {
+		transform: rotateX(0) rotateY(12deg)
+	}
+
+	25% {
+		transform: rotateX(12deg) rotateY(0)
+	}
+
+	50% {
+		transform: rotateX(0) rotateY(-12deg)
+	}
+
+	75% {
+		transform: rotateX(-12deg) rotateY(0)
+	}
+
+	to {
+		transform: rotateX(0) rotateY(12deg)
+	}
+
+  }
+
 
 /* Options Row */
 /*----------------------------------------------------------------*/
