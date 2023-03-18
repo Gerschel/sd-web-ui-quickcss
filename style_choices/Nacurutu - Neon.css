@@ -180,7 +180,6 @@ input[type=color] {
   background-color: var(--Background_color);
 }
 
-
 /* Background colors */
 /*----------------------------------------------------------------*/
 .dark, 
@@ -399,90 +398,73 @@ color: var(--Primary_color);
 /* TI - HN - LoRa Cards - Checkpoints*/
 /*----------------------------------------------------------------*/
 #tabs .tabitem .card{
- width: calc(3px *var(--cards_size));
- height: calc(4.48px *var(--cards_size));
- min-width: 50px !important;
- min-height: 74.6px !important;
- font-size: 60%;
- text-align: center;
- color: var(--Primary_color);
- transition: all 0.1s ease-in-out;
- border-width: 1px;
- border-color: var(--Secondary_color); 
+  width: calc(3px *var(--cards_size));
+  height: calc(4.48px *var(--cards_size));
+  min-width: 50px !important;
+  min-height: 74.6px !important;
+  font-size: 60%;
+  text-align: center;
+  color: var(--Primary_color);
+  transition: all 0.1s ease-in-out;
+  border-width: 1px;
+  border-color: var(--Secondary_color);
 }
 
 #tabs .tabitem .card:hover {
-border-width: 3px ;
-border-color: var(--Primary_color);
+  border-width: 3px ;
+  box-shadow: 0 0 0 0.5em transparent;
 }
 
 /* TI - HN - LoRa Cards - Checkpoints / Scroll */
-
 #txt2img_extra_networks .output-html, #img2img_extra_networks .output-html{
-  max-height: 76em;
+  max-height: 70em;
   overflow-y: scroll;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  scroll-padding-top: 5em;
+  scroll-padding-bottom: 5em;
+  scroll-margin-top: 5em;
+  scroll-margin-bottom: 5em;
 }
-
-
 
 /* Extra network cards */
 #tabs .tabitem .extra-network-cards{
  display:flex;
  flex-wrap:wrap;
  justify-content:center;
+ 
+}
+
+.extra-network-cards .card .metadata-button::before {
+color: var(--Secondary_color);
 }
 
 /* Cards Animations */
-
-
 .extra-network-cards .card{
-
-transition-property: transform;
-	transition-timing-function: cubic-bezier(.4,0,.2,1);
-    transition-duration: .5s;
-    transform: rotateX(0) rotateY(12deg);
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .5s;
+  transform: scale(1) rotateX(0) rotateY(8deg);
 }
 
-      
-    .extra-network-cards .card:hover{
-    box-shadow: 0 0 2px 0.3em rgba(0, 128, 255, 0.35);
-
-    transform-style: preserve-3d;
-	animation: hovering 5s ease infinite;
-
-    transform-style: preserve-3d;
-	animation: hovering 5s ease infinite;
+.extra-network-cards .card:hover{
+  transform-style: preserve-3d;
+  animation: pulse2 .3s, hovering 5s ease infinite, change-color-border 5s linear infinite;
+  -webkit-animation: pulse2 .3s, hovering 5s ease infinite, change-color-border 5s linear infinite;
+  -moz-animation: pulse2 .3s, hovering 5s ease infinite, change-color-border 5s linear infinite;
+  -o-animation: pulse2 .3s, hovering 5s ease infinite, change-color-border 5s linear infinite; 
 }
-
-  
 
 @keyframes hovering {
-	0% {
-		transform: rotateX(0) rotateY(12deg)
-	}
-
-	25% {
-		transform: rotateX(12deg) rotateY(0)
-	}
-
-	50% {
-		transform: rotateX(0) rotateY(-12deg)
-	}
-
-	75% {
-		transform: rotateX(-12deg) rotateY(0)
-	}
-
-	to {
-		transform: rotateX(0) rotateY(12deg)
-	}
-
-  }
-
+  0% {transform: scale(1.5) rotateX(0) rotateY(8deg); z-index:50;}
+  25% {transform: scale(1.5) rotateX(8deg) rotateY(0); z-index:50;}
+  50% {transform: scale(1.5) rotateX(0) rotateY(-8deg); z-index:50;}
+  75% {transform: scale(1.5) rotateX(-8deg) rotateY(0); z-index:50;}
+  to {transform: scale(1.5) rotateX(0) rotateY(8deg); z-index:50;}
+}
 
 /* Options Row */
 /*----------------------------------------------------------------*/
-
 #txt2img_tools, #img2img_tools{
   gap: 0.4em;
   justify-content: center;
