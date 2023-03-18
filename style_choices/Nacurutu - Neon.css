@@ -29,6 +29,7 @@ Original Style.css Edit
     --favicon: url('file=static/favicon.svg');
     --left-column: calc(20px *var(--left_pannel_width));
 }
+
 /* Quickcss extension */
 /*----------------------------------------------------------------*/
 #hidden{
@@ -178,6 +179,7 @@ input[type=color] {
   color: var(--Input_text_color_focus);
   background-color: var(--Background_color);
 }
+
 
 /* Background colors */
 /*----------------------------------------------------------------*/
@@ -413,6 +415,15 @@ color: var(--Primary_color);
 border-width: 3px ;
 border-color: var(--Primary_color);
 }
+
+/* TI - HN - LoRa Cards - Checkpoints / Scroll */
+
+#txt2img_extra_networks .output-html, #img2img_extra_networks .output-html{
+  max-height: 76em;
+  overflow-y: scroll;
+}
+
+
 
 /* Extra network cards */
 #tabs .tabitem .extra-network-cards{
