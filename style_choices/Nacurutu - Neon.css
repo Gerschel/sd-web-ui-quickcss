@@ -432,35 +432,33 @@ color: var(--Primary_color);
  display:flex;
  flex-wrap:wrap;
  justify-content:center;
- 
-}
+ }
 
 .extra-network-cards .card .metadata-button::before {
 color: var(--Secondary_color);
 }
 
 /* Cards Animations */
-.extra-network-cards .card{
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
-  transition-duration: .5s;
-  transform: scale(1) rotateX(0) rotateY(8deg);
+
+.extra-network-cards .card {
+  transform-origin:center;
+  transition:.3s !important;
+  
 }
 
 .extra-network-cards .card:hover{
+  transform: scale(1.5);
+  opacity:1 !important;
+  z-index:50;
   transform-style: preserve-3d;
-  animation: pulse2 .3s, hovering 5s ease infinite, change-color-border 5s linear infinite;
-  -webkit-animation: pulse2 .3s, hovering 5s ease infinite, change-color-border 5s linear infinite;
-  -moz-animation: pulse2 .3s, hovering 5s ease infinite, change-color-border 5s linear infinite;
-  -o-animation: pulse2 .3s, hovering 5s ease infinite, change-color-border 5s linear infinite; 
+  animation: pulse2 1s, change-color-border 5s linear infinite;
+  -webkit-animation: pulse2 1s, change-color-border 5s linear infinite;
+  -moz-animation: pulse2 1s, change-color-border 5s linear infinite;
+  -o-animation: pulse2 1s, change-color-border 5s linear infinite; 
 }
 
-@keyframes hovering {
-  0% {transform: scale(1.5) rotateX(0) rotateY(8deg); z-index:50;}
-  25% {transform: scale(1.5) rotateX(8deg) rotateY(0); z-index:50;}
-  50% {transform: scale(1.5) rotateX(0) rotateY(-8deg); z-index:50;}
-  75% {transform: scale(1.5) rotateX(-8deg) rotateY(0); z-index:50;}
-  to {transform: scale(1.5) rotateX(0) rotateY(8deg); z-index:50;}
+.extra-network-cards:hover .card {
+  opacity:0.3;
 }
 
 /* Options Row */
@@ -1061,4 +1059,4 @@ add this to webui.py besides prevent_thread_lock=True, ->
 
 favicon_path="favicon.svg",
 
-*/ 
+*/
