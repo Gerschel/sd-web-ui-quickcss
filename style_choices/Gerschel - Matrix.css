@@ -417,7 +417,7 @@ color: var(--Primary_color);
 }
 
 /* TI - HN - LoRa Cards - Checkpoints / Scroll */
-#txt2img_extra_networks .output-html, #img2img_extra_networks .output-html{
+#txt2img_extra_networks .output-html, #img2img_extra_networks .output-html, .extra-network-cards{
   max-height: 70em;
   overflow-y: scroll;
   padding-top: 5em;
